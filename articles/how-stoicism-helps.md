@@ -1,6 +1,6 @@
 ---
 title: "How Stoicism can help"
-category: "thoughts"
+category: "actuarial"
 date: "06-04-2023"
 ---
 

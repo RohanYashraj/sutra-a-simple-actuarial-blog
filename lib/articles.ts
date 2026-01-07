@@ -9,7 +9,7 @@ import type { ArticleItem } from "@/types"
 
 const articlesDirectory = path.join(process.cwd(), "articles")
 
-const getSortedArticles = (): ArticleItem[] => {
+export const getSortedArticles = (): ArticleItem[] => {
   const fileNames = fs.readdirSync(articlesDirectory)
 
   const allArticlesData = fileNames.map((fileName) => {
@@ -37,7 +37,46 @@ const getSortedArticles = (): ArticleItem[] => {
     } else if (dateTwo.isAfter(dateOne)) {
       return 1
     } else {
-      0
+      return 0
     }
   })
+}
+
+export const getCategorisedArticles = (): Record<string, ArticleItem[]> => {
+  const sortedArticles = getSortedArticles()
+  const categorisedArticles: Record<string, ArticleItem[]> = {}
+
+  sortedArticles.forEach((article) => {
+    if (!categorisedArticles[article.category]) {
+      categorisedArticles[article.category] = []
+    }
+    categorisedArticles[article.category].push(article)
+  })
+
+  return categorisedArticles
+}
+
+export const getArticleData = async (id: string) => {
+  const fullPath = path.join(articlesDirectory, `${id}.md`)
+  const fileContents = fs.readFileSync(fullPath, "utf-8")
+
+  const matterResult = matter(fileContents)
+
+  // Strip the first H1 tag if it exists (e.g. # Title) to prevent duplicate headers
+  const contentBody = matterResult.content.replace(/^#\s+.*$/m, "")
+
+  const processedContent = await remark()
+    .use(html)
+    .process(contentBody)
+  const contentHtml = processedContent.toString()
+
+  return {
+    id,
+    contentHtml,
+    title: matterResult.data.title,
+    date: matterResult.data.date,
+    category: matterResult.data.category,
+    author: matterResult.data.author,
+    authorImage: matterResult.data.authorImage,
+  }
 }
