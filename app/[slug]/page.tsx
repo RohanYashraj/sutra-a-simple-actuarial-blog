@@ -2,7 +2,8 @@ import Link from "next/link"
 import { ArrowLeftIcon } from "@heroicons/react/24/solid"
 import { getArticleData } from "@/lib/articles"
 
-const Article = async ({ params }: { params: { slug: string } }) => {
+const Article = async (props: { params: Promise<{ slug: string }> }) => {
+  const params = await props.params;
   const articleData = await getArticleData(params.slug)
 
   return (
