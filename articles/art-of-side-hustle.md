@@ -1,6 +1,6 @@
 ---
 title: "The art of the side hustle"
-category: "business"
+category: "actuarial"
 date: "02-02-2023"
 ---
 
