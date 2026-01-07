@@ -27,9 +27,26 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cormorantGaramond.variable} ${outfit.variable} bg-white text-zinc-900 antialiased selection:bg-zinc-900 selection:text-white`}
+        className={`${cormorantGaramond.variable} ${outfit.variable} bg-white text-zinc-900 antialiased selection:bg-zinc-900 selection:text-white flex flex-col min-h-screen`}
       >
-        {children}
+        <div className="flex-grow">
+          {children}
+        </div>
+        <footer className="border-t border-zinc-100 py-12 mt-20">
+          <div className="mx-auto w-11/12 lg:w-3/4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-zinc-400 text-xs font-medium tracking-wider">
+              © 2026, Sutra by <span className="text-zinc-950">Rohan Yashraj Gupta</span>
+            </p>
+            <a 
+              href="https://rohanyashraj.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-zinc-400 hover:text-zinc-950 text-xs font-bold uppercase tracking-[0.2em] transition-colors"
+            >
+              rohanyashraj.com
+            </a>
+          </div>
+        </footer>
       </body>
     </html>
   )

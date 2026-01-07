@@ -35,7 +35,7 @@ const Article = async (props: { params: Promise<{ slug: string }> }) => {
             className="flex items-center gap-2 text-zinc-400 hover:text-zinc-950 transition-colors group w-fit"
           >
             <ArrowLeftIcon width={16} />
-            <p className="text-xs font-bold uppercase tracking-widest">Back to Articles</p>
+            <p className="text-xs font-bold uppercase tracking-widest">Back to Homepage</p>
           </Link>
           
           <div className="flex flex-col gap-8">

@@ -23,7 +23,7 @@ export default function AboutPage() {
             className="flex items-center gap-2 text-zinc-400 hover:text-zinc-950 transition-colors group w-fit"
           >
             <ArrowLeftIcon width={16} />
-            <p className="text-xs font-bold uppercase tracking-widest">Back to Dashboard</p>
+            <p className="text-xs font-bold uppercase tracking-widest">Back to Homepage</p>
           </Link>
           
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-zinc-950 leading-none">

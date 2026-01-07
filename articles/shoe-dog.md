@@ -1,6 +1,6 @@
 ---
 title: "The Shoe Dog"
-category: "books"
+category: "actuarial"
 date: "02-05-2023"
 ---
 

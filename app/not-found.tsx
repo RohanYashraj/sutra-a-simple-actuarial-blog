@@ -30,7 +30,7 @@ export default function NotFound() {
             href="/" 
             className="mt-8 px-10 py-4 bg-zinc-950 text-white text-sm font-bold uppercase tracking-widest hover:bg-zinc-800 transition-all duration-300"
           >
-            Return to Library
+            Return to Homepage
           </Link>
         </div>
       </section>

@@ -20,7 +20,7 @@ const ArticleItemList = ({ category, articles }: Props) => {
           <div className="mt-4 flex items-center gap-2">
             <div className="h-px w-8 bg-zinc-200"></div>
             <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">
-              {articles.length} {articles.length === 1 ? 'Article' : 'Articles'}
+              {articles.length} {articles.length === 1 ? 'Blog' : 'Blogs'}
             </span>
           </div>
         </div>
@@ -42,7 +42,7 @@ const ArticleItemList = ({ category, articles }: Props) => {
                 {moment(article.date, "DD-MM-YYYY").format('MMMM D, YYYY')}
               </span>
               <span className="w-1 h-1 rounded-full bg-zinc-200"></span>
-              <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-zinc-400 group-hover:text-zinc-600 transition-colors">Read Case Study →</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-zinc-400 group-hover:text-zinc-600 transition-colors">Read Blog Post →</span>
             </div>
           </Link>
         ))}
