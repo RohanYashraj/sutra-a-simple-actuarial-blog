@@ -62,9 +62,12 @@ export const getArticleData = async (id: string) => {
 
   const matterResult = matter(fileContents)
 
+  // Strip the first H1 tag if it exists (e.g. # Title) to prevent duplicate headers
+  const contentBody = matterResult.content.replace(/^#\s+.*$/m, "")
+
   const processedContent = await remark()
     .use(html)
-    .process(matterResult.content)
+    .process(contentBody)
   const contentHtml = processedContent.toString()
 
   return {
@@ -73,5 +76,7 @@ export const getArticleData = async (id: string) => {
     title: matterResult.data.title,
     date: matterResult.data.date,
     category: matterResult.data.category,
+    author: matterResult.data.author,
+    authorImage: matterResult.data.authorImage,
   }
 }
