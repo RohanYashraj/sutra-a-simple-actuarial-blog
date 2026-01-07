@@ -48,7 +48,7 @@ const Article = async (props: { params: Promise<{ slug: string }> }) => {
                 <img 
                   src={articleData.authorImage || "/authors/profile-placeholder.svg"}  
                   alt={articleData.author || "Author"}
-                  className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
+                  className="object-cover w-full h-full transition-all duration-300"
                 />
               </div>
               <div className="flex flex-col">
