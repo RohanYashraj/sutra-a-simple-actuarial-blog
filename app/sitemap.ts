@@ -3,12 +3,15 @@ import { getSortedArticles } from '@/lib/articles'
 
 export const dynamic = 'force-static'
 
+// Helper to convert category to URL-friendly slug
+const categoryToSlug = (category: string) => category.toLowerCase().replace(/\s+/g, '-')
+
 export default function sitemap(): MetadataRoute.Sitemap {
     const articles = getSortedArticles()
     const baseUrl = 'https://sutra.rohanyashraj.com'
 
     const articleUrls = articles.map((article) => ({
-        url: `${baseUrl}/${article.id}`,
+        url: `${baseUrl}/${categoryToSlug(article.category)}/${article.id}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.8,

@@ -6,13 +6,17 @@ import { getArticleData, getSortedArticles } from "@/lib/articles"
 import type { Metadata } from "next"
 
 type Props = {
-  params: Promise<{ slug: string }>
+  params: Promise<{ category: string; slug: string }>
 }
 
-// Generate static paths for all articles
+// Helper to convert category to URL-friendly slug
+const categoryToSlug = (category: string) => category.toLowerCase().replace(/\s+/g, '-')
+
+// Generate static paths for all articles with category
 export async function generateStaticParams() {
   const articles = getSortedArticles()
   return articles.map((article) => ({
+    category: categoryToSlug(article.category),
     slug: article.id,
   }))
 }
@@ -24,6 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const articleData = await getArticleData(resolvedParams.slug)
     const publishDate = moment(articleData.date, "DD-MM-YYYY").toISOString()
+    const categorySlug = categoryToSlug(articleData.category)
     const description = articleData.description || 
       `Read "${articleData.title}" - an actuarial blog post on Sutra exploring insights about ${articleData.category.toLowerCase()}.`
     
@@ -35,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         type: "article",
         title: articleData.title,
         description,
-        url: `https://sutra.rohanyashraj.com/${resolvedParams.slug}`,
+        url: `https://sutra.rohanyashraj.com/${categorySlug}/${resolvedParams.slug}`,
         siteName: "Sutra - Actuarial Blog",
         publishedTime: publishDate,
         authors: articleData.author ? [articleData.author] : undefined,
@@ -55,7 +60,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         images: [articleData.authorImage || "/logo.png"],
       },
       alternates: {
-        canonical: `https://sutra.rohanyashraj.com/${resolvedParams.slug}`,
+        canonical: `https://sutra.rohanyashraj.com/${categorySlug}/${resolvedParams.slug}`,
       },
     }
   } catch {
@@ -71,11 +76,17 @@ const Article = async (props: Props) => {
   let articleData;
   try {
     articleData = await getArticleData(params.slug)
+    // Verify category matches
+    const expectedCategorySlug = categoryToSlug(articleData.category)
+    if (params.category !== expectedCategorySlug) {
+      notFound()
+    }
   } catch {
     notFound()
   }
 
   const publishDate = moment(articleData.date, "DD-MM-YYYY").toISOString()
+  const categorySlug = categoryToSlug(articleData.category)
   const description = articleData.description || 
     `Read "${articleData.title}" - an actuarial blog post on Sutra exploring insights about ${articleData.category.toLowerCase()}.`
 
@@ -85,7 +96,7 @@ const Article = async (props: Props) => {
     "@type": "BlogPosting",
     headline: articleData.title,
     description,
-    url: `https://sutra.rohanyashraj.com/${params.slug}`,
+    url: `https://sutra.rohanyashraj.com/${categorySlug}/${params.slug}`,
     datePublished: publishDate,
     dateModified: publishDate,
     author: {
@@ -99,7 +110,7 @@ const Article = async (props: Props) => {
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://sutra.rohanyashraj.com/${params.slug}`,
+      "@id": `https://sutra.rohanyashraj.com/${categorySlug}/${params.slug}`,
     },
     keywords: ["actuarial", "actuarial blog", articleData.category.toLowerCase()],
   }
@@ -167,4 +178,3 @@ const Article = async (props: Props) => {
 }
 
 export default Article
-
