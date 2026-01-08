@@ -5,4 +5,6 @@ export type ArticleItem = {
   category: string
   author?: string
   authorImage?: string
+  description?: string
 }
+

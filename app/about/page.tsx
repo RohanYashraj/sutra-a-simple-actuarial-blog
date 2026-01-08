@@ -1,5 +1,19 @@
 import Link from "next/link"
 import { ArrowLeftIcon } from "@heroicons/react/24/solid"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "About",
+  description: "About Sutra - An actuarial blog by Rohan Yashraj Gupta. Exploring the intersection of actuarial science, artificial intelligence, and modern technology.",
+  openGraph: {
+    title: "About Sutra - Actuarial Blog",
+    description: "About Sutra - An actuarial blog by Rohan Yashraj Gupta exploring actuarial science, AI, and technology.",
+    url: "https://sutra.rohanyashraj.com/about",
+  },
+  alternates: {
+    canonical: "https://sutra.rohanyashraj.com/about",
+  },
+}
 
 export default function AboutPage() {
   return (

@@ -15,8 +15,84 @@ const outfit = Outfit({
 })
 
 export const metadata: Metadata = {
-  title: "sutra - a simple actuarial blog",
-  description: "A minimalist space for actuarial science, AI, and technology insights.",
+  metadataBase: new URL('https://sutra.rohanyashraj.com'),
+  title: {
+    default: "Sutra - Actuarial Blog | AI, Risk & Technology Insights",
+    template: "%s | Sutra - Actuarial Blog"
+  },
+  description: "A leading actuarial blog exploring actuarial science, artificial intelligence, risk modeling, and technology. Expert insights on insurance, pension, and data-driven actuarial practices by Rohan Yashraj Gupta.",
+  keywords: [
+    "actuarial blog",
+    "actuarial science",
+    "actuarial science blog",
+    "AI in actuarial",
+    "actuarial technology",
+    "risk modeling",
+    "insurance analytics",
+    "pension actuarial",
+    "data science for actuaries",
+    "actuarial AI",
+    "actuarial insights",
+    "actuarial articles",
+  ],
+  authors: [{ name: "Rohan Yashraj Gupta", url: "https://rohanyashraj.com" }],
+  creator: "Rohan Yashraj Gupta",
+  publisher: "Sutra",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://sutra.rohanyashraj.com",
+    siteName: "Sutra - Actuarial Blog",
+    title: "Sutra - Actuarial Blog | AI, Risk & Technology Insights",
+    description: "A leading actuarial blog exploring actuarial science, AI, risk modeling, and technology insights.",
+    images: [
+      {
+        url: "/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Sutra - Actuarial Blog",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sutra - Actuarial Blog | AI, Risk & Technology Insights",
+    description: "A leading actuarial blog exploring actuarial science, AI, risk modeling, and technology insights.",
+    images: ["/logo.png"],
+    creator: "@rohanyashraj",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "https://sutra.rohanyashraj.com",
+  },
+}
+
+// JSON-LD WebSite Schema for rich snippets
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Sutra - Actuarial Blog",
+  description: "A leading actuarial blog exploring actuarial science, AI, risk modeling, and technology insights.",
+  url: "https://sutra.rohanyashraj.com",
+  author: {
+    "@type": "Person",
+    name: "Rohan Yashraj Gupta",
+    url: "https://rohanyashraj.com",
+  },
+  publisher: {
+    "@type": "Person",
+    name: "Rohan Yashraj Gupta",
+  },
 }
 
 export default function RootLayout({
@@ -26,6 +102,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+      </head>
       <body
         className={`${cormorantGaramond.variable} ${outfit.variable} bg-white text-zinc-900 antialiased selection:bg-zinc-900 selection:text-white flex flex-col min-h-screen`}
       >
@@ -51,3 +133,4 @@ export default function RootLayout({
     </html>
   )
 }
+

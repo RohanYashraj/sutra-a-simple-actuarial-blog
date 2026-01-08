@@ -8,6 +8,9 @@ interface Props {
   articles: ArticleItem[]
 }
 
+// Helper to convert category to URL-friendly slug
+const categoryToSlug = (category: string) => category.toLowerCase().replace(/\s+/g, '-')
+
 const ArticleItemList = ({ category, articles }: Props) => {
   return (
     <div className="flex flex-col md:flex-row gap-8 md:gap-16">
@@ -30,7 +33,7 @@ const ArticleItemList = ({ category, articles }: Props) => {
       <div className="md:w-3/4 flex flex-col gap-12 font-outfit">
         {articles.map((article, id) => (
           <Link
-            href={`/${article.id}`}
+            href={`/${categoryToSlug(article.category)}/${article.id}`}
             key={id}
             className="group flex flex-col gap-2"
           >
