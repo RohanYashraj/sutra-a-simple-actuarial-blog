@@ -78,5 +78,6 @@ export const getArticleData = async (id: string) => {
     category: matterResult.data.category,
     author: matterResult.data.author,
     authorImage: matterResult.data.authorImage,
+    description: matterResult.data.description,
   }
 }
