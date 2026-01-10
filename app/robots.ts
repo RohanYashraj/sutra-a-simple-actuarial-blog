@@ -9,6 +9,10 @@ export default function robots(): MetadataRoute.Robots {
                 userAgent: '*',
                 allow: '/',
             },
+            {
+                userAgent: ['GPTBot', 'CCBot', 'Google-Extended'],
+                allow: '/',
+            }
         ],
         sitemap: `${baseUrl}/sitemap.xml`,
     }

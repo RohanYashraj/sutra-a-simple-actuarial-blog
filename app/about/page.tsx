@@ -18,6 +18,28 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main className="min-h-screen font-outfit bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfilePage",
+            "dateCreated": "2024-01-01T00:00:00-05:00",
+            "dateModified": new Date().toISOString(),
+            "mainEntity": {
+              "@type": "Person",
+              "name": "Rohan Yashraj Gupta",
+              "alternateName": "RohanYashraj",
+              "description": "Actuary and Technologist exploring the future of insurance and AI.",
+              "image": "https://sutra.rohanyashraj.com/authors/profile-placeholder.svg",
+              "sameAs": [
+                "https://rohanyashraj.com",
+                "https://github.com/RohanYashraj"
+              ]
+            }
+          })
+        }}
+      />
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-zinc-100">
         <div className="mx-auto w-11/12 lg:w-3/4 h-16 flex items-center justify-between">

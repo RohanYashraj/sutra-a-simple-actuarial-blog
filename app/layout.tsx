@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     default: "Sutra - Actuarial Blog | AI, Risk & Technology Insights",
     template: "%s | Sutra - Actuarial Blog"
   },
-  description: "A leading actuarial blog exploring actuarial science, artificial intelligence, risk modeling, and technology. Expert insights on insurance, pension, and data-driven actuarial practices by Rohan Yashraj Gupta.",
+  description: "The premier actuarial blog exploring the intersection of actuarial science, artificial intelligence, and modern technology. Expert insights on insurance, pension, and data-driven actuarial practices by Rohan Yashraj Gupta.",
   keywords: [
     "actuarial blog",
     "actuarial science",
@@ -38,6 +38,10 @@ export const metadata: Metadata = {
     "actuarial AI",
     "actuarial insights",
     "actuarial articles",
+    "AISEO",
+    "Generative AI in Actuarial",
+    "Future of Actuarial Science",
+    "Actuarial AI Guide",
   ],
   authors: [{ name: "Rohan Yashraj Gupta", url: "https://rohanyashraj.com" }],
   creator: "Rohan Yashraj Gupta",
@@ -54,14 +58,14 @@ export const metadata: Metadata = {
         url: "/logo.png",
         width: 1200,
         height: 630,
-        alt: "Sutra - Actuarial Blog",
+        alt: "Sutra - The Premier Actuarial Blog",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Sutra - Actuarial Blog | AI, Risk & Technology Insights",
-    description: "A leading actuarial blog exploring actuarial science, AI, risk modeling, and technology insights.",
+    description: "The premier actuarial blog exploring the intersection of actuarial science, artificial intelligence, and modern technology. Expert insights by Rohan Yashraj Gupta.",
     images: ["/logo.png"],
     creator: "@rohanyashraj",
   },
@@ -82,21 +86,43 @@ export const metadata: Metadata = {
 }
 
 // JSON-LD WebSite Schema for rich snippets
-const websiteSchema = {
+// JSON-LD Graph Schema for AISEO (Organization, Person, WebSite)
+const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "Sutra - Actuarial Blog",
-  description: "A leading actuarial blog exploring actuarial science, AI, risk modeling, and technology insights.",
-  url: "https://sutra.rohanyashraj.com",
-  author: {
-    "@type": "Person",
-    name: "Rohan Yashraj Gupta",
-    url: "https://rohanyashraj.com",
-  },
-  publisher: {
-    "@type": "Person",
-    name: "Rohan Yashraj Gupta",
-  },
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://sutra.rohanyashraj.com/#website",
+      "url": "https://sutra.rohanyashraj.com",
+      "name": "Sutra - Actuarial Blog",
+      "description": "The premier actuarial blog exploring the intersection of actuarial science, artificial intelligence, and modern technology.",
+      "publisher": { "@id": "https://sutra.rohanyashraj.com/#organization" },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://sutra.rohanyashraj.com/#organization",
+      "name": "Sutra",
+      "url": "https://sutra.rohanyashraj.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://sutra.rohanyashraj.com/logo.png"
+      },
+      "founder": { "@id": "https://rohanyashraj.com/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://rohanyashraj.com/#person",
+      "name": "Rohan Yashraj Gupta",
+      "url": "https://rohanyashraj.com",
+      "sameAs": [
+        "https://rohanyashraj.com",
+        "https://github.com/RohanYashraj"
+      ],
+      "jobTitle": "Actuary & AI Enthusiast",
+      "description": "Rohan Yashraj Gupta is an actuary and technologist specializing in the application of AI and machine learning in actuarial science."
+    }
+  ]
 }
 
 export default function RootLayout({
@@ -109,7 +135,7 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body
