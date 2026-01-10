@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import { Cormorant_Garamond, Outfit } from "next/font/google"
 import "./globals.css"
+import PHProvider from './providers/PostHogProvider'
+import PostHogPageView from "./providers/PostHogPageView"
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -111,9 +113,12 @@ export default function RootLayout({
       <body
         className={`${cormorantGaramond.variable} ${outfit.variable} bg-white text-zinc-900 antialiased selection:bg-zinc-900 selection:text-white flex flex-col min-h-screen`}
       >
+        <PHProvider>
+          <PostHogPageView />
         <div className="flex-grow">
           {children}
         </div>
+        </PHProvider>
         <footer className="border-t border-zinc-100 py-12 mt-20">
           <div className="mx-auto w-11/12 lg:w-3/4 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-zinc-400 text-xs font-medium tracking-wider">
