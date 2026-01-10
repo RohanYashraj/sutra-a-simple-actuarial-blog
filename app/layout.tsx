@@ -1,4 +1,6 @@
 import type { Metadata } from "next"
+import { Suspense } from "react"
+
 import { Cormorant_Garamond, Outfit } from "next/font/google"
 import "./globals.css"
 import PHProvider from './providers/PostHogProvider'
@@ -114,7 +116,9 @@ export default function RootLayout({
         className={`${cormorantGaramond.variable} ${outfit.variable} bg-white text-zinc-900 antialiased selection:bg-zinc-900 selection:text-white flex flex-col min-h-screen`}
       >
         <PHProvider>
-          <PostHogPageView />
+          <Suspense fallback={null}>
+            <PostHogPageView />
+          </Suspense>
         <div className="flex-grow">
           {children}
         </div>
