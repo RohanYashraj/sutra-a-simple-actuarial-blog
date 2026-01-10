@@ -115,11 +115,41 @@ const Article = async (props: Props) => {
     keywords: ["actuarial", "actuarial blog", articleData.category.toLowerCase()],
   }
 
+  // JSON-LD BreadcrumbList Schema
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://sutra.rohanyashraj.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": articleData.category,
+        "item": `https://sutra.rohanyashraj.com/${categorySlug}` /* Note: Category pages need to exist or redirect */
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": articleData.title,
+        "item": `https://sutra.rohanyashraj.com/${categorySlug}/${params.slug}`
+      }
+    ]
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <main className="min-h-screen font-outfit bg-white">
         {/* Navigation */}
