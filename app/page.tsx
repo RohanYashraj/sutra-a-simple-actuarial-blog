@@ -1,9 +1,10 @@
 import Link from "next/link"
 import ArticleItemList from "@/components/ArticleListItem"
-import { getCategorisedArticles } from "@/lib/articles"
+import { getCategorisedArticles, getSortedArticles } from "@/lib/articles"
 
 const HomePage = () => {
   const articles = getCategorisedArticles()
+  const recentArticles = getSortedArticles().slice(0, 3)
 
   return (
     <main className="min-h-screen font-outfit">
@@ -14,7 +15,7 @@ const HomePage = () => {
             sutra<span className="text-zinc-400">.</span>
           </Link>
           <div className="flex gap-8 text-sm font-medium">
-            <Link href="/about" className="nav-link">About</Link>
+            <Link href="/about" className="nav-link text-zinc-500 hover:text-zinc-950 transition-colors">About</Link>
           </div>
         </div>
       </nav>
@@ -30,11 +31,19 @@ const HomePage = () => {
       {/* Articles Section */}
       <section className="mx-auto w-11/12 lg:w-3/4 pb-32">
         <div className="flex flex-col gap-24">
+          
+          {/* Recent Articles */}
+          <ArticleItemList 
+            category="Recent" 
+            articles={recentArticles} 
+          />
+
+          {/* Categorised Articles */}
           {articles !== null &&
             Object.keys(articles).map((category) => (
               <ArticleItemList
                 category={category}
-                articles={articles[category]}
+                articles={articles[category].slice(0, 3)}
                 key={category}
               />
             ))}

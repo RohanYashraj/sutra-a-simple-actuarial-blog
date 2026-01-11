@@ -1,5 +1,6 @@
 import Link from "next/link"
 import moment from "moment"
+import { ArrowLongRightIcon } from "@heroicons/react/24/outline"
 
 import type { ArticleItem } from "@/types"
 
@@ -13,39 +14,61 @@ const categoryToSlug = (category: string) => category.toLowerCase().replace(/\s+
 
 const ArticleItemList = ({ category, articles }: Props) => {
   return (
-    <div className="flex flex-col md:flex-row gap-8 md:gap-16">
+    <div className="flex flex-col md:flex-row gap-8 md:gap-16 border-t border-zinc-100 pt-12 first:border-t-0 first:pt-0">
       {/* Category Sidebar */}
       <div className="md:w-1/4">
-        <div className="sticky top-24">
-          <h2 className="font-cormorantGaramond text-4xl text-zinc-900 capitalize tracking-tight leading-none">
-            {category}
-          </h2>
-          <div className="mt-4 flex items-center gap-2">
-            <div className="h-px w-8 bg-zinc-200"></div>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">
-              {articles.length} {articles.length === 1 ? 'Blog' : 'Blogs'}
-            </span>
-          </div>
+        <div className="sticky top-24 flex flex-col gap-4">
+          {category === "Recent" ? (
+            <h2 className="font-cormorantGaramond text-3xl md:text-4xl text-zinc-900 capitalize tracking-tight leading-none">
+              {category}
+            </h2>
+          ) : (
+            <Link href={`/${categoryToSlug(category)}`} className="group">
+              <h2 className="font-cormorantGaramond text-3xl md:text-4xl text-zinc-900 capitalize tracking-tight leading-none group-hover:text-zinc-600 transition-colors">
+                {category}
+              </h2>
+            </Link>
+          )}
+          
+          {category !== "Recent" && (
+            <div className="flex items-center gap-2">
+              <div className="h-px w-8 bg-zinc-200"></div>
+              <Link href={`/${categoryToSlug(category)}`} className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-zinc-950 transition-colors">
+                View All Posts
+              </Link>
+            </div>
+          )}
         </div>
       </div>
 
       {/* Articles List */}
-      <div className="md:w-3/4 flex flex-col gap-12 font-outfit">
+      <div className="md:w-3/4 flex flex-col gap-16 font-outfit">
         {articles.map((article, id) => (
           <Link
             href={`/${categoryToSlug(article.category)}/${article.id}`}
             key={id}
-            className="group flex flex-col gap-2"
+            className="group flex flex-col gap-4"
           >
-            <h3 className="text-2xl md:text-3xl font-medium tracking-tight text-zinc-950 group-hover:text-zinc-600 transition-colors">
-              {article.title}
-            </h3>
+            <div className="flex flex-col gap-2">
+              <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-zinc-950 group-hover:text-zinc-600 transition-colors">
+                {article.title}
+              </h3>
+              {article.description && (
+                <p className="text-zinc-500 leading-relaxed text-sm md:text-base max-w-2xl">
+                  {article.description}
+                </p>
+              )}
+            </div>
+            
             <div className="flex items-center gap-3">
               <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-zinc-400">
                 {moment(article.date, "DD-MM-YYYY").format('MMMM D, YYYY')}
               </span>
               <span className="w-1 h-1 rounded-full bg-zinc-200"></span>
-              <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-zinc-400 group-hover:text-zinc-600 transition-colors">Read Blog Post →</span>
+              <div className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.1em] text-zinc-950 group-hover:text-zinc-600 transition-colors">
+                <span>Read Article</span>
+                <ArrowLongRightIcon className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+              </div>
             </div>
           </Link>
         ))}
