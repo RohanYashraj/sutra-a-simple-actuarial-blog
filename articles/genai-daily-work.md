@@ -1,7 +1,7 @@
 ---
 title: "Where GenAI Fits in an Actuary's Daily Work"
 category: "GenAI for Actuaries"
-date: "13-01-2026"
+date: "03-01-2026"
 author: "Rohan Yashraj Gupta"
 authorImage: "/authors/author-rohan.jpg"
 description: "Learn where GenAI actually adds value in daily actuarial tasks: reading contracts, summarizing results, and explaining technical concepts."

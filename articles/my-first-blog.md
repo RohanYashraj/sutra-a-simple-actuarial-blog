@@ -1,7 +1,7 @@
 ---
 title: "Day Zero: Why I'm Starting Sutra"
 category: "personal"
-date: "08-01-2026"
+date: "01-01-2026"
 author: "Rohan Yashraj Gupta"
 authorImage: "/authors/author-rohan.jpg"
 description: "Discover why I started Sutra - an actuarial blog exploring the intersection of actuarial science, AI, and technology. Join me on this journey of sharing insights and sparking curiosity."

@@ -1,7 +1,7 @@
 ---
 title: "Where GenAI Breaks Down for Actuaries"
 category: "GenAI for Actuaries"
-date: "14-01-2026"
+date: "04-01-2026"
 author: "Rohan Yashraj Gupta"
 authorImage: "/authors/author-rohan.jpg"
 description: "Understand the critical limitations of GenAI in actuarial work: why it fails at math, struggles with specific assumptions, and lacks necessary judgment."

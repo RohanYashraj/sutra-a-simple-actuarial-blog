@@ -1,7 +1,7 @@
 ---
 title: "What GenAI Actually Is, in Actuarial Terms"
 category: "GenAI for Actuaries"
-date: "11-01-2026"
+date: "01-01-2026"
 author: "Rohan Yashraj Gupta"
 authorImage: "/authors/author-rohan.jpg"
 description: "Explore the quiet evolution of actuarial work from Excel spreadsheets to modern API-driven platforms. Discover how speed, integration, and governance are reshaping the profession."

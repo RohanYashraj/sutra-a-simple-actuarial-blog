@@ -1,7 +1,7 @@
 ---
 title: "How Actuaries Should Work With GenAI"
 category: "GenAI for Actuaries"
-date: "15-01-2026"
+date: "05-01-2026"
 author: "Rohan Yashraj Gupta"
 authorImage: "/authors/author-rohan.jpg"
 description: "A practical guide for actuaries using GenAI: The Ask-Verify-Refine workflow, verification checklists, and how to treat AI like a junior analyst."

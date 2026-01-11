@@ -1,7 +1,7 @@
 ---
 title: "The One Mental Model Actuaries Need for GenAI"
 category: "GenAI for Actuaries"
-date: "16-01-2026"
+date: "06-01-2026"
 author: "Rohan Yashraj Gupta"
 authorImage: "/authors/author-rohan.jpg"
 description: "A framework for understanding where GenAI fits in actuarial work: The Language Layer vs. The Model Layer vs. The Judgment Layer."

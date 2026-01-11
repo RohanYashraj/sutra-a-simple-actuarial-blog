@@ -1,7 +1,7 @@
 ---
 title: "What GenAI Is Not"
 category: "GenAI for Actuaries"
-date: "12-01-2026"
+date: "02-01-2026"
 author: "Rohan Yashraj Gupta"
 authorImage: "/authors/author-rohan.jpg"
 description: "Discover why GenAI is not a replacement for actuarial models. Understand the critical difference between prediction and calculation in actuarial science."
