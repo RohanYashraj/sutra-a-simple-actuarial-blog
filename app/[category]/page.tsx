@@ -52,6 +52,7 @@ const CategoryPage = async (props: Props) => {
         <ArticleItemList 
           category={categoryName} 
           articles={categoryArticles} 
+          hideViewAllLink={true}
         />
       </section>
     </main>

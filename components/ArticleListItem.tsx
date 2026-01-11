@@ -7,12 +7,13 @@ import type { ArticleItem } from "@/types"
 interface Props {
   category: string
   articles: ArticleItem[]
+  hideViewAllLink?: boolean
 }
 
 // Helper to convert category to URL-friendly slug
 const categoryToSlug = (category: string) => category.toLowerCase().replace(/\s+/g, '-')
 
-const ArticleItemList = ({ category, articles }: Props) => {
+const ArticleItemList = ({ category, articles, hideViewAllLink }: Props) => {
   return (
     <div className="flex flex-col md:flex-row gap-8 md:gap-16 border-t border-zinc-100 pt-12 first:border-t-0 first:pt-0">
       {/* Category Sidebar */}
@@ -30,7 +31,7 @@ const ArticleItemList = ({ category, articles }: Props) => {
             </Link>
           )}
           
-          {category !== "Recent" && (
+          {category !== "Recent" && !hideViewAllLink && (
             <div className="flex items-center gap-2">
               <div className="h-px w-8 bg-zinc-200"></div>
               <Link href={`/${categoryToSlug(category)}`} className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-zinc-950 transition-colors">
