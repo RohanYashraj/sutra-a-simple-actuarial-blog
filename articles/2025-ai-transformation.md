@@ -99,6 +99,4 @@ If you're an actuary reading this, the message is simple: embrace the learning c
 
 Here's to 2025—the year we stopped wondering if AI would change actuarial work and started figuring out how to make it work for us.
 
----
-
 Enthusiast. Learner. Explorer.

@@ -143,8 +143,6 @@ This changes how actuaries work:
 
 You're trusting the platform more. Inspecting it less.
 
----
-
 ## The New Actuarial Skillset
 
 Excel skills aren't obsolete. You still need to:
