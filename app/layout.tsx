@@ -5,6 +5,7 @@ import { Cormorant_Garamond, Outfit } from "next/font/google"
 import "./globals.css"
 import PHProvider from './providers/PostHogProvider'
 import PostHogPageView from "./providers/PostHogPageView"
+import { Analytics } from "@vercel/analytics/next"
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -164,6 +165,7 @@ export default function RootLayout({
             </a>
           </div>
         </footer>
+        <Analytics />
       </body>
     </html>
   )
