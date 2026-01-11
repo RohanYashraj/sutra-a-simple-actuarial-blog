@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { getSortedArticles } from '@/lib/articles'
+import { getSortedArticles, getCategorisedArticles } from '@/lib/articles'
 
 export const dynamic = 'force-static'
 
@@ -8,7 +8,15 @@ const categoryToSlug = (category: string) => category.toLowerCase().replace(/\s+
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const articles = getSortedArticles()
+    const categories = Object.keys(getCategorisedArticles())
     const baseUrl = 'https://sutra.rohanyashraj.com'
+
+    const categoryUrls = categories.map((category) => ({
+        url: `${baseUrl}/${categoryToSlug(category)}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.6,
+    }))
 
     const articleUrls = articles.map((article) => ({
         url: `${baseUrl}/${categoryToSlug(article.category)}/${article.id}`,
@@ -30,6 +38,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'monthly',
             priority: 0.5,
         },
+        ...categoryUrls,
         ...articleUrls,
     ]
 }
