@@ -6,6 +6,7 @@ import "./globals.css"
 import PHProvider from './providers/PostHogProvider'
 import PostHogPageView from "./providers/PostHogPageView"
 import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -166,6 +167,7 @@ export default function RootLayout({
           </div>
         </footer>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
