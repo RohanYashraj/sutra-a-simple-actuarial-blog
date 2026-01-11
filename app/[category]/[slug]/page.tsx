@@ -164,7 +164,7 @@ const Article = async (props: Props) => {
           </div>
         </nav>
 
-        <section className="mx-auto w-11/12 md:w-3/4 lg:w-2/5 py-24 flex flex-col gap-12">
+        <section className="mx-auto w-11/12 md:w-3/4 lg:w-7/12 py-24 flex flex-col gap-12">
           <div className="flex flex-col gap-16">
             <Link 
               href={"/"} 

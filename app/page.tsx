@@ -22,7 +22,7 @@ const HomePage = () => {
       {/* Header Section */}
       <header className="mx-auto w-11/12 lg:w-3/4 pt-24 pb-16">
         <h1 className="font-cormorantGaramond text-5xl md:text-6xl text-zinc-950 max-w-2xl leading-tight">
-          Sutra - A simple <span className="italic">actuarial blog</span>, exploring numbers, AI, and the human side of tech.
+          Sutra - A simple actuarial blog, exploring numbers, AI, and the human side of tech.
         </h1>
         <div className="mt-8 h-1 w-20 bg-zinc-900"></div>
       </header>
