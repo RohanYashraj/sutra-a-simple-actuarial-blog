@@ -16,6 +16,7 @@ const HomePage = () => {
           </Link>
           <div className="flex gap-8 text-sm font-medium">
             <Link href="/about" className="nav-link text-zinc-500 hover:text-zinc-950 transition-colors">About</Link>
+            <Link href="https://www.rohanyashraj.com/contact" className="nav-link text-zinc-500 hover:text-zinc-950 transition-colors">Contact</Link>
           </div>
         </div>
       </nav>
