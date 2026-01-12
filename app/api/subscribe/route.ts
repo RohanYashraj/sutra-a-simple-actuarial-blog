@@ -1,5 +1,6 @@
 import { Resend } from 'resend'
 import { NextResponse } from 'next/server'
+import { getEmailTemplate } from '@/lib/email'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -29,22 +30,31 @@ export async function POST(request: Request) {
                 })
 
                 // Send Welcome Email
+                const welcomeHtml = getEmailTemplate(
+                    'Welcome to Sutra',
+                    `
+                    <h1>Welcome to Sutra</h1>
+                    <p>Thank you for subscribing. You have joined a community of forward-thinking actuaries exploring the intersection of our profession with artificial intelligence and modern technology.</p>
+                    
+                    <h2>What to Expect</h2>
+                    <p>We believe the future of actuarial science lies in the balance of technical rigor and technological innovation. You can expect:</p>
+                    <ul>
+                        <li><strong>Deep Dives:</strong> Analysis of AI trends specifically for insurance and risk.</li>
+                        <li><strong>Tutorials:</strong> Practical guides on using Python, LLMs, and modern tools.</li>
+                        <li><strong>Philosophy:</strong> Perspectives on how the actuary's role is evolving.</li>
+                    </ul>
+                    
+                    <p>Stay tuned for our next insight.</p>
+                    <br/>
+                    <p>Regards,<br/><strong>Rohan Yashraj Gupta</strong></p>
+                  `
+                )
+
                 await resend.emails.send({
                     from: 'Sutra Blog <newsletter@sutra.rohanyashraj.com>',
                     to: email,
                     subject: 'Welcome to Sutra - Actuarial Blog',
-                    html: `
-                        <h1>Welcome to Sutra!</h1>
-                        <p>Thank you for subscribing to Sutra - the premier actuarial blog exploring the intersection of actuarial science, artificial intelligence, and modern technology.</p>
-                        <p><strong>What to expect:</strong></p>
-                        <ul>
-                            <li>Deep dives into AI & Actuarial Science</li>
-                            <li>Tutorials on modern tech stacks for actuaries</li>
-                            <li>Insights on the future of the profession</li>
-                        </ul>
-                        <p>Stay tuned for our next post!</p>
-                        <p>Best,<br/>Rohan Yashraj Gupta</p>
-                    `
+                    html: welcomeHtml
                 })
 
             } else {
