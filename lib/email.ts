@@ -9,10 +9,15 @@ export const getEmailTemplate = (title: string, content: string, recipientEmail?
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
-          @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Outfit:wght@400;700&display=swap');
+          /* 
+            Deliverability Optimization:
+            Removed external Google Fonts (@import) to align with sending domain security policies (Gmail/Outlook).
+            The font stack below prioritizes brand fonts (Outfit, Cormorant Garamond) if locally available, 
+            falling back to high-quality system equivalents.
+          */
           
           body {
-            font-family: 'Outfit', Helvetica, Arial, sans-serif;
+            font-family: 'Outfit', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: #ffffff;
             color: #000000;
             margin: 0;
@@ -31,7 +36,7 @@ export const getEmailTemplate = (title: string, content: string, recipientEmail?
             border-bottom: 1px solid #f4f4f5;
           }
           .logo {
-            font-family: 'Outfit', Helvetica, Arial, sans-serif;
+            font-family: 'Outfit', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             font-size: 36px;
             font-weight: 700;
             letter-spacing: -0.05em;
@@ -46,7 +51,7 @@ export const getEmailTemplate = (title: string, content: string, recipientEmail?
             margin-bottom: 40px;
           }
           h1 {
-            font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+            font-family: 'Cormorant Garamond', 'Georgia', 'Times New Roman', serif;
             font-size: 32px;
             font-weight: 600;
             margin-bottom: 24px;
@@ -54,7 +59,7 @@ export const getEmailTemplate = (title: string, content: string, recipientEmail?
             line-height: 1.2;
           }
           h2 {
-            font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+            font-family: 'Cormorant Garamond', 'Georgia', 'Times New Roman', serif;
             font-size: 24px;
             font-weight: 600;
             margin-top: 32px;

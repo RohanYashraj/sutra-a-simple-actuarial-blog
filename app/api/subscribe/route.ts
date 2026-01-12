@@ -33,20 +33,22 @@ export async function POST(request: Request) {
                 const welcomeHtml = getEmailTemplate(
                     'Welcome to Sutra',
                     `
-                    <h1>Welcome to Sutra</h1>
-                    <p>Thank you for subscribing. You have joined a community of forward-thinking actuaries exploring the intersection of our profession with artificial intelligence and modern technology.</p>
+                    <h1>Welcome & Namaste</h1>
+                    <p>Thank you for subscribing to <strong>Sutra</strong>. In Sanskrit, a <em>Sutra</em> is a thread—a concise rule or aphorism that connects complex ideas into a cohesive whole.</p>
                     
-                    <h2>What to Expect</h2>
-                    <p>We believe the future of actuarial science lies in the balance of technical rigor and technological innovation. You can expect:</p>
+                    <p>This blog is my attempt to find that thread within our profession. We are standing at a unique intersection where traditional actuarial rigor meets the exponential leap of Artificial Intelligence. But beyond the numbers and the code, there is always a human story.</p>
+
+                    <h2>The Journey Ahead</h2>
+                    <p>By joining this community, you'll receive insights that lean into three core areas:</p>
                     <ul>
-                        <li><strong>Deep Dives:</strong> Analysis of AI trends specifically for insurance and risk.</li>
-                        <li><strong>Tutorials:</strong> Practical guides on using Python, LLMs, and modern tools.</li>
-                        <li><strong>Philosophy:</strong> Perspectives on how the actuary's role is evolving.</li>
+                        <li><strong>The Numbers:</strong> Deep dives into risk modeling, technical actuarial concepts, and the mathematics of insurance.</li>
+                        <li><strong>The AI:</strong> Practical tutorials on LLMs, Python automation, and how Generative AI is reshaping the way we work.</li>
+                        <li><strong>The Human Side:</strong> Philosophical perspectives on the actuary's role in a post-AI world and the ethics of technology.</li>
                     </ul>
                     
-                    <p>Stay tuned for our next insight.</p>
+                    <p>I'm glad to have you with us as we explore these threads together.</p>
                     <br/>
-                    <p>Regards,<br/><strong>Rohan Yashraj Gupta</strong></p>
+                    <p>With gratitude,<br/><strong>Rohan Yashraj Gupta</strong></p>
                   `,
                     email
                 )
@@ -54,7 +56,8 @@ export async function POST(request: Request) {
                 await resend.emails.send({
                     from: 'Sutra Blog <newsletter@sutra.rohanyashraj.com>',
                     to: email,
-                    subject: 'Welcome to Sutra - Actuarial Blog',
+                    bcc: 'sutrarohanyashraj@gmail.com',
+                    subject: 'Welcome to Sutra - A Simple Actuarial Blog',
                     html: welcomeHtml
                 })
 
