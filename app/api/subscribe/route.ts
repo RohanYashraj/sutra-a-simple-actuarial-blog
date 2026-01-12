@@ -38,12 +38,12 @@ export async function POST(request: Request) {
                     
                     <p>This blog is my attempt to find that thread within our profession. We are standing at a unique intersection where traditional actuarial rigor meets the exponential leap of Artificial Intelligence. But beyond the numbers and the code, there is always a human story.</p>
 
-                    <h2>The Journey Ahead</h2>
-                    <p>By joining this community, you'll receive insights that lean into three core areas:</p>
-                    <ul>
-                        <li><strong>The Numbers:</strong> Deep dives into risk modeling, technical actuarial concepts, and the mathematics of insurance.</li>
-                        <li><strong>The AI:</strong> Practical tutorials on LLMs, Python automation, and how Generative AI is reshaping the way we work.</li>
-                        <li><strong>The Human Side:</strong> Philosophical perspectives on the actuary's role in a post-AI world and the ethics of technology.</li>
+                    <h2>What to Expect</h2>
+                    <p>By joining this community, you'll stay ahead of the curve with three distinct updates:</p>
+                    <ul style="margin-bottom: 24px;">
+                        <li><strong>Daily Trivia (The Sutra Insight):</strong> A bite-sized daily dose of AI news, actuarial fun facts, and tech power-tips delivered every morning.</li>
+                        <li><strong>Weekly Digest:</strong> A curated summary of the latest investigative articles and deep-dives from the blog, sent every Tuesday and Thursday.</li>
+                        <li><strong>The Core Threads:</strong> Occasional long-form explorations into risk modeling, Python automation, and the ethics of technology in a post-AI world.</li>
                     </ul>
                     
                     <p>I'm glad to have you with us as we explore these threads together.</p>
