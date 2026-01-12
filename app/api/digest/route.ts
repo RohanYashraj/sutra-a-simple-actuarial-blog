@@ -23,19 +23,6 @@ export async function GET() {
 
     // 2. Fetch all contacts from Audience
     // Note: This API call fetches one page of contacts, which is fine for MVP.
-    // Ideally we iterate or use broadcast API, but sticking to "simple loop" per requirement.
-    const { data: contacts, error: contactsError } = await resend.contacts.list({
-      audienceId: audienceId,
-    })
-
-    if (contactsError || !contacts) {
-      throw new Error('Failed to fetch contacts')
-    }
-
-    if (contacts.data.length === 0) {
-      return NextResponse.json({ message: 'No subscribers to email.' })
-    }
-
     const emailContent = getEmailTemplate(
       'Daily Digest',
       `
@@ -70,61 +57,33 @@ export async function GET() {
             `
     )
 
-    // 3. Send emails
-    // Since we want unique unsubscribe links per user, we need to send individual emails
-    const results = await Promise.allSettled(
-      contacts.data.map(contact => {
-        const individualEmailContent = getEmailTemplate(
-          'Daily Digest',
-          `
-                      <h1>Daily Digest</h1>
-                      <p>Here are the latest insights from Sutra:</p>
-                      
-                      ${articles.map((article, index) => `
-                        <div style="margin-bottom: 32px; ${index < articles.length - 1 ? 'border-bottom: 1px solid #f4f4f5; padding-bottom: 32px;' : ''}">
-                          <h3 style="margin-bottom: 12px; font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; line-height: 1.2;">
-                            <a href="https://sutra.rohanyashraj.com/${article.category.toLowerCase().replace(/\s+/g, '-')}/${article.id}" style="color: #000000 !important; text-decoration: none;">
-                              ${article.title}
-                            </a>
-                          </h3>
-                          <p style="font-size: 15px; color: #3f3f46; margin-bottom: 20px; line-height: 1.5;">${article.description}</p>
-                          
-                          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
-                            <tr>
-                              <td>
-                                <a href="https://sutra.rohanyashraj.com/${article.category.toLowerCase().replace(/\s+/g, '-')}/${article.id}" style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; color: #000000 !important; border-bottom: 1px solid #000000;">Read Article</a>
-                              </td>
-                              <td style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #71717a; text-align: right;">
-                                ${article.date} • Rohan Yashraj Gupta
-                              </td>
-                            </tr>
-                          </table>
-                        </div>
-                      `).join('')}
-                      
-                      <div style="text-align: center; margin-top: 40px;">
-                        <a href="https://sutra.rohanyashraj.com" class="btn">Visit Website</a>
-                      </div>
-                    `,
-          contact.email
-        )
+    // 3. Send via Resend Broadcasts
+    // This is more efficient and handles unsubscribes automatically
+    const { data, error } = await resend.broadcasts.create({
+      audienceId: audienceId,
+      from: 'Sutra Blog <newsletter@sutra.rohanyashraj.com>',
+      subject: 'Daily Digest - Sutra Blog',
+      replyTo: 'rohanyashraj@gmail.com',
+      html: emailContent,
+      name: `Daily Digest - ${new Date().toLocaleDateString()}`
+    })
 
-        return resend.emails.send({
-          from: 'Sutra Blog <newsletter@sutra.rohanyashraj.com>',
-          to: contact.email,
-          replyTo: 'rohanyashraj@gmail.com',
-          subject: 'Daily Digest - Sutra Blog',
-          html: individualEmailContent
-        })
-      })
-    )
+    if (error || !data) {
+      console.error('Resend Broadcast Error:', error)
+      return NextResponse.json({ error: 'Failed to create broadcast' }, { status: 500 })
+    }
 
-    const successCount = results.filter(r => r.status === 'fulfilled').length
+    // 4. Send the broadcast immediately
+    const { error: sendError } = await resend.broadcasts.send(data.id)
+
+    if (sendError) {
+      console.error('Resend Broadcast Send Error:', sendError)
+      return NextResponse.json({ error: 'Failed to send broadcast' }, { status: 500 })
+    }
 
     return NextResponse.json({
-      message: 'Digest sent',
-      sentTo: successCount,
-      totalContacts: contacts.data.length
+      message: 'Broadcast sent successfully',
+      broadcastId: data.id
     })
 
   } catch (error) {
