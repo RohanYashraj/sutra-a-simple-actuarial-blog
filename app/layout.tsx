@@ -8,6 +8,7 @@ import PostHogPageView from "./providers/PostHogPageView"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import Subscribe from "./components/Subscribe"
+import StickySubscribe from "./components/StickySubscribe"
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -188,6 +189,7 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
+        <StickySubscribe />
         <Analytics />
         <SpeedInsights />
       </body>
