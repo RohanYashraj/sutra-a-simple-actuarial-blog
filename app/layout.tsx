@@ -7,6 +7,8 @@ import PHProvider from './providers/PostHogProvider'
 import PostHogPageView from "./providers/PostHogPageView"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import Subscribe from "./components/Subscribe"
+import StickySubscribe from "./components/StickySubscribe"
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -84,6 +86,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://sutra.rohanyashraj.com",
+    types: {
+      'application/rss+xml': '/feed.xml',
+    },
   },
 }
 
@@ -152,20 +157,39 @@ export default function RootLayout({
         </div>
         </PHProvider>
         <footer className="border-t border-zinc-100 py-12 mt-20">
-          <div className="mx-auto w-11/12 lg:w-3/4 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-zinc-400 text-xs font-medium tracking-wider">
-              © 2026, Sutra by <span className="text-zinc-950">Rohan Yashraj Gupta</span>
-            </p>
-            <a 
-              href="https://rohanyashraj.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-zinc-400 hover:text-zinc-950 text-xs font-bold uppercase tracking-[0.2em] transition-colors"
-            >
-              rohanyashraj.com
-            </a>
+          <div className="mx-auto w-11/12 lg:w-3/4 flex flex-col gap-12">
+            
+            <Subscribe />
+
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4 border-t border-zinc-100 pt-8">
+              <div className="flex items-center gap-4">
+                <p className="text-zinc-400 text-xs font-medium tracking-wider">
+                   © 2026, Sutra by <span className="text-zinc-700">Rohan Yashraj Gupta</span>
+                </p>
+                <a 
+                  href="/feed.xml" 
+                  className="text-zinc-400 hover:text-zinc-600 transition-colors"
+                  aria-label="RSS Feed"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                    <path fillRule="evenodd" d="M3.75 4.5a.75.75 0 01.75-.75h.75c8.284 0 15 6.716 15 15v.75a.75.75 0 01-.75.75h-.75a.75.75 0 01-.75-.75v-.75C18 11.708 13.292 7 7.5 7H6.75a.75.75 0 01-.75-.75V4.5zm0 6a.75.75 0 01.75-.75h.75a.75.75 0 01.75.75v.75a.75.75 0 01-.75.75H4.5a.75.75 0 01-.75-.75v-.75zm0 6a.75.75 0 01.75-.75h.75a.75.75 0 01.75.75v.75a.75.75 0 01-.75.75H4.5a.75.75 0 01-.75-.75v-.75z" clipRule="evenodd" />
+                    <path d="M3.75 17.25a2.25 2.25 0 114.5 0 2.25 2.25 0 01-4.5 0z" />
+                  </svg>
+                </a>
+              </div>
+
+              <a 
+                href="https://rohanyashraj.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-zinc-400 hover:text-zinc-950 text-xs font-bold uppercase tracking-[0.2em] transition-colors"
+              >
+                rohanyashraj.com
+              </a>
+            </div>
           </div>
         </footer>
+        <StickySubscribe />
         <Analytics />
         <SpeedInsights />
       </body>
