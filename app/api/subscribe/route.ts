@@ -48,7 +48,7 @@ export async function POST(request: Request) {
                     
                     <p>I'm glad to have you with us as we explore these threads together.</p>
                     <br/>
-                    <p>With gratitude,<br/><strong>Rohan Yashraj Gupta</strong></p>
+                    <p>With Regards,<br/><strong>Rohan Yashraj Gupta</strong></p>
                   `,
                     email
                 )
