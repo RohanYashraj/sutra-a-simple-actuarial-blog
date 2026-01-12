@@ -39,6 +39,10 @@ export async function generateDailyTrivia(retries = 3) {
       });
 
       const text = response.text;
+      if (!text) {
+        throw new Error("Gemini returned an empty response.");
+      }
+
       const cleanedText = text.replace(/```json|```/gi, "").trim();
       return JSON.parse(cleanedText);
     } catch (error: any) {
