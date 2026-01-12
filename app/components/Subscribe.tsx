@@ -52,14 +52,14 @@ export default function Subscribe({ minimal = false }: { minimal?: boolean }) {
       )}
       
       <form onSubmit={handleSubmit} className={`flex ${minimal ? 'flex-row' : 'flex-col md:flex-row'} gap-2 w-full md:w-auto whitespace-nowrap`}>
-        <div className={`relative ${minimal ? 'w-48 md:w-64' : 'w-full md:w-72'}`}>
+        <div className={`relative ${minimal ? 'w-full md:w-64' : 'w-full md:w-72'}`}>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email Address"
+            placeholder="email@example.com"
             required
-            className={`w-full ${minimal ? 'bg-white/10 border-white/20 text-zinc-900' : 'bg-zinc-50 border-zinc-200 text-zinc-900'} text-sm rounded-md px-4 py-2 outline-none focus:border-zinc-400 focus:ring-1 focus:ring-zinc-400 transition-all placeholder:text-zinc-500`}
+            className="w-full bg-zinc-50 border border-zinc-200 text-zinc-900 text-sm rounded-md px-4 py-2 outline-none focus:border-zinc-400 focus:ring-1 focus:ring-zinc-400 transition-all placeholder:text-zinc-500"
             disabled={status === 'loading' || status === 'success'}
           />
         </div>
