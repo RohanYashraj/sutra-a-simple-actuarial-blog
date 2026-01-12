@@ -1,5 +1,8 @@
+export const getEmailTemplate = (title: string, content: string, recipientEmail?: string) => {
+    const unsubscribeUrl = recipientEmail
+        ? `https://sutra.rohanyashraj.com/api/unsubscribe?email=${encodeURIComponent(recipientEmail)}`
+        : 'https://sutra.rohanyashraj.com';
 
-export const getEmailTemplate = (title: string, content: string) => {
     return `
     <!DOCTYPE html>
     <html>
@@ -85,6 +88,11 @@ export const getEmailTemplate = (title: string, content: string) => {
             border-top: 1px solid #f4f4f5;
             letter-spacing: 0.05em;
           }
+          .unsubscribe {
+            color: #a1a1aa !important;
+            text-decoration: underline;
+            font-size: 10px;
+          }
           .btn {
             display: inline-block;
             background-color: #000000;
@@ -111,6 +119,7 @@ export const getEmailTemplate = (title: string, content: string) => {
             <a href="https://sutra.rohanyashraj.com" style="color: #a1a1aa; text-decoration: none;">sutra.rohanyashraj.com</a>
             <br/><br/>
             <p style="font-size: 10px; color: #d4d4d8;">You are receiving this email because you subscribed to our newsletter.</p>
+            <a href="${unsubscribeUrl}" class="unsubscribe">Unsubscribe</a>
           </div>
         </div>
       </body>

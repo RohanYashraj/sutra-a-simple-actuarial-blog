@@ -47,7 +47,8 @@ export async function POST(request: Request) {
                     <p>Stay tuned for our next insight.</p>
                     <br/>
                     <p>Regards,<br/><strong>Rohan Yashraj Gupta</strong></p>
-                  `
+                  `,
+                    email
                 )
 
                 await resend.emails.send({
