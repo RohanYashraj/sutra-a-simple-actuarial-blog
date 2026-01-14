@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Subscribe from '@/app/components/Subscribe'
+import Subscribe from '@/components/Subscribe'
 
 export default function UnsubscribeSuccess() {
     return (

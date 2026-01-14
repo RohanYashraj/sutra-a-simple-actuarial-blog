@@ -1,7 +1,6 @@
 import fs from "fs"
 import matter from "gray-matter"
 import path from "path"
-import moment from "moment"
 import { remark } from "remark"
 import html from "remark-html"
 
@@ -30,12 +29,15 @@ export const getSortedArticles = (): ArticleItem[] => {
   })
 
   return allArticlesData.sort((a, b) => {
-    const format = "DD-MM-YYYY"
-    const dateOne = moment(a.date, format)
-    const dateTwo = moment(b.date, format)
-    if (dateOne.isBefore(dateTwo)) {
+    const [dayA, monthA, yearA] = a.date.split('-')
+    const [dayB, monthB, yearB] = b.date.split('-')
+
+    const dateA = new Date(`${yearA}-${monthA}-${dayA}`).getTime()
+    const dateB = new Date(`${yearB}-${monthB}-${dayB}`).getTime()
+
+    if (dateA < dateB) {
       return 1
-    } else if (dateOne.isAfter(dateTwo)) {
+    } else if (dateA > dateB) {
       return -1
     } else {
       return 0

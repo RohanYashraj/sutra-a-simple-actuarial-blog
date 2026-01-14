@@ -1,39 +1,17 @@
 'use client'
 
-import { useState } from 'react'
+import { useActionState, useEffect, useState } from 'react'
+import { subscribeAction } from '@/app/actions/subscribe'
 
 export default function Subscribe({ minimal = false }: { minimal?: boolean }) {
+  const [state, action, isPending] = useActionState(subscribeAction, null)
   const [email, setEmail] = useState('')
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-  const [errorMessage, setErrorMessage] = useState('')
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setStatus('loading')
-
-    try {
-      const res = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      })
-
-      const data = await res.json()
-
-      if (!res.ok) {
-        throw new Error(data.error || 'Something went wrong')
-      }
-
-      setStatus('success')
+  useEffect(() => {
+    if (state?.success) {
       setEmail('')
-    } catch (error: any) {
-      console.error(error)
-      setStatus('error')
-      setErrorMessage(error.message)
     }
-  }
+  }, [state])
 
   return (
     <div 
@@ -51,29 +29,30 @@ export default function Subscribe({ minimal = false }: { minimal?: boolean }) {
         </div>
       )}
       
-      <form onSubmit={handleSubmit} className={`flex ${minimal ? 'flex-row' : 'flex-col md:flex-row'} gap-2 w-full md:w-auto whitespace-nowrap`}>
+      <form action={action} className={`flex ${minimal ? 'flex-row' : 'flex-col md:flex-row'} gap-2 w-full md:w-auto whitespace-nowrap`}>
         <div className={`relative ${minimal ? 'w-full md:w-64' : 'w-full md:w-72'}`}>
           <input
             type="email"
+            name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="email@example.com"
             required
             className="w-full bg-zinc-50 border border-zinc-200 text-zinc-900 text-sm rounded-md px-4 py-2 outline-none focus:border-zinc-400 focus:ring-1 focus:ring-zinc-400 transition-all placeholder:text-zinc-500"
-            disabled={status === 'loading' || status === 'success'}
+            disabled={isPending || state?.success}
           />
         </div>
         
         <button
           type="submit"
-          disabled={status === 'loading' || status === 'success'}
+          disabled={isPending || state?.success}
           className={`${minimal ? 'px-4' : 'px-6'} bg-zinc-900 hover:bg-zinc-800 text-white text-sm font-medium py-2 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
         >
-          {status === 'loading' ? '...' : status === 'success' ? '✓' : 'Subscribe'}
+          {isPending ? '...' : state?.success ? '✓' : 'Subscribe'}
         </button>
 
-        {status === 'error' && (
-          <p className="absolute -bottom-6 left-0 text-red-500 text-xs">{errorMessage}</p>
+        {state?.error && (
+          <p className="absolute -bottom-6 left-0 text-red-500 text-xs">{state.error}</p>
         )}
       </form>
     </div>
