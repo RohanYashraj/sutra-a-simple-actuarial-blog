@@ -11,6 +11,19 @@ export async function GET(request: Request) {
     try {
         const { searchParams } = new URL(request.url);
         const force = searchParams.get("force");
+        const secret = searchParams.get("secret");
+
+        // Security Check
+        const authHeader = request.headers.get("Authorization");
+        const cronSecret = process.env.CRON_SECRET;
+
+        const isAuthorized =
+            (authHeader === `Bearer ${cronSecret}`) ||
+            (secret === cronSecret);
+
+        if (!cronSecret || !isAuthorized) {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
 
         // For manual testing/forcing a specific broadcast
         if (force) {

@@ -32,11 +32,36 @@ Each route generates content and triggers a broadcast:
 
 ## 🕰️ Cron Orchestration
 
-To stay within **Vercel's Hobby Plan limit (2 cron jobs)**, we use a single **Cron Orchestrator** at `/api/cron`.
+To avoid **Vercel's Hobby Plan limits**, we use **GitHub Actions** as the external scheduler to ping our orchestrator at `/api/cron`.
 
-- **Orchestrator Logic**: Runs every 15 minutes (`*/15 * * * *`).
-- **Scheduling**: Checks the current UTC time and day to trigger the relevant broadcast window.
-- **Location**: `app/api/cron/route.ts` manages the routing logic.
+- **Scheduler**: GitHub Action (`.github/workflows/cron.yml`) runs every 15 minutes (`*/15 * * * *`).
+- **Orchestrator Logic**: The `/api/cron` route checks the current UTC time/day to trigger the correct broadcast.
+- **Security**: The orchestrator is secured with a `CRON_SECRET`.
+    
+### 🔑 CRON_SECRET Setup Instructions
+
+1.  **Generate a Secret**:
+    Run this in your terminal to generate a secure string:
+    ```bash
+    openssl rand -base64 32
+    ```
+
+2.  **Add to Vercel**:
+    - Go to your Project on the [Vercel Dashboard](https://vercel.com/dashboard).
+    - Navigate to **Settings** > **Environment Variables**.
+    - Add a new variable:
+        - **Name**: `CRON_SECRET`
+        - **Value**: (your generated secret)
+    - Click **Save**. *Note: You may need to redeploy for the change to take effect.*
+
+3.  **Add to GitHub**:
+    - Go to your repository on GitHub.
+    - Navigate to **Settings** > **Secrets and variables** > **Actions**.
+    - Click **New repository secret**.
+    - Add the secret:
+        - **Name**: `CRON_SECRET`
+        - **Value**: (the same generated secret)
+    - Click **Add secret**.
 
 ### Broadcast Schedule (UTC)
 | Task | UTC Window | Days |
@@ -50,11 +75,11 @@ To stay within **Vercel's Hobby Plan limit (2 cron jobs)**, we use a single **Cr
 ## 🛠️ Maintenance & Testing
 
 ### Manual Triggering
-You can manually trigger any broadcast for testing by using the `force` parameter on the orchestrator route:
+You can manually trigger any broadcast for testing by using the `force` and `secret` parameters:
 ```bash
-curl "http://localhost:3000/api/cron?force=market-pulse"
+curl "https://your-site.com/api/cron?force=market-pulse&secret=YOUR_CRON_SECRET"
 ```
-*Available options: `trivia`, `digest`, `market-pulse`, `code-sutra`, `genai-frontiers`.*
+*Available options for force: `trivia`, `digest`, `market-pulse`, `code-sutra`, `genai-frontiers`.*
 
 ### Adding New Broadcasts
 1. Define the generation logic in `lib/gemini.ts`.
