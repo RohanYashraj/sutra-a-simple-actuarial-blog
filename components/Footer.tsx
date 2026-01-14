@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Subscribe from "./Subscribe"
 
@@ -30,14 +31,20 @@ export default function Footer() {
             </a>
           </div>
 
-          <a 
-            href="https://rohanyashraj.com" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-zinc-400 hover:text-zinc-950 text-xs font-bold uppercase tracking-[0.2em] transition-colors"
-          >
-            rohanyashraj.com
-          </a>
+            <Link 
+              href="/archive" 
+              className="text-zinc-400 hover:text-zinc-950 text-xs font-bold uppercase tracking-[0.2em] transition-colors"
+            >
+              Archive
+            </Link>
+            <a 
+              href="https://rohanyashraj.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-zinc-400 hover:text-zinc-950 text-xs font-bold uppercase tracking-[0.2em] transition-colors"
+            >
+              rohanyashraj.com
+            </a>
         </div>
       </div>
     </footer>
