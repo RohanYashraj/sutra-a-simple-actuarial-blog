@@ -27,17 +27,17 @@ export async function GET() {
 
       <div style="margin-bottom: 32px;">
         <h2 style="font-size: 18px; color: #000000;">${codeSutra.theChallenge.heading}</h2>
-        <p style="color: #3f3f46;">${codeSutra.theChallenge.content}</p>
+        <p style="color: #000000;">${codeSutra.theChallenge.content}</p>
       </div>
 
-      <div style="margin-bottom: 32px; padding: 24px; background-color: #1e1e1e; border-radius: 8px; font-family: 'Courier New', Courier, monospace; overflow-x: auto;">
-        <h2 style="margin-top: 0; font-size: 16px; color: #808080; border-bottom: 1px solid #333; padding-bottom: 8px;">${codeSutra.sutraSnippet.heading} (${codeSutra.sutraSnippet.language})</h2>
-        <pre style="margin-top: 16px; color: #d4d4d4; font-size: 13px; line-height: 1.5; white-space: pre-wrap; word-break: break-all;">${codeSutra.sutraSnippet.content.replace(/```[a-z]*\n|```/g, '')}</pre>
+      <div style="margin-bottom: 32px; padding: 24px; background-color: #000000; border-radius: 8px; font-family: 'Courier New', Courier, monospace; overflow-x: auto;">
+        <h2 style="margin-top: 0; font-size: 16px; color: #a1a1aa; border-bottom: 1px solid #333; padding-bottom: 8px;">${codeSutra.sutraSnippet.heading} (${codeSutra.sutraSnippet.language})</h2>
+        <pre style="margin-top: 16px; color: #ffffff; font-size: 13px; line-height: 1.5; white-space: pre-wrap; word-break: break-all;">${codeSutra.sutraSnippet.content.replace(/```[a-z]*\n|```/g, '')}</pre>
       </div>
 
-      <div style="margin-bottom: 32px; padding: 16px; border: 1px dashed #d4d4d8; border-radius: 8px;">
+      <div style="margin-bottom: 32px; padding: 16px; border: 1px dashed #a1a1aa; border-radius: 8px;">
         <h2 style="font-size: 18px; color: #000000; margin-top: 0;">${codeSutra.efficiencyGain.heading}</h2>
-        <p style="margin-bottom: 0; color: #52525b; font-style: italic;">${codeSutra.efficiencyGain.content}</p>
+        <p style="margin-bottom: 0; color: #3f3f46; font-style: italic;">${codeSutra.efficiencyGain.content}</p>
       </div>
 
       <div style="text-align: center; margin-top: 40px;">

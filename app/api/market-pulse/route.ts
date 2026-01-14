@@ -25,19 +25,19 @@ export async function GET() {
       <h1>${pulse.title}</h1>
       <p style="font-size: 14px; color: #71717a; margin-bottom: 32px;">Sutra Market Pulse • ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
 
-      <div style="margin-bottom: 32px; padding: 24px; background-color: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-        <h2 style="margin-top: 0; font-size: 18px; color: #0f172a;">${pulse.macroView.heading}</h2>
-        <p style="margin-bottom: 0; color: #334155;">${pulse.macroView.content}</p>
+      <div style="margin-bottom: 32px; padding: 24px; background-color: #fafafa; border-radius: 8px; border: 1px solid #f4f4f5;">
+        <h2 style="margin-top: 0; font-size: 18px; color: #000000;">${pulse.macroView.heading}</h2>
+        <p style="margin-bottom: 0; color: #000000;">${pulse.macroView.content}</p>
       </div>
 
       <div style="margin-bottom: 32px;">
-        <h2 style="font-size: 18px; color: #0f172a;">${pulse.actuarialAngle.heading}</h2>
-        <p style="color: #334155;">${pulse.actuarialAngle.content}</p>
+        <h2 style="font-size: 18px; color: #000000;">${pulse.actuarialAngle.heading}</h2>
+        <p style="color: #000000;">${pulse.actuarialAngle.content}</p>
       </div>
 
-      <div style="margin-bottom: 32px; border-left: 2px solid #3b82f6; padding-left: 20px; background-color: #eff6ff; padding-top: 16px; padding-bottom: 16px; padding-right: 16px; border-radius: 0 8px 8px 0;">
-        <h2 style="font-size: 18px; color: #1e40af; margin-top: 0;">${pulse.riskRadar.heading}</h2>
-        <p style="margin-bottom: 0; color: #1e3a8a;">${pulse.riskRadar.content}</p>
+      <div style="margin-bottom: 32px; border-left: 2px solid #000000; padding-left: 20px;">
+        <h2 style="font-size: 18px; color: #000000; margin-top: 0;">${pulse.riskRadar.heading}</h2>
+        <p style="margin-bottom: 0; color: #3f3f46; font-style: italic;">${pulse.riskRadar.content}</p>
       </div>
 
       <div style="text-align: center; margin-top: 40px;">

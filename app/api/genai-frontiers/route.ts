@@ -32,15 +32,15 @@ export async function GET() {
 
       <div style="margin-bottom: 40px;">
         <h2 style="font-size: 24px; color: #000000; border-bottom: 2px solid #000000; padding-bottom: 8px; display: inline-block;">${frontiers.deepDive.heading}</h2>
-        <p style="font-size: 17px; line-height: 1.8; color: #18181b; margin-top: 24px;">${frontiers.deepDive.content}</p>
+        <p style="font-size: 17px; line-height: 1.8; color: #000000; margin-top: 24px;">${frontiers.deepDive.content}</p>
       </div>
 
-      <div style="margin-bottom: 40px; padding: 24px; background-color: #f4f4f5; border-radius: 8px;">
+      <div style="margin-bottom: 40px; padding: 24px; background-color: #fafafa; border-radius: 8px; border: 1px solid #f4f4f5;">
         <h2 style="font-size: 18px; color: #000000; margin-top: 0;">${frontiers.marketPulse.heading}</h2>
         <p style="color: #3f3f46; margin-bottom: 0;">${frontiers.marketPulse.content}</p>
       </div>
 
-      <div style="margin-bottom: 40px; text-align: center; border-top: 1px solid #e4e4e7; border-bottom: 1px solid #e4e4e7; padding: 32px 0;">
+      <div style="margin-bottom: 40px; text-align: center; border-top: 1px solid #f4f4f5; border-bottom: 1px solid #f4f4f5; padding: 32px 0;">
         <h2 style="font-size: 16px; color: #71717a; text-transform: uppercase; letter-spacing: 0.2em; margin-top: 0;">${frontiers.theVerdict.heading}</h2>
         <p style="font-size: 20px; font-weight: 600; color: #000000; margin-bottom: 0; font-style: italic;">"${frontiers.theVerdict.content}"</p>
       </div>
