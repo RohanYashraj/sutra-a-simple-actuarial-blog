@@ -1,11 +1,10 @@
 import { generateGenAIFrontiers } from "@/lib/gemini";
 import { Resend } from "resend";
-import { NextResponse } from "next/server";
+import { NextResponse, connection } from "next/server";
 import { getEmailTemplate } from "@/lib/email";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export const dynamic = "force-dynamic";
 
 export async function triggerGenAIFrontiersBroadcast() {
   try {
@@ -83,6 +82,7 @@ export async function triggerGenAIFrontiersBroadcast() {
 }
 
 export async function GET() {
+  await connection();
   try {
     const result = await triggerGenAIFrontiersBroadcast();
     return NextResponse.json({

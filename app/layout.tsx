@@ -7,8 +7,8 @@ import PHProvider from './providers/PostHogProvider'
 import PostHogPageView from "./providers/PostHogPageView"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import Footer from "./components/Footer"
-import StickySubscribe from "./components/StickySubscribe"
+import Footer from "@/components/Footer"
+import StickySubscribe from "@/components/StickySubscribe"
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -152,12 +152,18 @@ export default function RootLayout({
           <Suspense fallback={null}>
             <PostHogPageView />
           </Suspense>
-        <div className="flex-grow">
-          {children}
-        </div>
+          <Suspense fallback={null}>
+            <div className="flex-grow">
+              {children}
+            </div>
+          </Suspense>
         </PHProvider>
-        <Footer />
-        <StickySubscribe />
+        <Suspense fallback={null}>
+          <Footer />
+        </Suspense>
+        <Suspense fallback={null}>
+          <StickySubscribe />
+        </Suspense>
         <Analytics />
         <SpeedInsights />
       </body>

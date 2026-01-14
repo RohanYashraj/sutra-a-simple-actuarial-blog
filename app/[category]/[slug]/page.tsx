@@ -1,7 +1,6 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeftIcon } from "@heroicons/react/24/solid"
-import moment from "moment"
 import { getArticleData, getSortedArticles } from "@/lib/articles"
 import type { Metadata } from "next"
 
@@ -27,7 +26,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   
   try {
     const articleData = await getArticleData(resolvedParams.slug)
-    const publishDate = moment(articleData.date, "DD-MM-YYYY").toISOString()
+    const [day, month, year] = articleData.date.split('-')
+    const publishDate = new Date(`${year}-${month}-${day}`).toISOString()
     const categorySlug = categoryToSlug(articleData.category)
     const description = articleData.description || 
       `Read "${articleData.title}" - an actuarial blog post on Sutra exploring insights about ${articleData.category.toLowerCase()}.`
@@ -85,7 +85,8 @@ const Article = async (props: Props) => {
     notFound()
   }
 
-  const publishDate = moment(articleData.date, "DD-MM-YYYY").toISOString()
+  const [day, month, year] = articleData.date.split('-')
+  const publishDate = new Date(`${year}-${month}-${day}`).toISOString()
   const categorySlug = categoryToSlug(articleData.category)
   const description = articleData.description || 
     `Read "${articleData.title}" - an actuarial blog post on Sutra exploring insights about ${articleData.category.toLowerCase()}.`
@@ -191,7 +192,7 @@ const Article = async (props: Props) => {
                 <div className="flex flex-col">
                   <p className="font-bold text-sm text-zinc-950 tracking-tight">{articleData.author || "Sutra Contributor"}</p>
                   <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest leading-none mt-1">
-                    {moment(articleData.date, "DD-MM-YYYY").format('MMMM D, YYYY')}
+                    {new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(new Date(`${year}-${month}-${day}`))}
                   </p>
                 </div>
               </div>

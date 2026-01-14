@@ -1,13 +1,12 @@
-import { NextResponse } from "next/server";
+import { NextResponse, connection } from "next/server";
 import { triggerTriviaBroadcast } from "../trivia/route";
 import { triggerDigestBroadcast } from "../digest/route";
 import { triggerMarketPulseBroadcast } from "../market-pulse/route";
 import { triggerCodeSutraBroadcast } from "../code-sutra/route";
 import { triggerGenAIFrontiersBroadcast } from "../genai-frontiers/route";
 
-export const dynamic = "force-dynamic";
-
 export async function GET(request: Request) {
+    await connection();
     try {
         const { searchParams } = new URL(request.url);
         const force = searchParams.get("force");

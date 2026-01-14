@@ -1,5 +1,4 @@
 import Link from "next/link"
-import moment from "moment"
 import { ArrowLongRightIcon } from "@heroicons/react/24/outline"
 
 import type { ArticleItem } from "@/types"
@@ -63,7 +62,10 @@ const ArticleItemList = ({ category, articles, hideViewAllLink }: Props) => {
             
             <div className="flex items-center gap-3">
               <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-zinc-400">
-                {moment(article.date, "DD-MM-YYYY").format('MMMM D, YYYY')}
+                {(() => {
+                  const [day, month, year] = article.date.split('-')
+                  return new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(new Date(`${year}-${month}-${day}`))
+                })()}
               </span>
               <span className="w-1 h-1 rounded-full bg-zinc-200"></span>
               <div className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.1em] text-zinc-950 group-hover:text-zinc-600 transition-colors">

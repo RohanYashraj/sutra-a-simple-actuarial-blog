@@ -25,7 +25,7 @@ export default function AboutPage() {
             "@context": "https://schema.org",
             "@type": "ProfilePage",
             "dateCreated": "2024-01-01T00:00:00-05:00",
-            "dateModified": new Date().toISOString(),
+            "dateModified": "2024-01-01T00:00:00-05:00",
             "mainEntity": {
               "@type": "Person",
               "name": "Rohan Yashraj Gupta",
