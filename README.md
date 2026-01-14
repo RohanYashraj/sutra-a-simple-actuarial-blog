@@ -1,42 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Sutra: A Simple Actuarial Blog
 
-## Getting Started
+Sutra is a minimalist, AI-powered actuarial blog designed to deliver daily insights, technical challenges, and market pulse updates to its subscribers.
 
-First, run the development server:
+## 🚀 Getting Started
 
+1.  **Environment Variables**: Ensure you have the following in your `.env.local`:
+    - `RESEND_API_KEY`: For email delivery.
+    - `RESEND_AUDIENCE_ID`: The target audience list for broadcasts.
+    - `GEMINI_API_KEY`: To power the AI content generation.
+
+2.  **Dev Server**:
+    ```bash
+    npm run dev
+    ```
+
+## 🏗️ Technical Architecture
+
+### 1. Content Generation (`lib/gemini.ts`)
+We use Google's **Gemini 1.5 Flash** to generate high-quality, structured JSON content for all daily broadcasts. Each broadcast type has a specialized prompt and structured schema to ensure consistency and professional tone.
+
+### 2. Email Delivery (`lib/email.ts`)
+Emails are sent using the **Resend Broadcast API**. This allows us to handle large lists efficiently with automatic unsubscribe management. The global email template maintains a strict minimalist aesthetic (Black/White/Gray).
+
+### 3. Daily Broadcast Ecosystem
+Each route generates content and triggers a broadcast:
+- `/api/trivia`: Quick actuarial insights and "Sutra Facts".
+- `/api/digest`: Top 3 latest articles from the blog.
+- `/api/market-pulse`: Macro-economic and insurance trend analysis.
+- `/api/code-sutra`: Technical modeling challenges with code snippets.
+- `/api/genai-frontiers`: Deep-dives into AI agents and market trends.
+
+## 🕰️ Cron Orchestration
+
+To stay within **Vercel's Hobby Plan limit (2 cron jobs)**, we use a single **Cron Orchestrator** at `/api/cron`.
+
+- **Orchestrator Logic**: Runs every 15 minutes (`*/15 * * * *`).
+- **Scheduling**: Checks the current UTC time and day to trigger the relevant broadcast window.
+- **Location**: `app/api/cron/route.ts` manages the routing logic.
+
+### Broadcast Schedule (UTC)
+| Task | UTC Window | Days |
+| :--- | :--- | :--- |
+| Trivia | 07:45 | Daily |
+| Digest | 09:15 | Tue, Thu |
+| Market Pulse | 11:30 | Mon, Wed, Fri |
+| Code Sutra | 15:15 | Tue, Thu, Sat |
+| GenAI Frontiers | 18:45 | Daily |
+
+## 🛠️ Maintenance & Testing
+
+### Manual Triggering
+You can manually trigger any broadcast for testing by using the `force` parameter on the orchestrator route:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+curl "http://localhost:3000/api/cron?force=market-pulse"
 ```
+*Available options: `trivia`, `digest`, `market-pulse`, `code-sutra`, `genai-frontiers`.*
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-## Send email
-
-```bash
-curl -X POST http://localhost:3000/api/subscribe -H "Content-Type: application/json" -d '{"email": "your-personal-email@gmail.com"}'
-```
+### Adding New Broadcasts
+1. Define the generation logic in `lib/gemini.ts`.
+2. Create the API route in `app/api/[name]/route.ts` and export a named `trigger...Broadcast` function.
+3. Register the new task in the Orchestrator (`app/api/cron/route.ts`) with its desired UTC window.
