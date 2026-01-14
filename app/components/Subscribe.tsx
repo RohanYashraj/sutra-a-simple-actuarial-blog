@@ -46,7 +46,7 @@ export default function Subscribe({ minimal = false }: { minimal?: boolean }) {
             Subscribe to updates
           </h3>
           <p className="text-zinc-500 text-sm leading-relaxed">
-            Get the latest actuarial insights and AI trends directly to your inbox. No spam, ever.
+            Stay ahead with our 4 specialized daily threads: Trivia, Market Pulse, Code Sutra, and GenAI Frontiers.
           </p>
         </div>
       )}
@@ -69,7 +69,7 @@ export default function Subscribe({ minimal = false }: { minimal?: boolean }) {
           disabled={status === 'loading' || status === 'success'}
           className={`${minimal ? 'px-4' : 'px-6'} bg-zinc-900 hover:bg-zinc-800 text-white text-sm font-medium py-2 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
         >
-          {status === 'loading' ? '...' : status === 'success' ? '✓' : 'Subscribe'}
+          {status === 'loading' ? '...' : status === 'success' ? 'Welcome to Sutra!' : 'Subscribe'}
         </button>
 
         {status === 'error' && (
