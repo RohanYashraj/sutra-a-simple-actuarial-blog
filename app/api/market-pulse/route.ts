@@ -7,21 +7,21 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
-    try {
-        const audienceId = process.env.RESEND_AUDIENCE_ID;
+export async function triggerMarketPulseBroadcast() {
+  try {
+    const audienceId = process.env.RESEND_AUDIENCE_ID;
 
-        if (!audienceId) {
-            return NextResponse.json({ error: "RESEND_AUDIENCE_ID is not set" }, { status: 500 });
-        }
+    if (!audienceId) {
+      throw new Error("RESEND_AUDIENCE_ID is not set");
+    }
 
-        // 1. Generate content using Gemini
-        const pulse = await generateMarketPulse();
+    // 1. Generate content using Gemini
+    const pulse = await generateMarketPulse();
 
-        // 2. Format HTML
-        const emailHtml = getEmailTemplate(
-            pulse.title,
-            `
+    // 2. Format HTML
+    const emailHtml = getEmailTemplate(
+      pulse.title,
+      `
       <h1>${pulse.title}</h1>
       <p style="font-size: 14px; color: #71717a; margin-bottom: 32px;">Sutra Market Pulse • ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
 
@@ -44,40 +44,48 @@ export async function GET() {
         <a href="https://sutra.rohanyashraj.com" class="btn">Analyze More on Sutra</a>
       </div>
       `
-        );
+    );
 
-        // 3. Create Resend Broadcast
-        const { data, error } = await resend.broadcasts.create({
-            audienceId,
-            from: "Sutra Market Pulse <newsletter@sutra.rohanyashraj.com>",
-            subject: `Market Pulse: ${pulse.title}`,
-            replyTo: "rohanyashraj@gmail.com",
-            html: emailHtml,
-            name: `Market Pulse - ${new Date().toLocaleDateString()}`,
-        });
+    // 3. Create Resend Broadcast
+    const { data, error } = await resend.broadcasts.create({
+      audienceId,
+      from: "Sutra Market Pulse <newsletter@sutra.rohanyashraj.com>",
+      subject: `Market Pulse: ${pulse.title}`,
+      replyTo: "rohanyashraj@gmail.com",
+      html: emailHtml,
+      name: `Market Pulse - ${new Date().toLocaleDateString()}`,
+    });
 
-        if (error || !data) {
-            console.error("Resend Broadcast Error:", error);
-            return NextResponse.json({ error: "Failed to create market pulse broadcast" }, { status: 500 });
-        }
-
-        // 4. Send immediately
-        const { error: sendError } = await resend.broadcasts.send(data.id);
-
-        if (sendError) {
-            console.error("Resend Send Error:", sendError);
-            return NextResponse.json({ error: "Failed to trigger market pulse broadcast" }, { status: 500 });
-        }
-
-        return NextResponse.json({
-            success: true,
-            message: "Market Pulse broadcast sent successfully",
-            broadcastId: data.id,
-            title: pulse.title
-        });
-
-    } catch (error) {
-        console.error("Market Pulse API Error:", error);
-        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    if (error || !data) {
+      throw new Error(`Resend Broadcast Error: ${error?.message || 'Unknown error'}`);
     }
+
+    // 4. Send immediately
+    const { error: sendError } = await resend.broadcasts.send(data.id);
+
+    if (sendError) {
+      throw new Error(`Resend Send Error: ${sendError.message}`);
+    }
+
+    return {
+      broadcastId: data.id,
+      title: pulse.title
+    };
+  } catch (error: any) {
+    console.error("Market Pulse API Error:", error);
+    throw error;
+  }
+}
+
+export async function GET() {
+  try {
+    const result = await triggerMarketPulseBroadcast();
+    return NextResponse.json({
+      success: true,
+      message: "Market Pulse broadcast sent successfully",
+      ...result
+    });
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
+  }
 }

@@ -7,23 +7,19 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 
 export const dynamic = 'force-dynamic'
 
-export async function GET() {
+export async function triggerDigestBroadcast() {
   try {
-    const audienceId = process.env.RESEND_AUDIENCE_ID
+    const audienceId = process.env.RESEND_AUDIENCE_ID;
 
     if (!audienceId) {
-      return NextResponse.json(
-        { error: 'RESEND_AUDIENCE_ID is not set' },
-        { status: 500 }
-      )
+      throw new Error("RESEND_AUDIENCE_ID is not set");
     }
 
     // 1. Fetch top 3 latest articles
-    const articles = getSortedArticles().slice(0, 3)
+    const articles = getSortedArticles().slice(0, 3);
 
-    // 2. Fetch all contacts from Audience
-    // Note: This API call fetches one page of contacts, which is fine for MVP.
-    const emailContent = getEmailTemplate(
+    // 2. Format HTML
+    const emailHtml = getEmailTemplate(
       'Daily Digest',
       `
               <h1>Daily Digest</h1>
@@ -55,42 +51,47 @@ export async function GET() {
                 <a href="https://sutra.rohanyashraj.com" class="btn">Visit Website</a>
               </div>
             `
-    )
+    );
 
-    // 3. Send via Resend Broadcasts
-    // This is more efficient and handles unsubscribes automatically
+    // 3. Create Resend Broadcast
     const { data, error } = await resend.broadcasts.create({
       audienceId: audienceId,
       from: 'Sutra Blog <newsletter@sutra.rohanyashraj.com>',
       subject: 'Daily Digest - Sutra Blog',
       replyTo: 'rohanyashraj@gmail.com',
-      html: emailContent,
+      html: emailHtml,
       name: `Daily Digest - ${new Date().toLocaleDateString()}`
-    })
+    });
 
     if (error || !data) {
-      console.error('Resend Broadcast Error:', error)
-      return NextResponse.json({ error: 'Failed to create broadcast' }, { status: 500 })
+      throw new Error(`Resend Broadcast Error: ${error?.message || 'Unknown error'}`);
     }
 
     // 4. Send the broadcast immediately
-    const { error: sendError } = await resend.broadcasts.send(data.id)
+    const { error: sendError } = await resend.broadcasts.send(data.id);
 
     if (sendError) {
-      console.error('Resend Broadcast Send Error:', sendError)
-      return NextResponse.json({ error: 'Failed to send broadcast' }, { status: 500 })
+      throw new Error(`Resend Send Error: ${sendError.message}`);
     }
 
+    return {
+      broadcastId: data.id
+    };
+
+  } catch (error: any) {
+    console.error('Digest Error:', error);
+    throw error;
+  }
+}
+
+export async function GET() {
+  try {
+    const result = await triggerDigestBroadcast();
     return NextResponse.json({
       message: 'Broadcast sent successfully',
-      broadcastId: data.id
-    })
-
-  } catch (error) {
-    console.error('Digest Error:', error)
-    return NextResponse.json(
-      { error: 'Internal Server Error' },
-      { status: 500 }
-    )
+      ...result
+    });
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message || 'Internal Server Error' }, { status: 500 });
   }
 }

@@ -7,12 +7,12 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+export async function triggerGenAIFrontiersBroadcast() {
   try {
     const audienceId = process.env.RESEND_AUDIENCE_ID;
 
     if (!audienceId) {
-      return NextResponse.json({ error: "RESEND_AUDIENCE_ID is not set" }, { status: 500 });
+      throw new Error("RESEND_AUDIENCE_ID is not set");
     }
 
     // 1. Generate content using Gemini
@@ -62,27 +62,35 @@ export async function GET() {
     });
 
     if (error || !data) {
-      console.error("Resend Broadcast Error:", error);
-      return NextResponse.json({ error: "Failed to create GenAI frontiers broadcast" }, { status: 500 });
+      throw new Error(`Resend Broadcast Error: ${error?.message || 'Unknown error'}`);
     }
 
     // 4. Send immediately
     const { error: sendError } = await resend.broadcasts.send(data.id);
 
     if (sendError) {
-      console.error("Resend Send Error:", sendError);
-      return NextResponse.json({ error: "Failed to trigger GenAI frontiers broadcast" }, { status: 500 });
+      throw new Error(`Resend Send Error: ${sendError.message}`);
     }
 
+    return {
+      broadcastId: data.id,
+      title: frontiers.title
+    };
+  } catch (error: any) {
+    console.error("GenAI Frontiers API Error:", error);
+    throw error;
+  }
+}
+
+export async function GET() {
+  try {
+    const result = await triggerGenAIFrontiersBroadcast();
     return NextResponse.json({
       success: true,
       message: "GenAI Frontiers broadcast sent successfully",
-      broadcastId: data.id,
-      title: frontiers.title
+      ...result
     });
-
-  } catch (error) {
-    console.error("GenAI Frontiers API Error:", error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
   }
 }
