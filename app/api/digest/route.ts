@@ -2,8 +2,6 @@ import { getSortedArticles } from '@/lib/articles'
 import { Resend } from 'resend'
 import { NextResponse, connection } from 'next/server'
 import { getEmailTemplate } from '@/lib/email'
-import { ConvexHttpClient } from "convex/browser";
-import { api } from "@/convex/_generated/api";
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -53,16 +51,6 @@ export async function triggerDigestBroadcast() {
               </div>
             `
     );
-
-    // 2.5 Archive to Convex
-    const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
-
-    await convex.mutation(api.broadcasts.saveBroadcast, {
-      type: 'digest',
-      title: 'Daily Digest',
-      slug: `digest-${new Date().toISOString().split('T')[0]}`,
-      data: { articles },
-    });
 
     // 3. Create Resend Broadcast
     const { data, error } = await resend.broadcasts.create({
