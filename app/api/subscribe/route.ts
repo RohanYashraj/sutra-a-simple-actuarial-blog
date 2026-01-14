@@ -39,13 +39,11 @@ export async function POST(request: Request) {
                     <p>This blog is my attempt to find that thread within our profession. We are standing at a unique intersection where traditional actuarial rigor meets the exponential leap of Artificial Intelligence. But beyond the numbers and the code, there is always a human story.</p>
 
                     <h2>What to Expect</h2>
-                    <p>By joining this community, you'll stay ahead of the curve with our specialized daily threads:</p>
+                    <p>By joining this community, you'll stay ahead of the curve with three distinct updates:</p>
                     <ul style="margin-bottom: 24px;">
-                        <li><strong>Daily Trivia:</strong> A bite-sized daily dose of AI news and actuarial fun facts to start your morning.</li>
-                        <li><strong>Market Pulse:</strong> A mid-day analytical brief on global economic trends and their insurance impact (Mon, Wed, Fri).</li>
-                        <li><strong>Code Sutra:</strong> Elegant code solutions for complex actuarial modeling challenges (Tue, Thu, Sat).</li>
-                        <li><strong>GenAI Frontiers:</strong> A daily long-read into the visionary future of AI agents in our domain.</li>
-                        <li><strong>Weekly Digest:</strong> A curated summary of our latest investigative blog articles, sent every Tuesday and Thursday.</li>
+                        <li><strong>Daily Trivia (The Sutra Insight):</strong> A bite-sized daily dose of AI news, actuarial fun facts, and tech power-tips delivered every morning.</li>
+                        <li><strong>Weekly Digest:</strong> A curated summary of the latest investigative articles and deep-dives from the blog, sent every Tuesday and Thursday.</li>
+                        <li><strong>The Core Threads:</strong> Occasional long-form explorations into risk modeling, Python automation, and the ethics of technology in a post-AI world.</li>
                     </ul>
                     
                     <p>I'm glad to have you with us as we explore these threads together.</p>

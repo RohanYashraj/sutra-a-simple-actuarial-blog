@@ -7,21 +7,21 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const dynamic = "force-dynamic";
 
-export async function triggerTriviaBroadcast() {
-  try {
-    const audienceId = process.env.RESEND_AUDIENCE_ID;
+export async function GET() {
+    try {
+        const audienceId = process.env.RESEND_AUDIENCE_ID;
 
-    if (!audienceId) {
-      throw new Error("RESEND_AUDIENCE_ID is not set");
-    }
+        if (!audienceId) {
+            return NextResponse.json({ error: "RESEND_AUDIENCE_ID is not set" }, { status: 500 });
+        }
 
-    // 1. Generate content using Gemini
-    const trivia = await generateDailyTrivia();
+        // 1. Generate content using Gemini
+        const trivia = await generateDailyTrivia();
 
-    // 2. Format HTML
-    const emailHtml = getEmailTemplate(
-      trivia.title,
-      `
+        // 2. Format HTML
+        const emailHtml = getEmailTemplate(
+            trivia.title,
+            `
       <h1>${trivia.title}</h1>
       <p style="font-size: 14px; color: #71717a; margin-bottom: 32px;">The Sutra Insight • ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
 
@@ -44,48 +44,40 @@ export async function triggerTriviaBroadcast() {
         <a href="https://sutra.rohanyashraj.com" class="btn">Read More on Sutra</a>
       </div>
       `
-    );
+        );
 
-    // 3. Create Resend Broadcast
-    const { data, error } = await resend.broadcasts.create({
-      audienceId,
-      from: "Sutra Blog <newsletter@sutra.rohanyashraj.com>",
-      subject: `Sutra Insight: ${trivia.title}`,
-      replyTo: "rohanyashraj@gmail.com",
-      html: emailHtml,
-      name: `Daily Trivia - ${new Date().toLocaleDateString()}`,
-    });
+        // 3. Create Resend Broadcast
+        const { data, error } = await resend.broadcasts.create({
+            audienceId,
+            from: "Sutra Blog <newsletter@sutra.rohanyashraj.com>",
+            subject: `Sutra Insight: ${trivia.title}`,
+            replyTo: "rohanyashraj@gmail.com",
+            html: emailHtml,
+            name: `Daily Trivia - ${new Date().toLocaleDateString()}`,
+        });
 
-    if (error || !data) {
-      throw new Error(`Resend Broadcast Error: ${error?.message || 'Unknown error'}`);
+        if (error || !data) {
+            console.error("Resend Broadcast Error:", error);
+            return NextResponse.json({ error: "Failed to create trivia broadcast" }, { status: 500 });
+        }
+
+        // 4. Send immediately
+        const { error: sendError } = await resend.broadcasts.send(data.id);
+
+        if (sendError) {
+            console.error("Resend Send Error:", sendError);
+            return NextResponse.json({ error: "Failed to trigger trivia broadcast" }, { status: 500 });
+        }
+
+        return NextResponse.json({
+            success: true,
+            message: "Daily trivia broadcast sent successfully",
+            broadcastId: data.id,
+            title: trivia.title
+        });
+
+    } catch (error) {
+        console.error("Trivia API Error:", error);
+        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
     }
-
-    // 4. Send immediately
-    const { error: sendError } = await resend.broadcasts.send(data.id);
-
-    if (sendError) {
-      throw new Error(`Resend Send Error: ${sendError.message}`);
-    }
-
-    return {
-      broadcastId: data.id,
-      title: trivia.title
-    };
-  } catch (error: any) {
-    console.error("Trivia API Error:", error);
-    throw error;
-  }
-}
-
-export async function GET() {
-  try {
-    const result = await triggerTriviaBroadcast();
-    return NextResponse.json({
-      success: true,
-      message: "Daily trivia broadcast sent successfully",
-      ...result
-    });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
-  }
 }
