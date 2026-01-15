@@ -4,6 +4,7 @@ import { NextResponse, connection } from "next/server";
 import { getEmailTemplate } from "@/lib/email";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "@/convex/_generated/api";
+import { sanitizeSlug } from "@/lib/slug";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
@@ -75,7 +76,7 @@ export async function triggerGenAIFrontiersBroadcast() {
     }
 
     // 5. Archive to Convex
-    const slug = `${frontiers.title.toLowerCase().replace(/\s+/g, '-')}-${new Date().getTime()}`;
+    const slug = `${sanitizeSlug(frontiers.title)}-${new Date().getTime()}`;
     await convex.mutation(api.broadcasts.saveBroadcast, {
       type: 'genai-frontiers',
       title: frontiers.title,

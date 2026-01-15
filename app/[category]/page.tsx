@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 import ArticleItemList from "@/components/ArticleListItem"
 import { getCategorisedArticles } from "@/lib/articles"
 import { ArrowLeftIcon } from "@heroicons/react/24/solid"
+import { sanitizeSlug } from "@/lib/slug"
 
 interface Props {
   params: Promise<{
@@ -19,7 +20,7 @@ const CategoryPage = async (props: Props) => {
 
   // Find the category that matches the slug
   const categoryName = Object.keys(articles).find(
-    (cat) => cat.toLowerCase().replace(/\s+/g, '-') === params.category
+    (cat) => sanitizeSlug(cat) === params.category
   )
 
   if (!categoryName) return notFound()

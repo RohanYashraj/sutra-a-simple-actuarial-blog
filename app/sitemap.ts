@@ -2,11 +2,12 @@ import { MetadataRoute } from 'next'
 import { getSortedArticles, getCategorisedArticles } from '@/lib/articles'
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "@/convex/_generated/api";
+import { sanitizeSlug } from '@/lib/slug'
 
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
 // Helper to convert category to URL-friendly slug
-const categoryToSlug = (category: string) => category.toLowerCase().replace(/\s+/g, '-')
+const categoryToSlug = (category: string) => sanitizeSlug(category)
 
 const ARCHIVE_TYPES = ['trivia', 'market-pulse', 'code-sutra', 'genai-frontiers'];
 

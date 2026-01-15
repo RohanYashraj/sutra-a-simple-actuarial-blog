@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { ArrowLongRightIcon } from "@heroicons/react/24/outline"
+import { sanitizeSlug } from "@/lib/slug"
 
 import type { ArticleItem } from "@/types"
 
@@ -10,7 +11,7 @@ interface Props {
 }
 
 // Helper to convert category to URL-friendly slug
-const categoryToSlug = (category: string) => category.toLowerCase().replace(/\s+/g, '-')
+const categoryToSlug = (category: string) => sanitizeSlug(category)
 
 const ArticleItemList = ({ category, articles, hideViewAllLink }: Props) => {
   return (
