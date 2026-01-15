@@ -23,7 +23,7 @@ const HomePage = () => {
       </nav>
 
       {/* Header Section */}
-      <header className="mx-auto w-11/12 lg:w-3/4 pt-24 pb-16">
+      <header className="mx-auto w-11/12 lg:w-3/4 pt-16 pb-12">
         <h1 className="font-cormorantGaramond text-5xl md:text-6xl text-zinc-950 max-w-2xl leading-tight">
           Sutra - A simple actuarial blog, exploring numbers, AI, and the human side of tech.
         </h1>
@@ -31,8 +31,8 @@ const HomePage = () => {
       </header>
 
       {/* Articles Section */}
-      <section className="mx-auto w-11/12 lg:w-3/4 pb-32">
-        <div className="flex flex-col gap-24">
+      <section className="mx-auto w-11/12 lg:w-3/4 pb-20">
+        <div className="flex flex-col gap-16">
           
           {/* Recent Articles */}
           <ArticleItemList 

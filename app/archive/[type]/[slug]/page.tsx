@@ -36,15 +36,15 @@ export default async function BroadcastViewPage({
         </div>
       </nav>
 
-      <article className="mx-auto w-11/12 lg:w-1/2 pt-16 pb-32">
+      <article className="mx-auto w-11/12 lg:w-1/2 pt-16 pb-20">
         <Link 
           href={`/archive/${type}`} 
-          className="flex items-center gap-2 text-zinc-400 hover:text-zinc-950 transition-colors group w-fit mb-12"
+          className="flex items-center gap-2 text-zinc-400 hover:text-zinc-950 transition-colors group w-fit mb-8"
         >
           <ArrowLeftIcon width={16} />
           <p className="text-xs font-bold uppercase tracking-widest">Back to {type.replace(/-/g, ' ')} Archive</p>
         </Link>
-        <header className="mb-16">
+        <header className="mb-12">
           <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mb-4 block">
             {new Date(publishedAt).toLocaleDateString('en-US', { 
               weekday: 'long',
@@ -159,7 +159,7 @@ export default async function BroadcastViewPage({
 
         </div>
 
-        <div className="mt-24 pt-12 border-t border-zinc-100 text-center">
+        <div className="mt-16 pt-10 border-t border-zinc-100 text-center">
            <Link href="/archive" className="text-sm font-medium text-zinc-500 hover:text-zinc-950 transition-colors">
              Explore all Archives
            </Link>

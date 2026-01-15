@@ -42,10 +42,10 @@ export default async function TypeArchivePage({
         </div>
       </nav>
 
-      <header className="mx-auto w-11/12 lg:w-3/4 pt-16 pb-16">
+      <header className="mx-auto w-11/12 lg:w-3/4 pt-16 pb-12">
         <Link 
           href="/archive" 
-          className="flex items-center gap-2 text-zinc-400 hover:text-zinc-950 transition-colors group w-fit mb-12"
+          className="flex items-center gap-2 text-zinc-400 hover:text-zinc-950 transition-colors group w-fit mb-8"
         >
           <ArrowLeftIcon width={16} />
           <p className="text-xs font-bold uppercase tracking-widest">Back to Archives</p>
@@ -56,7 +56,7 @@ export default async function TypeArchivePage({
         <div className="mt-8 h-1 w-20 bg-zinc-900"></div>
       </header>
 
-      <section className="mx-auto w-11/12 lg:w-3/4 pb-32">
+      <section className="mx-auto w-11/12 lg:w-3/4 pb-20">
         {broadcasts.length === 0 ? (
           <div className="py-20 text-center border border-dashed border-zinc-200">
             <p className="text-zinc-500 text-sm">No broadcasts found in this category yet.</p>
@@ -67,7 +67,7 @@ export default async function TypeArchivePage({
               <Link 
                 key={broadcast._id}
                 href={`/archive/${type}/${broadcast.slug}`}
-                className="group py-10 border-b border-zinc-100 hover:bg-zinc-50/50 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4 px-4 -mx-4"
+                className="group py-8 border-b border-zinc-100 hover:bg-zinc-50/50 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4 px-4 -mx-4"
               >
                 <div>
                   <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-zinc-400 mb-2 block">

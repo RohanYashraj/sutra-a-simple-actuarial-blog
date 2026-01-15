@@ -55,7 +55,7 @@ export default function ArchivePage() {
         </div>
       </nav>
 
-      <header className="mx-auto w-11/12 lg:w-3/4 pt-24 pb-16">
+      <header className="mx-auto w-11/12 lg:w-3/4 pt-16 pb-12">
         <h1 className="font-cormorantGaramond text-5xl md:text-6xl text-zinc-950 max-w-2xl leading-tight">
           The Sutra Archives
         </h1>
@@ -65,7 +65,7 @@ export default function ArchivePage() {
         <div className="mt-8 h-1 w-20 bg-zinc-900"></div>
       </header>
 
-      <section className="mx-auto w-11/12 lg:w-3/4 pb-32">
+      <section className="mx-auto w-11/12 lg:w-3/4 pb-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {BROADCAST_TYPES.map((type) => (
             <Link 
