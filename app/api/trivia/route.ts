@@ -2,8 +2,11 @@ import { generateDailyTrivia } from "@/lib/gemini";
 import { Resend } from "resend";
 import { NextResponse, connection } from "next/server";
 import { getEmailTemplate } from "@/lib/email";
+import { ConvexHttpClient } from "convex/browser";
+import { api } from "@/convex/_generated/api";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
 
 export async function triggerTriviaBroadcast() {
@@ -65,6 +68,15 @@ export async function triggerTriviaBroadcast() {
     if (sendError) {
       throw new Error(`Resend Send Error: ${sendError.message}`);
     }
+
+    // 5. Archive to Convex
+    const slug = `${trivia.title.toLowerCase().replace(/\s+/g, '-')}-${new Date().getTime()}`;
+    await convex.mutation(api.broadcasts.saveBroadcast, {
+      type: 'trivia',
+      title: trivia.title,
+      slug,
+      data: trivia,
+    });
 
     return {
       broadcastId: data.id,
