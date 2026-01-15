@@ -45,7 +45,7 @@ const HomePage = () => {
             <div className="max-w-xl">
               <h2 className="font-cormorantGaramond text-4xl mb-4 text-zinc-100 italic">The Sutra Insight Archive</h2>
               <p className="text-zinc-400 text-lg leading-relaxed">
-                Explore our full history of daily actuarial insights, AI deep dives, and market pulse updates.
+                Explore our full history of high-impact actuarial insights, AI deep dives, and market pulse updates.
               </p>
             </div>
             <Link 

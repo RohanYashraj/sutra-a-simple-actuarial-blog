@@ -56,7 +56,7 @@ export async function triggerGenAIFrontiersBroadcast() {
     // 3. Create Resend Broadcast
     const { data, error } = await resend.broadcasts.create({
       audienceId,
-      from: "Sutra GenAI Frontiers <newsletter@sutra.rohanyashraj.com>",
+      from: "Sutra | GenAI Frontiers <newsletter@sutra.rohanyashraj.com>",
       subject: `Frontiers: ${frontiers.title}`,
       replyTo: "rohanyashraj@gmail.com",
       html: emailHtml,

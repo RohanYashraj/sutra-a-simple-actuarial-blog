@@ -51,7 +51,7 @@ export async function triggerMarketPulseBroadcast() {
     // 3. Create Resend Broadcast
     const { data, error } = await resend.broadcasts.create({
       audienceId,
-      from: "Sutra Market Pulse <newsletter@sutra.rohanyashraj.com>",
+      from: "Sutra | Market Pulse <newsletter@sutra.rohanyashraj.com>",
       subject: `Market Pulse: ${pulse.title}`,
       replyTo: "rohanyashraj@gmail.com",
       html: emailHtml,

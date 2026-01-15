@@ -24,7 +24,7 @@ export default function Subscribe({ minimal = false }: { minimal?: boolean }) {
             Subscribe to updates
           </h3>
           <p className="text-zinc-500 text-sm leading-relaxed">
-            Get the latest actuarial insights and AI trends directly to your inbox. No spam, ever.
+            Join 1,000+ actuaries for high-impact insights every Tuesday, Thursday, and Sunday. No spam, ever.
           </p>
         </div>
       )}

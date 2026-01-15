@@ -11,31 +11,31 @@ import {
 const BROADCAST_TYPES = [
   {
     id: "trivia",
-    name: "Daily Trivia",
-    description: "Daily insights into actuarial history, probability, and math milestones.",
+    name: "Sutra Trivia",
+    description: "Weekly insights into actuarial history, probability, and math milestones.",
     icon: Zap,
-    count: "Daily",
+    count: "Weekly",
   },
   {
     id: "market-pulse",
     name: "Market Pulse",
-    description: "Macroeconomic trends and their specific impact on insurance and risk.",
+    description: "High-impact macroeconomic trends and their specific impact on insurance and risk.",
     icon: LineChart,
-    count: "Daily",
+    count: "Weekly",
   },
   {
     id: "code-sutra",
     name: "Code Sutra",
     description: "Elegant code snippets and technical solutions for actuarial modeling.",
     icon: Code2,
-    count: "Daily",
+    count: "Weekly",
   },
   {
     id: "genai-frontiers",
     name: "GenAI Frontiers",
     description: "Forward-looking deep dives into AI agents and the future of actuarial work.",
     icon: Lightbulb,
-    count: "Daily",
+    count: "Weekly",
   },
 ];
 

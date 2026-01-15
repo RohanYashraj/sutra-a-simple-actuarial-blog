@@ -8,7 +8,7 @@ import { notFound } from "next/navigation";
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
 const TYPE_LABELS: Record<string, string> = {
-  trivia: "Daily Trivia",
+  trivia: "Sutra Trivia",
   "market-pulse": "Market Pulse",
   "code-sutra": "Code Sutra",
   "genai-frontiers": "GenAI Frontiers",

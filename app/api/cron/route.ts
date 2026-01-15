@@ -44,35 +44,31 @@ export async function GET(request: Request) {
 
         console.log(`Cron Orchestrator running at ${hour}:${minute} UTC, Day ${day}`);
 
-        // 1. Daily Trivia: 07:45 UTC
-        if (hour === 7 && minute >= 40 && minute <= 55) {
-            console.log("Triggering Daily Trivia...");
+        // 1. Sutra Trivia: 07:45 UTC (Sunday)
+        if (hour === 7 && minute >= 40 && minute <= 55 && day === 0) {
+            console.log("Triggering Sutra Trivia...");
             return NextResponse.json(await triggerTriviaBroadcast());
         }
 
-        // 2. Daily Digest: 09:15 UTC (Tue, Thu)
-        if (hour === 9 && minute >= 10 && minute <= 25 && (day === 2 || day === 4)) {
-            console.log("Triggering Daily Digest...");
-            return NextResponse.json(await triggerDigestBroadcast());
-        }
-
-        // 3. Market Pulse: 11:30 UTC (Mon, Wed, Fri)
-        if (hour === 11 && minute >= 25 && minute <= 40 && (day === 1 || day === 3 || day === 5)) {
+        // 2. Market Pulse: 11:30 UTC (Thursday)
+        if (hour === 11 && minute >= 25 && minute <= 40 && day === 4) {
             console.log("Triggering Market Pulse...");
             return NextResponse.json(await triggerMarketPulseBroadcast());
         }
 
-        // 4. Code Sutra: 15:15 UTC (Tue, Thu, Sat)
-        if (hour === 15 && minute >= 10 && minute <= 25 && (day === 2 || day === 4 || day === 6)) {
+        // 3. Code Sutra: 15:15 UTC (Sunday)
+        if (hour === 15 && minute >= 10 && minute <= 25 && day === 0) {
             console.log("Triggering Code Sutra...");
             return NextResponse.json(await triggerCodeSutraBroadcast());
         }
 
-        // 5. GenAI Frontiers: 18:45 UTC (Daily)
-        if (hour === 18 && minute >= 40 && minute <= 55) {
+        // 4. GenAI Frontiers: 18:45 UTC (Tuesday)
+        if (hour === 18 && minute >= 40 && minute <= 55 && day === 2) {
             console.log("Triggering GenAI Frontiers...");
             return NextResponse.json(await triggerGenAIFrontiersBroadcast());
         }
+
+        // Note: Daily Digest is currently paused in the automation cycle.
 
         return NextResponse.json({
             message: "No tasks scheduled for this window",
