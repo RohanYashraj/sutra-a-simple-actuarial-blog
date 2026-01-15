@@ -39,11 +39,10 @@ export async function POST(request: Request) {
                     <p>This blog is my attempt to find that thread within our profession. We are standing at a unique intersection where traditional actuarial rigor meets the exponential leap of Artificial Intelligence. But beyond the numbers and the code, there is always a human story.</p>
 
                     <h2>What to Expect</h2>
-                    <p>By joining this community, you'll stay ahead of the curve with three distinct updates:</p>
                     <ul style="margin-bottom: 24px;">
-                        <li><strong>Daily Trivia (The Sutra Insight):</strong> A bite-sized daily dose of AI news, actuarial fun facts, and tech power-tips delivered every morning.</li>
-                        <li><strong>Weekly Digest:</strong> A curated summary of the latest investigative articles and deep-dives from the blog, sent every Tuesday and Thursday.</li>
-                        <li><strong>The Core Threads:</strong> Occasional long-form explorations into risk modeling, Python automation, and the ethics of technology in a post-AI world.</li>
+                        <li><strong>GenAI Frontiers (Tuesday):</strong> A visionary deep dive into AI Agents and the future of actuarial work.</li>
+                        <li><strong>Market Pulse (Thursday):</strong> High-impact macroeconomic trends specifically for the actuarial sector.</li>
+                        <li><strong>Weekend Technical (Sunday):</strong> A concentrated drop of Sutra Trivia and Code Sutra modeling snippets.</li>
                     </ul>
                     
                     <p>I'm glad to have you with us as we explore these threads together.</p>

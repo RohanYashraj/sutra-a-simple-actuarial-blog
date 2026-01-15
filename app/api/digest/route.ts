@@ -2,8 +2,11 @@ import { getSortedArticles } from '@/lib/articles'
 import { Resend } from 'resend'
 import { NextResponse, connection } from 'next/server'
 import { getEmailTemplate } from '@/lib/email'
+import { ConvexHttpClient } from "convex/browser";
+import { api } from "@/convex/_generated/api";
 
 const resend = new Resend(process.env.RESEND_API_KEY)
+const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!)
 
 
 export async function triggerDigestBroadcast() {
@@ -19,10 +22,10 @@ export async function triggerDigestBroadcast() {
 
     // 2. Format HTML
     const emailHtml = getEmailTemplate(
-      'Daily Digest',
+      'Sutra Digest',
       `
-              <h1>Daily Digest</h1>
-              <p>Here are the latest insights from Sutra:</p>
+              <h1>Sutra Digest</h1>
+              <p>The week's latest actuarial insights and tech deep-dives:</p>
               
               ${articles.map((article, index) => `
                 <div style="margin-bottom: 32px; ${index < articles.length - 1 ? 'border-bottom: 1px solid #f4f4f5; padding-bottom: 32px;' : ''}">
@@ -55,11 +58,11 @@ export async function triggerDigestBroadcast() {
     // 3. Create Resend Broadcast
     const { data, error } = await resend.broadcasts.create({
       audienceId: audienceId,
-      from: 'Sutra Blog <newsletter@sutra.rohanyashraj.com>',
-      subject: 'Daily Digest - Sutra Blog',
+      from: 'Sutra | Digest <newsletter@sutra.rohanyashraj.com>',
+      subject: 'Weekly Digest - Sutra Blog',
       replyTo: 'rohanyashraj@gmail.com',
       html: emailHtml,
-      name: `Daily Digest - ${new Date().toLocaleDateString()}`
+      name: `Sutra Digest - ${new Date().toLocaleDateString()}`
     });
 
     if (error || !data) {
@@ -68,10 +71,6 @@ export async function triggerDigestBroadcast() {
 
     // 4. Send the broadcast immediately
     const { error: sendError } = await resend.broadcasts.send(data.id);
-
-    if (sendError) {
-      throw new Error(`Resend Send Error: ${sendError.message}`);
-    }
 
     return {
       broadcastId: data.id

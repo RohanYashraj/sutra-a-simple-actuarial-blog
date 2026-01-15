@@ -5,10 +5,10 @@ const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY
 });
 
-export async function generateDailyTrivia(retries = 3) {
+export async function generateSutraTrivia(retries = 3) {
   const prompt = `
     You are the AI editor for "Sutra", a premier actuarial and technology blog. 
-    Your goal is to provide a high-value daily insight for professional actuaries and tech enthusiasts.
+    Your goal is to provide a high-value weekly insight for professional actuaries and tech enthusiasts.
     
     Format your response as a JSON object with the following structure:
     {
@@ -63,7 +63,7 @@ export async function generateDailyTrivia(retries = 3) {
 export async function generateMarketPulse(retries = 3) {
   const prompt = `
     You are the Market Strategist for "Sutra". 
-    Your goal is to provide a concise daily brief on global economic trends specifically for actuaries.
+    Your goal is to provide a concise brief on global economic trends specifically for actuaries.
     
     Format your response as a JSON object:
     {
@@ -112,7 +112,7 @@ export async function generateMarketPulse(retries = 3) {
 export async function generateCodeSutra(retries = 3) {
   const prompt = `
     You are the Principal Engineer for "Sutra". 
-    Your goal is to provide a daily technical insight or "Code Sutra" for actuarial modeling.
+    Your goal is to provide a technical insight or "Code Sutra" for actuarial modeling.
     
     Format your response as a JSON object:
     {
@@ -162,7 +162,7 @@ export async function generateCodeSutra(retries = 3) {
 export async function generateGenAIFrontiers(retries = 3) {
   const prompt = `
     You are the Futurist-in-Chief for "Sutra". 
-    Your goal is to provide a "long read" daily insight on GenAI, AI Agents, and latest market trends in the Actuarial domain.
+    Your goal is to provide a "long read" insight on GenAI, AI Agents, and latest market trends in the Actuarial domain.
     
     Format your response as a JSON object:
     {

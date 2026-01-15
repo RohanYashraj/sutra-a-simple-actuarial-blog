@@ -2,8 +2,11 @@ import { generateMarketPulse } from "@/lib/gemini";
 import { Resend } from "resend";
 import { NextResponse, connection } from "next/server";
 import { getEmailTemplate } from "@/lib/email";
+import { ConvexHttpClient } from "convex/browser";
+import { api } from "@/convex/_generated/api";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
 
 export async function triggerMarketPulseBroadcast() {
@@ -48,7 +51,7 @@ export async function triggerMarketPulseBroadcast() {
     // 3. Create Resend Broadcast
     const { data, error } = await resend.broadcasts.create({
       audienceId,
-      from: "Sutra Market Pulse <newsletter@sutra.rohanyashraj.com>",
+      from: "Sutra | Market Pulse <newsletter@sutra.rohanyashraj.com>",
       subject: `Market Pulse: ${pulse.title}`,
       replyTo: "rohanyashraj@gmail.com",
       html: emailHtml,
@@ -65,6 +68,15 @@ export async function triggerMarketPulseBroadcast() {
     if (sendError) {
       throw new Error(`Resend Send Error: ${sendError.message}`);
     }
+
+    // 5. Archive to Convex
+    const slug = `${pulse.title.toLowerCase().replace(/\s+/g, '-')}-${new Date().getTime()}`;
+    await convex.mutation(api.broadcasts.saveBroadcast, {
+      type: 'market-pulse',
+      title: pulse.title,
+      slug,
+      data: pulse,
+    });
 
     return {
       broadcastId: data.id,

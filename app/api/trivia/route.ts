@@ -1,9 +1,12 @@
-import { generateDailyTrivia } from "@/lib/gemini";
+import { generateSutraTrivia } from "@/lib/gemini";
 import { Resend } from "resend";
 import { NextResponse, connection } from "next/server";
 import { getEmailTemplate } from "@/lib/email";
+import { ConvexHttpClient } from "convex/browser";
+import { api } from "@/convex/_generated/api";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
 
 export async function triggerTriviaBroadcast() {
@@ -15,7 +18,7 @@ export async function triggerTriviaBroadcast() {
     }
 
     // 1. Generate content using Gemini
-    const trivia = await generateDailyTrivia();
+    const trivia = await generateSutraTrivia();
 
     // 2. Format HTML
     const emailHtml = getEmailTemplate(
@@ -48,11 +51,11 @@ export async function triggerTriviaBroadcast() {
     // 3. Create Resend Broadcast
     const { data, error } = await resend.broadcasts.create({
       audienceId,
-      from: "Sutra Blog <newsletter@sutra.rohanyashraj.com>",
+      from: "Sutra | Trivia <newsletter@sutra.rohanyashraj.com>",
       subject: `Sutra Insight: ${trivia.title}`,
       replyTo: "rohanyashraj@gmail.com",
       html: emailHtml,
-      name: `Daily Trivia - ${new Date().toLocaleDateString()}`,
+      name: `Sutra Trivia - ${new Date().toLocaleDateString()}`,
     });
 
     if (error || !data) {
@@ -65,6 +68,15 @@ export async function triggerTriviaBroadcast() {
     if (sendError) {
       throw new Error(`Resend Send Error: ${sendError.message}`);
     }
+
+    // 5. Archive to Convex
+    const slug = `${trivia.title.toLowerCase().replace(/\s+/g, '-')}-${new Date().getTime()}`;
+    await convex.mutation(api.broadcasts.saveBroadcast, {
+      type: 'trivia',
+      title: trivia.title,
+      slug,
+      data: trivia,
+    });
 
     return {
       broadcastId: data.id,
@@ -82,7 +94,7 @@ export async function GET() {
     const result = await triggerTriviaBroadcast();
     return NextResponse.json({
       success: true,
-      message: "Daily trivia broadcast sent successfully",
+      message: "Sutra trivia broadcast sent successfully",
       ...result
     });
   } catch (error: any) {

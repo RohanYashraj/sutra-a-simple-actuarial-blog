@@ -11,7 +11,21 @@ export default function robots(): MetadataRoute.Robots {
                 disallow: ['/api/', '/unsubscribe/'],
             },
             {
-                userAgent: ['GPTBot', 'CCBot', 'Google-Extended'],
+                userAgent: [
+                    'GPTBot',
+                    'Claude-WebCheck',
+                    'Anthropic-AI',
+                    'PerplexityBot',
+                    'YouBot',
+                    'CCBot',
+                    'Google-Extended',
+                    'Amazonbot',
+                    'FacebookBot',
+                    'Applebot',
+                    'Cohere-ai',
+                    'Omgilibot',
+                    'Bytespider'
+                ],
                 allow: '/',
                 disallow: ['/api/', '/unsubscribe/'],
             }

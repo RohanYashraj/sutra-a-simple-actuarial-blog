@@ -14,7 +14,7 @@ const categoryToSlug = (category: string) => category.toLowerCase().replace(/\s+
 
 const ArticleItemList = ({ category, articles, hideViewAllLink }: Props) => {
   return (
-    <div className="flex flex-col md:flex-row gap-8 md:gap-16 border-t border-zinc-100 pt-12 first:border-t-0 first:pt-0">
+    <div className="flex flex-col md:flex-row gap-8 md:gap-16 border-t border-zinc-100 pt-10 first:border-t-0 first:pt-0">
       {/* Category Sidebar */}
       <div className="md:w-1/4">
         <div className="sticky top-24 flex flex-col gap-4">
@@ -42,7 +42,7 @@ const ArticleItemList = ({ category, articles, hideViewAllLink }: Props) => {
       </div>
 
       {/* Articles List */}
-      <div className="md:w-3/4 flex flex-col gap-16 font-outfit">
+      <div className="md:w-3/4 flex flex-col gap-10 font-outfit">
         {articles.map((article, id) => (
           <Link
             href={`/${categoryToSlug(article.category)}/${article.id}`}

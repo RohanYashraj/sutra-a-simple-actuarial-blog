@@ -13,7 +13,7 @@ export default function UnsubscribeSuccess() {
                         You've been unsubscribed
                     </h1>
                     <p className="text-zinc-500 text-sm leading-relaxed">
-                        We're sorry to see you go. You will no longer receive the daily digest or updates from Sutra.
+                        We're sorry to see you go. You will no longer receive the weekly updates or insights from Sutra.
                     </p>
                 </div>
 
