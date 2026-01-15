@@ -5,6 +5,9 @@ const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY
 });
 
+const DEFAULT_MODEL = "gemini-3-flash-preview";
+const GEMINI_MODEL = process.env.GEMINI_MODEL || DEFAULT_MODEL;
+
 export async function generateSutraTrivia(retries = 3) {
   const prompt = `
     You are the AI editor for "Sutra", a premier actuarial and technology blog. 
@@ -34,7 +37,7 @@ export async function generateSutraTrivia(retries = 3) {
   for (let i = 0; i < retries; i++) {
     try {
       const response = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
+        model: GEMINI_MODEL,
         contents: prompt,
       });
 
@@ -89,7 +92,7 @@ export async function generateMarketPulse(retries = 3) {
   for (let i = 0; i < retries; i++) {
     try {
       const response = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
+        model: GEMINI_MODEL,
         contents: prompt,
       });
 
@@ -139,7 +142,7 @@ export async function generateCodeSutra(retries = 3) {
   for (let i = 0; i < retries; i++) {
     try {
       const response = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
+        model: GEMINI_MODEL,
         contents: prompt,
       });
 
@@ -192,7 +195,7 @@ export async function generateGenAIFrontiers(retries = 3) {
   for (let i = 0; i < retries; i++) {
     try {
       const response = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
+        model: GEMINI_MODEL,
         contents: prompt,
       });
 
