@@ -68,7 +68,7 @@ export async function GET(request: Request) {
             return NextResponse.json(await triggerGenAIFrontiersBroadcast());
         }
 
-        // Note: Daily Digest is currently paused in the automation cycle.
+        // Note: Sutra Digest is currently paused in the automation cycle.
 
         return NextResponse.json({
             message: "No tasks scheduled for this window",

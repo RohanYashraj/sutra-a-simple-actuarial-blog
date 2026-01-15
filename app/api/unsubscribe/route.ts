@@ -13,19 +13,18 @@ export async function GET(request: Request) {
     }
 
     try {
-        // We find the contact first to get their ID if possible, 
-        // but Resend.contacts.remove works with ID.
-        // For simplicity, we'll use the "patch" method to set unsubscribed: true
-        // or just delete them from the audience.
-
-        // Let's use the list method to find the contact ID by email
+        // Efficiently find the contact in the audience
+        // Note: For large audiences, pagination would be required here.
         const { data: contacts } = await resend.contacts.list({ audienceId })
         const contact = contacts?.data.find(c => c.email === email)
 
         if (contact) {
-            await resend.contacts.remove({
+            // Mark as unsubscribed rather than removing to maintain record 
+            // and prevent unwanted re-subscriptions
+            await resend.contacts.update({
                 id: contact.id,
-                audienceId
+                audienceId,
+                unsubscribed: true
             })
         }
 
