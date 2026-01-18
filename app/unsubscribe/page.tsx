@@ -32,7 +32,7 @@ function UnsubscribeContent() {
         throw new Error(data.error || 'Failed to unsubscribe');
       }
 
-      setStatus('success');
+      router.push('/unsubscribe/success');
     } catch (error: any) {
       console.error('Unsubscribe error:', error);
       setStatus('error');
@@ -41,23 +41,6 @@ function UnsubscribeContent() {
       setLoading(false);
     }
   };
-
-  if (status === 'success') {
-    return (
-      <div className="max-w-xl mx-auto px-4 py-20 text-center">
-        <h1 className="font-serif text-4xl mb-6 text-zinc-900">Unsubscribed</h1>
-        <p className="font-sans text-zinc-600 mb-8 text-lg">
-          The thread has been severed. You have been successfully unsubscribed from all Sutra updates.
-        </p>
-        <Link 
-          href="/"
-          className="inline-block bg-zinc-900 text-white font-sans font-medium px-6 py-3 rounded hover:bg-zinc-800 transition-colors"
-        >
-          Return to Sutra
-        </Link>
-      </div>
-    );
-  }
 
   if (!email) {
     return (

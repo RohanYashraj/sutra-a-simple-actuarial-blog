@@ -3,7 +3,7 @@
 import { useActionState, useEffect, useState } from 'react'
 import { subscribeAction } from '@/app/actions/subscribe'
 
-export default function Subscribe({ minimal = false }: { minimal?: boolean }) {
+export default function Subscribe({ minimal = false, darkMode = false }: { minimal?: boolean; darkMode?: boolean }) {
   const [state, action, isPending] = useActionState(subscribeAction, null)
   const [email, setEmail] = useState('')
 
@@ -38,7 +38,11 @@ export default function Subscribe({ minimal = false }: { minimal?: boolean }) {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="email@example.com"
             required
-            className="w-full bg-zinc-50 border border-zinc-200 text-zinc-900 text-sm rounded-md px-4 py-2 outline-none focus:border-zinc-400 focus:ring-1 focus:ring-zinc-400 transition-all placeholder:text-zinc-500"
+            className={`w-full text-sm rounded-md px-4 py-2 outline-none transition-all ${
+              darkMode 
+                ? 'bg-zinc-800 border border-zinc-700 text-white placeholder:text-zinc-500 focus:border-zinc-600' 
+                : 'bg-zinc-50 border border-zinc-200 text-zinc-900 placeholder:text-zinc-500 focus:border-zinc-400 focus:ring-1 focus:ring-zinc-400'
+            }`}
             disabled={isPending || state?.success}
           />
         </div>
@@ -46,7 +50,11 @@ export default function Subscribe({ minimal = false }: { minimal?: boolean }) {
         <button
           type="submit"
           disabled={isPending || state?.success}
-          className={`${minimal ? 'px-4' : 'px-6'} bg-zinc-900 hover:bg-zinc-800 text-white text-sm font-medium py-2 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
+          className={`${minimal ? 'px-4' : 'px-6'} py-2 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+            darkMode
+              ? 'bg-white text-zinc-950 font-bold uppercase tracking-widest text-[10px] hover:bg-zinc-200'
+              : 'bg-zinc-900 hover:bg-zinc-800 text-white text-sm font-medium'
+          }`}
         >
           {isPending ? '...' : state?.success ? '✓' : 'Subscribe'}
         </button>
