@@ -51,15 +51,23 @@ To avoid **Vercel's Hobby Plan limits**, we use **[cron-job.org](https://cron-jo
 ### Broadcast Schedule (UTC)
 | Task | UTC Window | Days |
 | :--- | :--- | :--- |
-| Trivia | 07:45 | Daily |
-| Digest | 09:15 | Tue, Thu |
-| Market Pulse | 11:30 | Mon, Wed, Fri |
-| Code Sutra | 15:15 | Tue, Thu, Sat |
-| GenAI Frontiers | 18:45 | Daily |
+| GenAI Frontiers | 18:45 | Tuesday |
+| Code Sutra | 15:15 | Wed, Sat |
+| Market Pulse | 11:30 | Thursday |
+| Sutra Trivia | 07:45 | Fri, Sun |
 
 ## 🛠️ Maintenance & Testing
 
-### Manual Triggering
+### Manual Triggering (Orchestrator)
 ```bash
 curl "https://your-site.com/api/cron?force=market-pulse&secret=YOUR_CRON_SECRET"
 ```
+
+### Manual Audience Broadcasts
+To send a custom update email to all subscribers:
+1. Open `scripts/broadcast-update.ts`.
+2. Edit the `SUBJECT` and `CONTENT_HTML` constants.
+3. Run the script:
+   ```bash
+   npx tsx scripts/broadcast-update.ts
+   ```
