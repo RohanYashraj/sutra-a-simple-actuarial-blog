@@ -20,6 +20,7 @@ export async function subscribeAction(prevState: any, formData: FormData) {
       await resend.emails.send({
         from: 'Sutra Blog <newsletter@sutra.rohanyashraj.com>',
         to: 'rohanyashraj@gmail.com',
+        bcc: "sutrarohanyashraj@gmail.com",
         subject: 'New Subscriber (No Audience ID)!',
         html: `<p>New subscriber: <strong>${email}</strong>. Please check your RESEND_AUDIENCE_ID.</p>`
       });
@@ -77,6 +78,7 @@ export async function subscribeAction(prevState: any, formData: FormData) {
       from: "Sutra Blog <newsletter@sutra.rohanyashraj.com>",
       to: email,
       bcc: "sutrarohanyashraj@gmail.com",
+      replyTo: "rohanyashraj@gmail.com",
       subject: "Welcome to Sutra - A Simple Actuarial Blog",
       html: welcomeHtml,
     });
