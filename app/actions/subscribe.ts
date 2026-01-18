@@ -53,12 +53,16 @@ export async function subscribeAction(prevState: any, formData: FormData) {
               <span style="color: #52525b; font-size: 14px;">A visionary deep dive into AI Agents and the future of actuarial work.</span>
             </li>
             <li style="margin-bottom: 16px;">
+              <strong style="color: #000000; display: block; font-size: 16px;">Wednesday & Saturday: Code Sutra</strong>
+              <span style="color: #52525b; font-size: 14px;">Practical Python modeling snippets and technical tutorials.</span>
+            </li>
+            <li style="margin-bottom: 16px;">
               <strong style="color: #000000; display: block; font-size: 16px;">Thursday: Market Pulse</strong>
               <span style="color: #52525b; font-size: 14px;">High-impact macroeconomic trends specifically for the actuarial sector.</span>
             </li>
             <li style="margin-bottom: 0;">
-              <strong style="color: #000000; display: block; font-size: 16px;">Sunday: Weekend Technical</strong>
-              <span style="color: #52525b; font-size: 14px;">A concentrated drop of Sutra Trivia and Code Sutra modeling snippets.</span>
+              <strong style="color: #000000; display: block; font-size: 16px;">Friday & Sunday: Sutra Trivia</strong>
+              <span style="color: #52525b; font-size: 14px;">Engaging actuarial trivia to test your knowledge and keep you sharp.</span>
             </li>
         </ul>
       </div>
