@@ -44,28 +44,39 @@ export async function GET(request: Request) {
 
         console.log(`Cron Orchestrator running at ${hour}:${minute} UTC, Day ${day}`);
 
-        // 1. Sutra Trivia: 07:45 UTC (Sunday)
-        if (hour === 7 && minute >= 40 && minute <= 55 && day === 0) {
+        // 1. Sutra Trivia: 07:45 UTC (Friday & Sunday)
+        // Friday (Day 5) & Sunday (Day 0)
+        if (hour === 7 && minute >= 40 && minute <= 55 && (day === 5 || day === 0)) {
             console.log("Triggering Sutra Trivia...");
             return NextResponse.json(await triggerTriviaBroadcast());
         }
 
         // 2. Market Pulse: 11:30 UTC (Thursday)
+        // Thursday (Day 4)
         if (hour === 11 && minute >= 25 && minute <= 40 && day === 4) {
             console.log("Triggering Market Pulse...");
             return NextResponse.json(await triggerMarketPulseBroadcast());
         }
 
-        // 3. Code Sutra: 15:15 UTC (Sunday)
-        if (hour === 15 && minute >= 10 && minute <= 25 && day === 0) {
+        // 3. Code Sutra: 15:15 UTC (Wednesday & Saturday)
+        // Wednesday (Day 3) & Saturday (Day 6)
+        if (hour === 15 && minute >= 10 && minute <= 25 && (day === 3 || day === 6)) {
             console.log("Triggering Code Sutra...");
             return NextResponse.json(await triggerCodeSutraBroadcast());
         }
 
         // 4. GenAI Frontiers: 18:45 UTC (Tuesday)
+        // Tuesday (Day 2)
         if (hour === 18 && minute >= 40 && minute <= 55 && day === 2) {
             console.log("Triggering GenAI Frontiers...");
             return NextResponse.json(await triggerGenAIFrontiersBroadcast());
+        }
+
+        // 5. Sutra Digest: 13:00 UTC (Monday)
+        // Monday (Day 1)
+        if (hour === 13 && minute >= 0 && minute <= 15 && day === 1) {
+            console.log("Triggering Sutra Digest...");
+            return NextResponse.json(await triggerDigestBroadcast());
         }
 
         // Note: Sutra Digest is currently paused in the automation cycle.

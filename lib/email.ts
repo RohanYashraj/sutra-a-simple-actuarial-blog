@@ -1,7 +1,7 @@
 export const getEmailTemplate = (title: string, content: string, recipientEmail?: string) => {
   const unsubscribeUrl = recipientEmail
-    ? `https://sutra.rohanyashraj.com/api/unsubscribe?email=${encodeURIComponent(recipientEmail)}`
-    : '{{{resend_unsubscribe_url}}}';
+    ? `https://sutra.rohanyashraj.com/unsubscribe?email=${encodeURIComponent(recipientEmail)}`
+    : `https://sutra.rohanyashraj.com/unsubscribe?email={{{EMAIL}}}`;
 
   return `
     <!DOCTYPE html>
