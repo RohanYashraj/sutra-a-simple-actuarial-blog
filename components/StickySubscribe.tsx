@@ -50,7 +50,7 @@ export default function StickySubscribe() {
       }`}
     >
       <div className="mx-auto w-11/12 lg:w-3/4 mb-4 flex justify-center">
-        <div className="bg-white/20 backdrop-blur-lg border border-white/20 rounded-full py-2 px-3 shadow-sm">
+        <div className="bg-white/20 backdrop-blur-lg border border-white/20 rounded-xl py-2 px-3 shadow-sm">
           <Subscribe minimal={true} />
         </div>
       </div>
