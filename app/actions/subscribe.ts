@@ -69,7 +69,6 @@ export async function subscribeAction(prevState: any, formData: FormData) {
         <a href="https://sutra.rohanyashraj.com/archive" class="btn" style="background-color: transparent; border: 1px solid #000000; color: #000000 !important; margin-bottom: 12px;">Explore Archives</a>
       </div>
 
-      <p style="margin-top: 40px; border-top: 1px solid #f4f4f5; pt: 24px;">With Regards,<br/><strong>Rohan Yashraj Gupta</strong></p>
     `,
       email
     );

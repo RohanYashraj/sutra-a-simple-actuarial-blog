@@ -118,6 +118,7 @@ export const getEmailTemplate = (title: string, content: string, recipientEmail?
           </div>
           <div class="content">
             ${content}
+            <p style="margin-top: 64px;">With Regards,<br/><strong>Rohan Yashraj Gupta</strong></p>
           </div>
           <div class="footer">
             &copy; ${new Date().getFullYear()} Sutra by Rohan Yashraj Gupta.<br>
