@@ -31,5 +31,7 @@ export default function robots(): MetadataRoute.Robots {
             }
         ],
         sitemap: `${baseUrl}/sitemap.xml`,
+        // Added IndexNow location as recommended for discovery
+        // Host: https://www.bing.com/indexnow?url=https://sutra.rohanyashraj.com/&key=17b0d2d31c4f4b26a575a6c1e1144026
     }
 }

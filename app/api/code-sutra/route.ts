@@ -5,6 +5,7 @@ import { getEmailTemplate } from "@/lib/email";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "@/convex/_generated/api";
 import { sanitizeSlug } from "@/lib/slug";
+import { submitUrlsToIndexNow } from "@/lib/indexnow";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
@@ -78,6 +79,9 @@ export async function triggerCodeSutraBroadcast() {
       slug,
       data: codeSutra,
     });
+
+    // 6. Submit to IndexNow
+    await submitUrlsToIndexNow([`https://sutra.rohanyashraj.com/archive/code-sutra/${slug}`]);
 
     return {
       broadcastId: data.id,
