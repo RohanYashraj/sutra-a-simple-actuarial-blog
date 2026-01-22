@@ -46,23 +46,28 @@ export async function subscribeAction(prevState: any, formData: FormData) {
       <p>This is my attempt to find that thread within our profession. We are standing at a unique intersection where traditional actuarial rigor meets the exponential leap of Artificial Intelligence.</p>
 
       <div style="background-color: #fafafa; padding: 32px; border-radius: 8px; border: 1px solid #f4f4f5; margin: 32px 0;">
-        <h2 style="margin-top: 0; font-size: 18px; text-transform: uppercase; letter-spacing: 0.1em; color: #71717a;">Our Weekly Rhythm</h2>
+        <h2 style="margin-top: 0; font-size: 18px; text-transform: uppercase; letter-spacing: 0.1em; color: #71717a;">The Daily Pulse</h2>
+        <p style="font-size: 14px; color: #71717a; margin-top: -8px; margin-bottom: 24px;">New insights delivered every morning at 08:00 UTC.</p>
         <ul style="margin-bottom: 0; padding-left: 0; list-style-type: none;">
             <li style="margin-bottom: 16px;">
-              <strong style="color: #000000; display: block; font-size: 16px;">Tuesday: GenAI Frontiers</strong>
-              <span style="color: #52525b; font-size: 14px;">A visionary deep dive into AI Agents and the future of actuarial work.</span>
+              <strong style="color: #000000; display: block; font-size: 16px;">Mon & Thu: Actuarial Simplified</strong>
+              <span style="color: #52525b; font-size: 14px;">Complex jargon broken down into simple, everyday analogies.</span>
             </li>
             <li style="margin-bottom: 16px;">
-              <strong style="color: #000000; display: block; font-size: 16px;">Wednesday & Saturday: Code Sutra</strong>
+              <strong style="color: #000000; display: block; font-size: 16px;">Tuesday: Code Sutra</strong>
               <span style="color: #52525b; font-size: 14px;">Practical Python modeling snippets and technical tutorials.</span>
             </li>
             <li style="margin-bottom: 16px;">
-              <strong style="color: #000000; display: block; font-size: 16px;">Thursday: Market Pulse</strong>
-              <span style="color: #52525b; font-size: 14px;">High-impact macroeconomic trends specifically for the actuarial sector.</span>
+              <strong style="color: #000000; display: block; font-size: 16px;">Wednesday: Sutra Trivia</strong>
+              <span style="color: #52525b; font-size: 14px;">Engaging actuarial facts to keep your mind sharp.</span>
+            </li>
+            <li style="margin-bottom: 16px;">
+              <strong style="color: #000000; display: block; font-size: 16px;">Friday: GenAI Frontiers</strong>
+              <span style="color: #52525b; font-size: 14px;">Deep dives into AI Agents and the future of actuarial work.</span>
             </li>
             <li style="margin-bottom: 0;">
-              <strong style="color: #000000; display: block; font-size: 16px;">Friday & Sunday: Sutra Trivia</strong>
-              <span style="color: #52525b; font-size: 14px;">Engaging actuarial trivia to test your knowledge and keep you sharp.</span>
+              <strong style="color: #000000; display: block; font-size: 16px;">Saturday: Market Pulse</strong>
+              <span style="color: #52525b; font-size: 14px;">Macroeconomic trends filtered through an actuarial lens.</span>
             </li>
         </ul>
       </div>

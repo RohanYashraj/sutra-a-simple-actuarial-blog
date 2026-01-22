@@ -21,10 +21,10 @@ export default function Subscribe({ minimal = false, darkMode = false }: { minim
       {!minimal && (
         <div className="max-w-xl">
           <h3 className="text-sm font-semibold text-zinc-900 uppercase tracking-wider mb-2">
-            Subscribe to updates
+            Subscribe to Sutra
           </h3>
           <p className="text-zinc-500 text-sm leading-relaxed">
-            Join 1,000+ actuaries for high-impact insights every Tuesday, Thursday, and Sunday. No spam, ever.
+            A fresh actuarial insight in your inbox every morning at 08:00 UTC.
           </p>
         </div>
       )}

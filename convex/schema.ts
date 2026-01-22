@@ -3,7 +3,7 @@ import { v } from "convex/values";
 
 export default defineSchema({
     broadcasts: defineTable({
-        type: v.string(), // 'trivia', 'digest', 'market-pulse', 'code-sutra', 'genai-frontiers'
+        type: v.string(), // 'trivia', 'digest', 'market-pulse', 'code-sutra', 'genai-frontiers', 'actuarial-simplified'
         title: v.string(),
         slug: v.string(),
         data: v.any(), // The JSON object containing the specific fields for each type

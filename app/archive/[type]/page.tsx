@@ -12,6 +12,7 @@ const TYPE_LABELS: Record<string, string> = {
   "market-pulse": "Market Pulse",
   "code-sutra": "Code Sutra",
   "genai-frontiers": "GenAI Frontiers",
+  "actuarial-simplified": "Actuarial Simplified",
 };
 
 export default async function TypeArchivePage({

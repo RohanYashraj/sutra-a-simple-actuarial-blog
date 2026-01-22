@@ -5,7 +5,7 @@ import {
   LineChart, 
   Code2, 
   Lightbulb, 
-  FileText 
+  BookOpen 
 } from "lucide-react";
 
 const BROADCAST_TYPES = [
@@ -35,6 +35,13 @@ const BROADCAST_TYPES = [
     name: "GenAI Frontiers",
     description: "Forward-looking deep dives into AI agents and the future of actuarial work.",
     icon: Lightbulb,
+    count: "Weekly",
+  },
+  {
+    id: "actuarial-simplified",
+    name: "Actuarial Simplified",
+    description: "Complex actuarial concepts explained in plain, everyday language.",
+    icon: BookOpen,
     count: "Weekly",
   },
 ];

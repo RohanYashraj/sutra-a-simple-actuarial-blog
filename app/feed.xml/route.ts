@@ -1,6 +1,7 @@
 import { getSortedArticles } from '@/lib/articles'
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "@/convex/_generated/api";
+import { sanitizeSlug } from '@/lib/slug';
 
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
@@ -9,6 +10,7 @@ const TYPE_LABELS: Record<string, string> = {
   "market-pulse": "Market Pulse",
   "code-sutra": "Code Sutra",
   "genai-frontiers": "GenAI Frontiers",
+  "actuarial-simplified": "Actuarial Simplified",
 };
 
 export const dynamic = 'force-dynamic';
@@ -29,7 +31,7 @@ export async function GET() {
   const combinedItems = [
     ...articles.map(a => ({
       title: a.title,
-      link: `${siteUrl}/${a.category.toLowerCase().replace(/\s+/g, '-')}/${a.id}`,
+      link: `${siteUrl}/${sanitizeSlug(a.category)}/${a.id}`,
       pubDate: (() => {
         const [day, month, year] = a.date.split('-');
         return new Date(`${year}-${month}-${day}`).toUTCString();
@@ -49,9 +51,9 @@ export async function GET() {
   const xml = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Sutra - High-Value Actuarial & AI Weekly</title>
+    <title>Sutra - High-Value Actuarial &amp; AI Weekly</title>
     <link>${siteUrl}</link>
-    <description>Exploring the thread between actuarial rigor and exponential AI at a 3-day weekly cadence.</description>
+    <description>Exploring the thread between actuarial rigor and exponential AI with a fresh insight every morning at 08:00 UTC.</description>
     <language>en-us</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <atom:link href="${siteUrl}/feed.xml" rel="self" type="application/rss+xml" />
@@ -63,7 +65,7 @@ export async function GET() {
       <guid isPermaLink="true">${item.link}</guid>
       <pubDate>${item.pubDate}</pubDate>
       <description><![CDATA[${item.description}]]></description>
-      <category>${item.category}</category>
+      <category>${item.category.replace(/&/g, '&amp;')}</category>
     </item>`)
       .join('')}
   </channel>

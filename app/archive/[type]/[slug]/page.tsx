@@ -156,6 +156,24 @@ export default async function BroadcastViewPage({
               </div>
             </div>
           )}
+          {type === 'actuarial-simplified' && (
+            <div className="space-y-12">
+              <div className="bg-zinc-50 p-8 border-l-4 border-zinc-900">
+                <h2 className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-4">{data.theJargon.heading}</h2>
+                <p className="text-xl font-medium text-zinc-800 italic">{data.theJargon.content}</p>
+              </div>
+
+              <div className="bg-zinc-900 text-white p-10 rounded-lg shadow-xl">
+                <h2 className="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-4">{data.realTalk.heading}</h2>
+                <p className="text-2xl font-cormorantGaramond leading-relaxed text-zinc-100">{data.realTalk.content}</p>
+              </div>
+
+              <div className="p-8 border border-zinc-100 flex items-start gap-4 text-center justify-center flex-col items-center">
+                <h2 className="text-sm font-bold uppercase tracking-widest text-zinc-400 mb-4">{data.whyItMatters.heading}</h2>
+                <p className="text-zinc-600 leading-relaxed max-w-md">{data.whyItMatters.content}</p>
+              </div>
+            </div>
+          )}
 
         </div>
 

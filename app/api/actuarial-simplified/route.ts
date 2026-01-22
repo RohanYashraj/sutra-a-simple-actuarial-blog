@@ -1,0 +1,104 @@
+import { generateActuarialSimplified } from "@/lib/gemini";
+import { Resend } from "resend";
+import { NextResponse, connection } from "next/server";
+import { getEmailTemplate } from "@/lib/email";
+import { ConvexHttpClient } from "convex/browser";
+import { api } from "@/convex/_generated/api";
+import { sanitizeSlug } from "@/lib/slug";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
+
+
+export async function triggerActuarialSimplifiedBroadcast() {
+    try {
+        const audienceId = process.env.RESEND_AUDIENCE_ID;
+
+        if (!audienceId) {
+            throw new Error("RESEND_AUDIENCE_ID is not set");
+        }
+
+        // 1. Generate content using Gemini
+        const simplified = await generateActuarialSimplified();
+
+        // 2. Format HTML
+        const emailHtml = getEmailTemplate(
+            simplified.title,
+            `
+      <h1 style="font-size: 36px; line-height: 1.1; margin-bottom: 8px;">${simplified.title}</h1>
+      <p style="font-size: 14px; color: #71717a; margin-bottom: 32px; letter-spacing: 0.05em; text-transform: uppercase;">Actuarial Simplified • ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+
+      <div style="margin-bottom: 40px; padding: 24px; background-color: #fafafa; border-radius: 8px; border-left: 4px solid #000000;">
+        <h2 style="margin-top: 0; font-size: 16px; color: #71717a; text-transform: uppercase; letter-spacing: 0.1em;">${simplified.theJargon.heading}</h2>
+        <p style="font-size: 18px; line-height: 1.6; margin-bottom: 0; color: #000000; font-style: italic;">${simplified.theJargon.content}</p>
+      </div>
+
+      <div style="margin-bottom: 40px; padding: 32px; background-color: #000000; color: #ffffff; border-radius: 4px;">
+        <h2 style="margin-top: 0; font-size: 20px; color: #a1a1aa; text-transform: uppercase; letter-spacing: 0.1em;">${simplified.realTalk.heading}</h2>
+        <p style="font-size: 18px; line-height: 1.8; margin-bottom: 0; color: #ffffff;">${simplified.realTalk.content}</p>
+      </div>
+
+      <div style="margin-bottom: 40px; text-align: center; border-top: 1px solid #f4f4f5; border-bottom: 1px solid #f4f4f5; padding: 32px 0;">
+        <h2 style="font-size: 16px; color: #71717a; text-transform: uppercase; letter-spacing: 0.2em; margin-top: 0;">${simplified.whyItMatters.heading}</h2>
+        <p style="font-size: 18px; color: #000000; margin-bottom: 0;">${simplified.whyItMatters.content}</p>
+      </div>
+
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="https://sutra.rohanyashraj.com" class="btn">Learn More at Sutra</a>
+      </div>
+            `
+        );
+
+        // 3. Create Resend Broadcast
+        const { data, error } = await resend.broadcasts.create({
+            audienceId,
+            from: "Sutra | Actuarial Simplified <newsletter@sutra.rohanyashraj.com>",
+            subject: `Simplified: ${simplified.title}`,
+            replyTo: "rohanyashraj@gmail.com",
+            html: emailHtml,
+            name: `Actuarial Simplified - ${new Date().toLocaleDateString()}`,
+        });
+
+        if (error || !data) {
+            throw new Error(`Resend Broadcast Error: ${error?.message || 'Unknown error'}`);
+        }
+
+        // 4. Send immediately
+        const { error: sendError } = await resend.broadcasts.send(data.id);
+
+        if (sendError) {
+            throw new Error(`Resend Send Error: ${sendError.message}`);
+        }
+
+        // 5. Archive to Convex
+        const slug = `${sanitizeSlug(simplified.title)}-${new Date().getTime()}`;
+        await convex.mutation(api.broadcasts.saveBroadcast, {
+            type: 'actuarial-simplified',
+            title: simplified.title,
+            slug,
+            data: simplified,
+        });
+
+        return {
+            broadcastId: data.id,
+            title: simplified.title
+        };
+    } catch (error: any) {
+        console.error("Actuarial Simplified API Error:", error);
+        throw error;
+    }
+}
+
+export async function GET() {
+    await connection();
+    try {
+        const result = await triggerActuarialSimplifiedBroadcast();
+        return NextResponse.json({
+            success: true,
+            message: "Actuarial Simplified broadcast sent successfully",
+            ...result
+        });
+    } catch (error: any) {
+        return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
+    }
+}
