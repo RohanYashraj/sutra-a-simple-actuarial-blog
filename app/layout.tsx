@@ -90,6 +90,9 @@ export const metadata: Metadata = {
       'application/rss+xml': '/feed.xml',
     },
   },
+  other: {
+    "blogarama-site-verification": "blogarama-0debb237-3b55-439c-926d-654a95b25b1e",
+  },
 }
 
 // JSON-LD WebSite Schema for rich snippets
