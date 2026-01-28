@@ -1,12 +1,38 @@
 import Link from "next/link";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "@/convex/_generated/api";
+import type { Metadata } from "next";
+
+type Props = {
+  params: Promise<{ type: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { type } = await params;
+  
+  const getTypeName = (t: string) => {
+    switch (t) {
+      case 'trivia': return 'Sutra Insight';
+      case 'market-pulse': return 'Market Pulse';
+      case 'code-sutra': return 'Code Sutra';
+      case 'genai-frontiers': return 'GenAI Frontiers';
+      case 'digest': return 'Daily Digest';
+      default: return 'Archive';
+    }
+  };
+
+  return {
+    title: `${getTypeName(type)} History`,
+    description: `Browse the daily history of ${getTypeName(type)} on Sutra - Actuarial Blog.`,
+    alternates: {
+      canonical: `/archive/${type}`,
+    },
+  };
+}
 
 export default async function ArchiveTypePage({
   params,
-}: {
-  params: Promise<{ type: string }>;
-}) {
+}: Props) {
   const { type } = await params;
   const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
   const broadcasts = await convex.query(api.broadcasts.getBroadcastsByType, { type });

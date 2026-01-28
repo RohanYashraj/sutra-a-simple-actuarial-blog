@@ -60,7 +60,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         images: [articleData.authorImage || "/logo.png"],
       },
       alternates: {
-        canonical: `https://sutra.rohanyashraj.com/${categorySlug}/${resolvedParams.slug}`,
+        canonical: `/${categorySlug}/${resolvedParams.slug}`,
       },
     }
   } catch {

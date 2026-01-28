@@ -4,6 +4,7 @@ import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "@/convex/_generated/api";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
@@ -15,11 +16,31 @@ const TYPE_LABELS: Record<string, string> = {
   "actuarial-simplified": "Actuarial Simplified",
 };
 
+type Props = {
+  params: Promise<{ type: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { type } = await params;
+  
+  if (!TYPE_LABELS[type]) {
+    return {
+      title: "Archive Not Found",
+    };
+  }
+
+  return {
+    title: `${TYPE_LABELS[type]} Archive`,
+    description: `Browse all past issues of ${TYPE_LABELS[type]} on Sutra - Actuarial Blog.`,
+    alternates: {
+      canonical: `/archive/${type}`,
+    },
+  };
+}
+
 export default async function TypeArchivePage({
   params,
-}: {
-  params: Promise<{ type: string }>;
-}) {
+}: Props) {
   const { type } = await params;
   
   if (!TYPE_LABELS[type]) {

@@ -86,7 +86,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://sutra.rohanyashraj.com",
+    canonical: "/",
     types: {
       'application/rss+xml': '/feed.xml',
     },

@@ -5,11 +5,27 @@ import ArticleItemList from "@/components/ArticleListItem"
 import { getCategorisedArticles } from "@/lib/articles"
 import { ArrowLeftIcon } from "@heroicons/react/24/solid"
 import { sanitizeSlug } from "@/lib/slug"
+import type { Metadata } from "next"
 
 interface Props {
   params: Promise<{
     category: string
   }>
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const resolvedParams = await params
+  const category = resolvedParams.category
+  // Capitalize first letter for title
+  const displayCategory = category.charAt(0).toUpperCase() + category.slice(1).replace(/-/g, ' ')
+
+  return {
+    title: `${displayCategory} Articles`,
+    description: `Explore all articles in the ${displayCategory} category on Sutra - Actuarial Blog.`,
+    alternates: {
+      canonical: `/${category}`,
+    },
+  }
 }
 
 const CategoryPage = async (props: Props) => {

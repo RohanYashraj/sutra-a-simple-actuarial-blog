@@ -3,14 +3,36 @@ import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "@/convex/_generated/api";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
+type Props = {
+  params: Promise<{ type: string; slug: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { type, slug } = await params;
+  const broadcast = await convex.query(api.broadcasts.getBroadcastBySlug, { slug });
+
+  if (!broadcast || broadcast.type !== type) {
+    return {
+      title: "Page Not Found",
+    };
+  }
+
+  return {
+    title: broadcast.title,
+    description: `Archive: ${broadcast.title}. Part of the ${type.replace(/-/g, ' ')} series on Sutra - Actuarial Blog.`,
+    alternates: {
+      canonical: `/archive/${type}/${slug}`,
+    },
+  };
+}
+
 export default async function BroadcastViewPage({
   params,
-}: {
-  params: Promise<{ type: string; slug: string }>;
-}) {
+}: Props) {
   const { type, slug } = await params;
   
   const broadcast = await convex.query(api.broadcasts.getBroadcastBySlug, { slug });

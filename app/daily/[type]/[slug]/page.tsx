@@ -2,12 +2,36 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "@/convex/_generated/api";
+import type { Metadata } from "next";
+
+const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
+
+type Props = {
+  params: Promise<{ type: string; slug: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { type, slug } = await params;
+  const broadcast = await convex.query(api.broadcasts.getBroadcastBySlug, { slug });
+
+  if (!broadcast || broadcast.type !== type) {
+    return {
+      title: "Update Not Found",
+    };
+  }
+
+  return {
+    title: broadcast.title,
+    description: `${broadcast.title} - Daily update on Sutra - Actuarial Blog.`,
+    alternates: {
+      canonical: `/archive/${type}/${slug}`,
+    },
+  };
+}
 
 export default async function BroadcastDetailPage({
   params,
-}: {
-  params: Promise<{ type: string; slug: string }>;
-}) {
+}: Props) {
   const { type, slug } = await params;
   const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
   const broadcast = await convex.query(api.broadcasts.getBroadcastBySlug, { slug });

@@ -7,6 +7,15 @@ import {
   Lightbulb, 
   BookOpen 
 } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sutra Archives",
+  description: "Browse the complete collection of Sutra's actuarial insights, market pulses, code snippets, and GenAI frontiers.",
+  alternates: {
+    canonical: "/archive",
+  },
+};
 
 const BROADCAST_TYPES = [
   {
