@@ -53,13 +53,13 @@ export default function AboutPage() {
       </nav>
 
       <section className="mx-auto w-11/12 md:w-3/4 lg:w-2/5 py-24 flex flex-col gap-16">
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-4">
           <Link 
             href={"/"} 
-            className="flex items-center gap-2 text-zinc-400 hover:text-zinc-950 transition-colors group w-fit"
+            className="flex items-center gap-1.5 text-zinc-400 hover:text-zinc-950 transition-colors group w-fit"
           >
-            <ArrowLeftIcon width={16} />
-            <p className="text-xs font-bold uppercase tracking-widest">Back to Homepage</p>
+            <ArrowLeftIcon width={12} />
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em]">Back to Homepage</p>
           </Link>
           
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-zinc-950 leading-none">

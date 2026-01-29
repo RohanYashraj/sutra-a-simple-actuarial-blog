@@ -67,10 +67,10 @@ export default async function TypeArchivePage({
       <header className="mx-auto w-11/12 lg:w-3/4 pt-16 pb-12">
         <Link 
           href="/archive" 
-          className="flex items-center gap-2 text-zinc-400 hover:text-zinc-950 transition-colors group w-fit mb-8"
+          className="flex items-center gap-1.5 text-zinc-400 hover:text-zinc-950 transition-colors group w-fit mb-4"
         >
-          <ArrowLeftIcon width={16} />
-          <p className="text-xs font-bold uppercase tracking-widest">Back to Archives</p>
+          <ArrowLeftIcon width={12} />
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em]">Back to Archives</p>
         </Link>
         <h1 className="font-cormorantGaramond text-5xl md:text-6xl text-zinc-950 max-w-2xl leading-tight">
           {TYPE_LABELS[type]} Archive
