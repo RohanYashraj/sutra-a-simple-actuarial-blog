@@ -16,6 +16,7 @@
     "convex": "^1.31.4",
     "dotenv": "^17.2.3",
     "gray-matter": "^4.0.3",
+    "gsap": "^3.14.2",
     "lucide-react": "^0.562.0",
     "next": "^16.1.1",
     "posthog-js": "^1.318.1",

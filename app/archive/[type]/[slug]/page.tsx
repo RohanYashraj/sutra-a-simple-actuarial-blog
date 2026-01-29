@@ -61,10 +61,10 @@ export default async function BroadcastViewPage({
       <article className="mx-auto w-11/12 lg:w-1/2 pt-16 pb-20">
         <Link 
           href={`/archive/${type}`} 
-          className="flex items-center gap-2 text-zinc-400 hover:text-zinc-950 transition-colors group w-fit mb-8"
+          className="flex items-center gap-1.5 text-zinc-400 hover:text-zinc-950 transition-colors group w-fit mb-4"
         >
-          <ArrowLeftIcon width={16} />
-          <p className="text-xs font-bold uppercase tracking-widest">Back to {type.replace(/-/g, ' ')} Archive</p>
+          <ArrowLeftIcon width={12} />
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em]">Back to {type.replace(/-/g, ' ')} Archive</p>
         </Link>
         <header className="mb-12">
           <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mb-4 block">

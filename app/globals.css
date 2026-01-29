@@ -2,16 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 .article {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   font-family: var(--font-outfit);
   font-size: 1.125rem;
-  line-height: 1.75;
-  margin-bottom: 5rem;
+  line-height: 1.5;
+  max-width: 68ch;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3rem;
   color: #27272a;
-  /* zinc-800 */
+}
+
+@media (max-width: 768px) {
+  .article {
+    font-size: 1rem;
+    line-height: 1.5;
+    gap: 1rem;
+  }
 }
 
 .article h1 {
@@ -36,7 +51,7 @@
 }
 
 .article p {
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .article ol {

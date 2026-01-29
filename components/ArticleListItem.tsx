@@ -1,8 +1,16 @@
+"use client"
+
 import Link from "next/link"
 import { ArrowLongRightIcon } from "@heroicons/react/24/outline"
 import { sanitizeSlug } from "@/lib/slug"
+import { useEffect, useRef } from "react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 import type { ArticleItem } from "@/types"
+
+// Register ScrollTrigger
+gsap.registerPlugin(ScrollTrigger)
 
 interface Props {
   category: string
@@ -14,8 +22,40 @@ interface Props {
 const categoryToSlug = (category: string) => sanitizeSlug(category)
 
 const ArticleItemList = ({ category, articles, hideViewAllLink }: Props) => {
+  const containerRef = useRef<HTMLDivElement>(null)
+  
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Stagger animation for articles
+      gsap.fromTo(
+        ".article-item",
+        { 
+          y: 20, 
+          opacity: 0 
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%", // Start animation when top of container hits 80% of viewport
+            toggleActions: "play none none reverse"
+          }
+        }
+      )
+    }, containerRef)
+    
+    return () => ctx.revert()
+  }, [])
+
   return (
-    <div className="flex flex-col md:flex-row gap-8 md:gap-16 border-t border-zinc-100 pt-10 first:border-t-0 first:pt-0">
+    <div 
+      ref={containerRef}
+      className="flex flex-col md:flex-row gap-8 md:gap-16 border-t border-zinc-100 pt-10 first:border-t-0 first:pt-0"
+    >
       {/* Category Sidebar */}
       <div className="md:w-1/4">
         <div className="sticky top-24 flex flex-col gap-4">
@@ -48,7 +88,7 @@ const ArticleItemList = ({ category, articles, hideViewAllLink }: Props) => {
           <Link
             href={`/${categoryToSlug(article.category)}/${article.id}`}
             key={id}
-            className="group flex flex-col gap-4"
+            className="article-item group flex flex-col gap-4"
           >
             <div className="flex flex-col gap-2">
               <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-zinc-950 group-hover:text-zinc-600 transition-colors">

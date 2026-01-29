@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         cormorantGaramond: ["var(--font-cormorant-garamond)", "serif"],
+        outfit: ["var(--font-outfit)", "sans-serif"],
         poppins: ["var(--font-poppins)", "sans-serif"],
       },
     },

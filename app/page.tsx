@@ -1,6 +1,7 @@
 import Link from "next/link"
 import ArticleItemList from "@/components/ArticleListItem"
 import { getCategorisedArticles, getSortedArticles } from "@/lib/articles"
+import Hero from "@/components/Hero"
 
 const HomePage = () => {
   const articles = getCategorisedArticles()
@@ -10,7 +11,7 @@ const HomePage = () => {
     <main className="min-h-screen font-outfit">
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-zinc-100">
-        <div className="mx-auto w-11/12 lg:w-3/4 h-16 flex items-center justify-between">
+        <div className="mx-auto max-w-6xl w-11/12 h-16 flex items-center justify-between">
           <Link href="/" className="text-2xl font-bold tracking-tighter text-zinc-950">
             sutra<span className="text-zinc-400">.</span>
           </Link>
@@ -22,17 +23,11 @@ const HomePage = () => {
         </div>
       </nav>
 
-      {/* Header Section */}
-      <header className="mx-auto w-11/12 lg:w-3/4 pt-16 pb-12">
-        <h1 className="font-cormorantGaramond text-5xl md:text-6xl text-zinc-950 max-w-2xl leading-tight">
-          Sutra - A simple actuarial blog, exploring numbers, AI, and the human side of tech.
-        </h1>
-        <div className="mt-8 h-1 w-20 bg-zinc-900"></div>
-      </header>
+      <Hero />
 
       {/* Articles Section */}
-      <section className="mx-auto w-11/12 lg:w-3/4 pb-20">
-        <div className="flex flex-col gap-16">
+      <section className="mx-auto max-w-6xl w-11/12 pb-20">
+        <div className="flex flex-col gap-8">
           
           {/* Recent Articles */}
           <ArticleItemList 
