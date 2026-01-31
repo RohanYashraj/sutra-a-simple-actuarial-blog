@@ -6,8 +6,7 @@ import { sanitizeSlug } from '@/lib/slug'
 
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
-// Helper to convert category to URL-friendly slug
-const categoryToSlug = (category: string) => sanitizeSlug(category)
+
 
 const ARCHIVE_TYPES = ['trivia', 'market-pulse', 'code-sutra', 'genai-frontiers', 'actuarial-simplified'];
 
@@ -27,14 +26,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
 
     const categoryUrls = categories.map((category) => ({
-        url: `${baseUrl}/${categoryToSlug(category)}`,
+        url: `${baseUrl}/${sanitizeSlug(category)}`,
         lastModified: new Date('2024-01-01'),
         changeFrequency: 'weekly' as const,
         priority: 0.6,
     }))
 
     const articleUrls = articles.map((article) => ({
-        url: `${baseUrl}/${categoryToSlug(article.category)}/${article.id}`,
+        url: `${baseUrl}/${sanitizeSlug(article.category)}/${article.id}`,
         lastModified: (() => {
             const [day, month, year] = article.date.split('-')
             return new Date(`${year}-${month}-${day}`)

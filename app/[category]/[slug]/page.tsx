@@ -2,20 +2,20 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeftIcon } from "@heroicons/react/24/solid"
 import { getArticleData, getSortedArticles } from "@/lib/articles"
+import { sanitizeSlug } from "@/lib/slug"
 import type { Metadata } from "next"
 
 type Props = {
   params: Promise<{ category: string; slug: string }>
 }
 
-// Helper to convert category to URL-friendly slug
-const categoryToSlug = (category: string) => category.toLowerCase().replace(/\s+/g, '-')
+
 
 // Generate static paths for all articles with category
 export async function generateStaticParams() {
   const articles = getSortedArticles()
   return articles.map((article) => ({
-    category: categoryToSlug(article.category),
+    category: sanitizeSlug(article.category),
     slug: article.id,
   }))
 }
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const articleData = await getArticleData(resolvedParams.slug)
     const [day, month, year] = articleData.date.split('-')
     const publishDate = new Date(`${year}-${month}-${day}`).toISOString()
-    const categorySlug = categoryToSlug(articleData.category)
+    const categorySlug = sanitizeSlug(articleData.category)
     const description = articleData.description || 
       `Read "${articleData.title}" - an actuarial blog post on Sutra exploring insights about ${articleData.category.toLowerCase()}.`
     
@@ -77,7 +77,7 @@ const Article = async (props: Props) => {
   try {
     articleData = await getArticleData(params.slug)
     // Verify category matches
-    const expectedCategorySlug = categoryToSlug(articleData.category)
+    const expectedCategorySlug = sanitizeSlug(articleData.category)
     if (params.category !== expectedCategorySlug) {
       notFound()
     }
@@ -87,7 +87,7 @@ const Article = async (props: Props) => {
 
   const [day, month, year] = articleData.date.split('-')
   const publishDate = new Date(`${year}-${month}-${day}`).toISOString()
-  const categorySlug = categoryToSlug(articleData.category)
+  const categorySlug = sanitizeSlug(articleData.category)
   const description = articleData.description || 
     `Read "${articleData.title}" - an actuarial blog post on Sutra exploring insights about ${articleData.category.toLowerCase()}.`
 
