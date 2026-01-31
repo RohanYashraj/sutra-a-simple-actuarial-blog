@@ -64,10 +64,19 @@ curl "https://your-site.com/api/cron?force=market-pulse&secret=YOUR_CRON_SECRET"
 ```
 
 ### Manual Audience Broadcasts
-To send a custom update email to all subscribers:
-1. Open `scripts/broadcast-update.ts`.
-2. Edit the `SUBJECT` and `CONTENT_HTML` constants.
-3. Run the script:
-   ```bash
-   npx tsx scripts/broadcast-update.ts
-   ```
+To send a custom update email or broadcast a new article to all subscribers:
+
+1. **Custom General Update**:
+   - Open `scripts/broadcast-update.ts`.
+   - Edit the `SUBJECT` and `CONTENT_HTML` constants.
+   - Run the script:
+     ```bash
+     npx tsx scripts/broadcast-update.ts
+     ```
+
+2. **New Article Broadcast**:
+   - Run the broadcast script with the article slug (filename without `.md`):
+     ```bash
+     npx tsx scripts/broadcast-article.ts <article-slug>
+     ```
+     *Example*: `npx tsx scripts/broadcast-article.ts when-actuaries-start-delegating-to-agents`

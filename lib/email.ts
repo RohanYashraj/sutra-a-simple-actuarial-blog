@@ -109,6 +109,13 @@ export const getEmailTemplate = (title: string, content: string, recipientEmail?
             font-weight: 500;
             margin-top: 16px;
           }
+          img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            display: block;
+            margin: 24px auto;
+          }
         </style>
       </head>
       <body>
