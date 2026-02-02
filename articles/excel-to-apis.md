@@ -1,6 +1,6 @@
 ---
 title: "From Excel to APIs: The Quiet Evolution of Actuarial Work"
-category: "actuarial"
+category: "Actuarial"
 date: "11-01-2026"
 author: "Rohan Yashraj Gupta"
 authorImage: "/authors/author-rohan.jpg"

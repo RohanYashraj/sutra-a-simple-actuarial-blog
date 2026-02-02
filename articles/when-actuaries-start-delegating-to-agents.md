@@ -1,6 +1,6 @@
 ---
 title: "When Actuaries Start Delegating to Agents"
-category: "actuarial"
+category: "Actuarial"
 date: "31-01-2026"
 author: "Rohan Yashraj Gupta"
 authorImage: "/authors/author-rohan.jpg"

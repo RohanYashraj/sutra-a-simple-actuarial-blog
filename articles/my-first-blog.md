@@ -1,6 +1,6 @@
 ---
 title: "Day Zero: Why I'm Starting Sutra"
-category: "personal"
+category: "Personal"
 date: "01-01-2026"
 author: "Rohan Yashraj Gupta"
 authorImage: "/authors/author-rohan.jpg"

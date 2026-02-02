@@ -1,6 +1,6 @@
 ---
 title: "Why Actuaries Will Become Prompt Engineers"
-category: "actuarial"
+category: "Actuarial"
 date: "02-02-2026"
 author: "Rohan Yashraj Gupta"
 authorImage: "/authors/author-rohan.jpg"

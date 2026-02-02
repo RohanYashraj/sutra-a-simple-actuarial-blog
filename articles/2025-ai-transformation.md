@@ -1,6 +1,6 @@
 ---
 title: "2025: The Year AI Transformed Actuarial Work"
-category: "actuarial"
+category: "Actuarial"
 date: "09-01-2026"
 author: "Rohan Yashraj Gupta"
 authorImage: "/authors/author-rohan.jpg"
