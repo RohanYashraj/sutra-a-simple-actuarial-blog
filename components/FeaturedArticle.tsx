@@ -46,7 +46,7 @@ const FeaturedArticle = ({ article }: Props) => {
         <span className="h-px bg-zinc-200 flex-grow"></span>
       </div>
       
-      <div ref={containerRef} className="group relative overflow-hidden bg-zinc-900 text-zinc-100 rounded-lg p-8 md:p-16">
+      <div ref={containerRef} className="group relative overflow-hidden bg-zinc-950 text-white rounded-sm p-8 md:p-16">
         <div className="relative z-10 flex flex-col gap-6 max-w-3xl">
            <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-zinc-400">
              <span>{article.category}</span>
