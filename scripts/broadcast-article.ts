@@ -27,19 +27,24 @@ async function broadcastArticle() {
         const siteUrl = 'https://sutra.rohanyashraj.com';
         const articleUrl = `${siteUrl}/${sanitizeSlug(article.category)}/${article.id}`;
 
-        const subject = `New Article: ${article.title}`;
+        const subject = `Fresh off the press: ${article.title}`;
 
         const contentHtml = `
-            <h1>${article.title}</h1>
-            <p style="font-style: italic; color: #71717a; margin-bottom: 24px;">
+            <div style="text-transform: uppercase; font-size: 12px; letter-spacing: 0.1em; color: #a1a1aa; margin-bottom: 8px; font-weight: 600;">
+                New Blog
+            </div>
+            <h1 style="margin-top: 0;">${article.title}</h1>
+            <p style="font-size: 18px; color: #3f3f46; margin-bottom: 24px; line-height: 1.5;">
                 ${article.description}
             </p>
-            <div class="article-preview">
-                ${article.contentHtml.split('</p>')[0] + '</p>'}
-                <p>...</p>
+            <div style="border-left: 3px solid #f4f4f5; padding-left: 20px; font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: #52525b; margin-bottom: 32px;">
+                ${article.contentHtml.split('</p>')[0].replace('<p>', '').replace('</p>', '')}...
             </div>
+            <p style="margin-bottom: 32px;">
+                I've just published a new piece exploring the intersections of actuarial science and modern technology. I think you'll find this perspective particularly relevant to where our profession is heading.
+            </p>
             <div style="text-align: center; margin-top: 32px;">
-                <a href="${articleUrl}" class="btn">Read the Full Article</a>
+                <a href="${articleUrl}" class="btn" style="background-color: #000; color: #fff; padding: 14px 28px; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 16px;">Read the Full Article</a>
             </div>
         `;
 
