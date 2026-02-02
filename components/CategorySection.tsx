@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { ArrowLongRightIcon } from "@heroicons/react/24/outline"
 import { sanitizeSlug } from "@/lib/slug"
+import { formatDate } from "@/lib/utils"
 import { useEffect, useRef } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -60,7 +61,7 @@ const CategorySection = ({ category, articles }: Props) => {
         <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-8">
           {articles.map((article) => (
              <article key={article.id} className="group flex flex-col gap-3">
-               <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">{article.date}</span>
+               <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">{formatDate(article.date)}</span>
                
                <Link href={`/${sanitizeSlug(article.category)}/${article.id}`}>
                  <h3 className="text-xl font-medium text-zinc-950 group-hover:text-zinc-600 transition-colors">

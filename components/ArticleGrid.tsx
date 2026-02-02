@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { ArrowLongRightIcon } from "@heroicons/react/24/outline"
 import { sanitizeSlug } from "@/lib/slug"
+import { formatDate } from "@/lib/utils"
 import { useEffect, useRef } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -56,7 +57,7 @@ const ArticleGrid = ({ articles, title = "Recent Insights" }: Props) => {
                <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-zinc-400">
                  <span className="text-zinc-950">{article.category}</span>
                  <span className="w-1 h-1 rounded-full bg-zinc-300"></span>
-                 <span>{article.date}</span>
+                 <span>{formatDate(article.date)}</span>
                </div>
                
                <Link href={`/${sanitizeSlug(article.category)}/${article.id}`}>

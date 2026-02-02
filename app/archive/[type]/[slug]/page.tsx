@@ -67,6 +67,10 @@ export default async function BroadcastViewPage({
           <p className="text-[10px] font-bold uppercase tracking-[0.2em]">Back to {type.replace(/-/g, ' ')} Archive</p>
         </Link>
         <header className="mb-12">
+          <h1 className="font-cormorantGaramond text-5xl md:text-6xl text-zinc-950 leading-tight mb-8">
+            {title}
+          </h1>
+          <div className="h-1 w-20 bg-zinc-900 mb-6"></div>
           <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mb-4 block">
             {new Date(publishedAt).toLocaleDateString('en-US', { 
               weekday: 'long',
@@ -75,10 +79,6 @@ export default async function BroadcastViewPage({
               year: 'numeric' 
             })}
           </span>
-          <h1 className="font-cormorantGaramond text-5xl md:text-6xl text-zinc-950 leading-tight mb-8">
-            {title}
-          </h1>
-          <div className="h-1 w-20 bg-zinc-900"></div>
         </header>
 
         <div className="prose prose-zinc prose-lg max-w-none">

@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { ArrowLongRightIcon } from "@heroicons/react/24/outline"
 import { sanitizeSlug } from "@/lib/slug"
+import { formatDate } from "@/lib/utils"
 import { useEffect, useRef } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -51,7 +52,7 @@ const FeaturedArticle = ({ article }: Props) => {
            <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-zinc-400">
              <span>{article.category}</span>
              <span className="w-1 h-1 rounded-full bg-zinc-600"></span>
-             <span>{article.date}</span>
+             <span>{formatDate(article.date)}</span>
            </div>
            
            <h2 className="font-cormorantGaramond text-4xl md:text-6xl font-medium leading-none tracking-tight group-hover:text-zinc-300 transition-colors">
