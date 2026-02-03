@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         authors: articleData.author ? [articleData.author] : undefined,
         images: [
           {
-            url: articleData.authorImage || "/logo.png",
+            url: articleData.image || articleData.authorImage || "/logo.png",
             width: 1200,
             height: 630,
             alt: articleData.title,
@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         card: "summary_large_image",
         title: articleData.title,
         description,
-        images: [articleData.authorImage || "/logo.png"],
+        images: [articleData.image || articleData.authorImage || "/logo.png"],
       },
       alternates: {
         canonical: `/${categorySlug}/${resolvedParams.slug}`,
@@ -113,7 +113,8 @@ const Article = async (props: Props) => {
       "@type": "WebPage",
       "@id": `https://sutra.rohanyashraj.com/${categorySlug}/${params.slug}`,
     },
-    keywords: ["actuarial", "actuarial blog", articleData.category.toLowerCase()],
+    image: articleData.image ? `https://sutra.rohanyashraj.com${articleData.image}` : `https://sutra.rohanyashraj.com${articleData.authorImage || "/logo.png"}`,
+    keywords: ["actuarial", "actuarial blog", "agenticai", "agentic AI", articleData.category.toLowerCase()],
   }
 
   // JSON-LD BreadcrumbList Schema

@@ -25,12 +25,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         console.error("Failed to fetch broadcasts for sitemap:", error);
     }
 
-    const categoryUrls = categories.map((category) => ({
-        url: `${baseUrl}/${sanitizeSlug(category)}`,
-        lastModified: new Date('2024-01-01'),
-        changeFrequency: 'weekly' as const,
-        priority: 0.6,
-    }))
+    const allCategorisedArticles = getCategorisedArticles()
+
+    const categoryUrls = categories.map((category) => {
+        const categoryArticles = allCategorisedArticles[category] || []
+        // Find most recent article date
+        let latestDate = new Date('2024-01-01')
+
+        if (categoryArticles.length > 0) {
+            // Articles are already sorted by date in getSortedArticles -> getCategorisedArticles preserves order? 
+            // getCategorisedArticles iterates sortedArticles, so yes. The first one should be latest.
+            const latestArticle = categoryArticles[0]
+            const [day, month, year] = latestArticle.date.split('-')
+            latestDate = new Date(`${year}-${month}-${day}`)
+        }
+
+        return {
+            url: `${baseUrl}/${sanitizeSlug(category)}`,
+            lastModified: latestDate,
+            changeFrequency: 'weekly' as const,
+            priority: 0.6,
+        }
+    })
 
     const articleUrls = articles.map((article) => ({
         url: `${baseUrl}/${sanitizeSlug(article.category)}/${article.id}`,

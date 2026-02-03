@@ -24,6 +24,7 @@ export const getSortedArticles = (): ArticleItem[] => {
       title: matterResult.data.title,
       date: matterResult.data.date,
       category: matterResult.data.category,
+      image: matterResult.data.image,
       description: matterResult.data.description,
     }
   })
@@ -81,6 +82,7 @@ export const getArticleData = async (id: string) => {
     category: matterResult.data.category,
     author: matterResult.data.author,
     authorImage: matterResult.data.authorImage,
+    image: matterResult.data.image,
     description: matterResult.data.description,
   }
 }

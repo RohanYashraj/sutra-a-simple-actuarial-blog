@@ -10,25 +10,26 @@ export default function robots(): MetadataRoute.Robots {
                 allow: '/',
                 disallow: ['/api/', '/unsubscribe/'],
             },
-            {
-                userAgent: [
-                    'GPTBot',
-                    'Claude-WebCheck',
-                    'Anthropic-AI',
-                    'PerplexityBot',
-                    'YouBot',
-                    'CCBot',
-                    'Google-Extended',
-                    'Amazonbot',
-                    'FacebookBot',
-                    'Applebot',
-                    'Cohere-ai',
-                    'Omgilibot',
-                    'Bytespider'
-                ],
-                allow: '/',
-                disallow: ['/api/', '/unsubscribe/'],
-            }
+            // Allowed for AEO (Answer Engine Optimization)
+            // {
+            //     userAgent: [
+            //         'GPTBot',
+            //         'Claude-WebCheck',
+            //         'Anthropic-AI',
+            //         'PerplexityBot',
+            //         'YouBot',
+            //         'CCBot',
+            //         'Google-Extended',
+            //         'Amazonbot',
+            //         'FacebookBot',
+            //         'Applebot',
+            //         'Cohere-ai',
+            //         'Omgilibot',
+            //         'Bytespider'
+            //     ],
+            //     allow: '/',
+            //     disallow: ['/api/', '/unsubscribe/'],
+            // }
         ],
         sitemap: `${baseUrl}/sitemap.xml`,
         // Added IndexNow location as recommended for discovery
