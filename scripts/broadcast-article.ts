@@ -27,9 +27,10 @@ async function broadcastArticle() {
         const siteUrl = 'https://sutra.rohanyashraj.com';
         const articleUrl = `${siteUrl}/${sanitizeSlug(article.category)}/${article.id}`;
 
-        const subject = `Fresh off the press: ${article.title}`;
+        const subject = `New Blog: ${article.title}`;
 
         const contentHtml = `
+            <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?w=1200&h=400&fit=crop" alt="${article.title}" style="width: 100%; max-width: 600px; height: auto; border-radius: 8px; margin-bottom: 24px;" />
             <div style="text-transform: uppercase; font-size: 12px; letter-spacing: 0.1em; color: #a1a1aa; margin-bottom: 8px; font-weight: 600;">
                 New Blog
             </div>
@@ -38,10 +39,21 @@ async function broadcastArticle() {
                 ${article.description}
             </p>
             <div style="border-left: 3px solid #f4f4f5; padding-left: 20px; font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: #52525b; margin-bottom: 32px;">
-                ${article.contentHtml.split('</p>')[0].replace('<p>', '').replace('</p>', '')}...
+                DeepSeek built a frontier AI model for $6 million. OpenAI spent $100 million on GPT-4. Same performance. One-sixteenth the cost. Nvidia lost $593 billion in market value when this became clear.
             </div>
-            <p style="margin-bottom: 32px;">
-                I've just published a new piece exploring the intersections of actuarial science and modern technology. I think you'll find this perspective particularly relevant to where our profession is heading.
+            <p style="margin-bottom: 24px;">
+                This piece explores what that efficiency breakthrough means for how we think about risk modeling, resource allocation, and the age-old assumption that better outcomes require proportionally bigger budgets.
+            </p>
+            <p style="margin-bottom: 24px; font-weight: 500;">
+                Key takeaways for actuaries:
+            </p>
+            <ul style="margin-bottom: 32px; padding-left: 20px; color: #3f3f46; line-height: 1.8;">
+                <li><strong>Activate selectively</strong> — Not every calculation needs full complexity</li>
+                <li><strong>Question scaling assumptions</strong> — Bigger isn't always better, just more expensive</li>
+                <li><strong>Consider open alternatives</strong> — Premium prices for commodity capabilities drain innovation budgets</li>
+            </ul>
+            <p style="margin-bottom: 32px; font-style: italic; color: #52525b;">
+                Efficiency wasn't supposed to be the path to frontier capabilities. But here we are.
             </p>
             <div style="text-align: center; margin-top: 32px;">
                 <a href="${articleUrl}" class="btn" style="background-color: #000; color: #fff; padding: 14px 28px; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 16px;">Read the Full Article</a>
