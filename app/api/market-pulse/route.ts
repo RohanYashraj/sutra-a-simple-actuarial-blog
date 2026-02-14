@@ -54,7 +54,7 @@ export async function triggerMarketPulseBroadcast() {
     const { data, error } = await resend.broadcasts.create({
       audienceId,
       from: "Sutra | Market Pulse <newsletter@sutra.rohanyashraj.com>",
-      subject: `Market Pulse: ${pulse.title}`,
+      subject: `${pulse.title}`,
       replyTo: "rohanyashraj@gmail.com",
       html: emailHtml,
       name: `Market Pulse - ${new Date().toLocaleDateString()}`,

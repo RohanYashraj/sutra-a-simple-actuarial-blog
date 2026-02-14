@@ -54,7 +54,7 @@ export async function triggerActuarialSimplifiedBroadcast() {
         const { data, error } = await resend.broadcasts.create({
             audienceId,
             from: "Sutra | Actuarial Simplified <newsletter@sutra.rohanyashraj.com>",
-            subject: `Simplified: ${simplified.title}`,
+            subject: `${simplified.title}`,
             replyTo: "rohanyashraj@gmail.com",
             html: emailHtml,
             name: `Actuarial Simplified - ${new Date().toLocaleDateString()}`,

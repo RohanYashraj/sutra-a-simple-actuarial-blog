@@ -59,7 +59,7 @@ export async function triggerGenAIFrontiersBroadcast() {
     const { data, error } = await resend.broadcasts.create({
       audienceId,
       from: "Sutra | GenAI Frontiers <newsletter@sutra.rohanyashraj.com>",
-      subject: `Frontiers: ${frontiers.title}`,
+      subject: `${frontiers.title}`,
       replyTo: "rohanyashraj@gmail.com",
       html: emailHtml,
       name: `GenAI Frontiers - ${new Date().toLocaleDateString()}`,

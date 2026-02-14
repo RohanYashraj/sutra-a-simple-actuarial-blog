@@ -54,7 +54,7 @@ export async function triggerCodeSutraBroadcast() {
     const { data, error } = await resend.broadcasts.create({
       audienceId,
       from: "Sutra | Code Sutra <newsletter@sutra.rohanyashraj.com>",
-      subject: `Code Sutra: ${codeSutra.title}`,
+      subject: `${codeSutra.title}`,
       replyTo: "rohanyashraj@gmail.com",
       html: emailHtml,
       name: `Code Sutra - ${new Date().toLocaleDateString()}`,

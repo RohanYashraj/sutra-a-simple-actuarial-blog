@@ -54,7 +54,7 @@ export async function triggerTriviaBroadcast() {
     const { data, error } = await resend.broadcasts.create({
       audienceId,
       from: "Sutra | Trivia <newsletter@sutra.rohanyashraj.com>",
-      subject: `Sutra Insight: ${trivia.title}`,
+      subject: `${trivia.title}`,
       replyTo: "rohanyashraj@gmail.com",
       html: emailHtml,
       name: `Sutra Trivia - ${new Date().toLocaleDateString()}`,
