@@ -47,9 +47,9 @@ I asked three different GenAI models this exact question.
 
 Results:
 
-* Model A: $148,775.40
-* Model B: $149,086.50  
-* Model C: $148,877.50
+- Model A: $148,775.40
+- Model B: $149,086.50
+- Model C: $148,877.50
 
 Actual answer: $148,775.54
 
@@ -75,10 +75,10 @@ It's also useless.
 
 Your product has:
 
-* A 10-pay premium structure
-* Partnership program certification
-* Rate guarantee for five years
-* Mostly employer groups
+- A 10-pay premium structure
+- Partnership program certification
+- Rate guarantee for five years
+- Mostly employer groups
 
 None of those factors appear in GenAI's answer.
 
@@ -94,10 +94,10 @@ It doesn't know what lapse rate fits your context.
 
 You still need to:
 
-* Pull your own experience data
-* Adjust for product features
-* Consider competitive positioning
-* Document your rationale
+- Pull your own experience data
+- Adjust for product features
+- Consider competitive positioning
+- Document your rationale
 
 GenAI didn't help.
 
@@ -135,10 +135,10 @@ All technically correct.
 
 None of it tells you:
 
-* What jurisdictions are involved
-* Whether the breach meets GDPR thresholds
-* If similar cases settled or went to trial
-* What your reinsurance treaty actually covers
+- What jurisdictions are involved
+- Whether the breach meets GDPR thresholds
+- If similar cases settled or went to trial
+- What your reinsurance treaty actually covers
 
 GenAI gave you the shape of an answer.
 
@@ -174,9 +174,9 @@ Never for deciding.
 
 If the output contains:
 
-* Calculated numbers
-* Specific assumptions for your context
-* Recommendations on edge cases
+- Calculated numbers
+- Specific assumptions for your context
+- Recommendations on edge cases
 
 Verify everything.
 

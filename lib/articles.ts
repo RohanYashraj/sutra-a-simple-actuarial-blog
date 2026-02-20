@@ -1,23 +1,23 @@
-import fs from "fs"
-import matter from "gray-matter"
-import path from "path"
-import { remark } from "remark"
-import html from "remark-html"
+import fs from "fs";
+import matter from "gray-matter";
+import path from "path";
+import { remark } from "remark";
+import html from "remark-html";
 
-import type { ArticleItem } from "@/types"
+import type { ArticleItem } from "@/types";
 
-const articlesDirectory = path.join(process.cwd(), "articles")
+const articlesDirectory = path.join(process.cwd(), "articles");
 
 export const getSortedArticles = (): ArticleItem[] => {
-  const fileNames = fs.readdirSync(articlesDirectory)
+  const fileNames = fs.readdirSync(articlesDirectory);
 
   const allArticlesData = fileNames.map((fileName) => {
-    const id = fileName.replace(/\.md$/, "")
+    const id = fileName.replace(/\.md$/, "");
 
-    const fullPath = path.join(articlesDirectory, fileName)
-    const fileContents = fs.readFileSync(fullPath, "utf-8")
+    const fullPath = path.join(articlesDirectory, fileName);
+    const fileContents = fs.readFileSync(fullPath, "utf-8");
 
-    const matterResult = matter(fileContents)
+    const matterResult = matter(fileContents);
 
     return {
       id,
@@ -26,53 +26,51 @@ export const getSortedArticles = (): ArticleItem[] => {
       category: matterResult.data.category,
       image: matterResult.data.image,
       description: matterResult.data.description,
-    }
-  })
+    };
+  });
 
   return allArticlesData.sort((a, b) => {
-    const [dayA, monthA, yearA] = a.date.split('-')
-    const [dayB, monthB, yearB] = b.date.split('-')
+    const [dayA, monthA, yearA] = a.date.split("-");
+    const [dayB, monthB, yearB] = b.date.split("-");
 
-    const dateA = new Date(`${yearA}-${monthA}-${dayA}`).getTime()
-    const dateB = new Date(`${yearB}-${monthB}-${dayB}`).getTime()
+    const dateA = new Date(`${yearA}-${monthA}-${dayA}`).getTime();
+    const dateB = new Date(`${yearB}-${monthB}-${dayB}`).getTime();
 
     if (dateA < dateB) {
-      return 1
+      return 1;
     } else if (dateA > dateB) {
-      return -1
+      return -1;
     } else {
-      return 0
+      return 0;
     }
-  })
-}
+  });
+};
 
 export const getCategorisedArticles = (): Record<string, ArticleItem[]> => {
-  const sortedArticles = getSortedArticles()
-  const categorisedArticles: Record<string, ArticleItem[]> = {}
+  const sortedArticles = getSortedArticles();
+  const categorisedArticles: Record<string, ArticleItem[]> = {};
 
   sortedArticles.forEach((article) => {
     if (!categorisedArticles[article.category]) {
-      categorisedArticles[article.category] = []
+      categorisedArticles[article.category] = [];
     }
-    categorisedArticles[article.category].push(article)
-  })
+    categorisedArticles[article.category].push(article);
+  });
 
-  return categorisedArticles
-}
+  return categorisedArticles;
+};
 
 export const getArticleData = async (id: string) => {
-  const fullPath = path.join(articlesDirectory, `${id}.md`)
-  const fileContents = fs.readFileSync(fullPath, "utf-8")
+  const fullPath = path.join(articlesDirectory, `${id}.md`);
+  const fileContents = fs.readFileSync(fullPath, "utf-8");
 
-  const matterResult = matter(fileContents)
+  const matterResult = matter(fileContents);
 
   // Strip the first H1 tag if it exists (e.g. # Title) to prevent duplicate headers
-  const contentBody = matterResult.content.replace(/^#\s+.*$/m, "")
+  const contentBody = matterResult.content.replace(/^#\s+.*$/m, "");
 
-  const processedContent = await remark()
-    .use(html)
-    .process(contentBody)
-  const contentHtml = processedContent.toString()
+  const processedContent = await remark().use(html).process(contentBody);
+  const contentHtml = processedContent.toString();
 
   return {
     id,
@@ -84,5 +82,5 @@ export const getArticleData = async (id: string) => {
     authorImage: matterResult.data.authorImage,
     image: matterResult.data.image,
     description: matterResult.data.description,
-  }
-}
+  };
+};

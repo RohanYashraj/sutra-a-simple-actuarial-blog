@@ -1,35 +1,36 @@
-import type { Metadata } from "next"
-import { Suspense } from "react"
-import Script from "next/script"
+import type { Metadata } from "next";
+import { Suspense } from "react";
+import Script from "next/script";
 
-import { Cormorant_Garamond, Outfit } from "next/font/google"
-import "./globals.css"
-import PHProvider from './providers/PostHogProvider'
-import PostHogPageView from "./providers/PostHogPageView"
-import { Analytics } from "@vercel/analytics/next"
-import { SpeedInsights } from "@vercel/speed-insights/next"
-import Footer from "@/components/Footer"
-import StickySubscribe from "@/components/StickySubscribe"
+import { Cormorant_Garamond, Outfit } from "next/font/google";
+import "./globals.css";
+import PHProvider from "./providers/PostHogProvider";
+import PostHogPageView from "./providers/PostHogPageView";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import Footer from "@/components/Footer";
+import StickySubscribe from "@/components/StickySubscribe";
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-cormorant-garamond",
   weight: ["300", "400", "600"],
-})
+});
 
 const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-outfit",
   weight: ["300", "400", "600", "700"],
-})
+});
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://sutra.rohanyashraj.com'),
+  metadataBase: new URL("https://sutra.rohanyashraj.com"),
   title: {
     default: "Sutra - Actuarial Blog | AI, Risk & Technology Insights",
-    template: "%s | Sutra - Actuarial Blog"
+    template: "%s | Sutra - Actuarial Blog",
   },
-  description: "The premier actuarial blog exploring the intersection of actuarial science, artificial intelligence, and modern technology. Expert insights on insurance, pension, and data-driven actuarial practices by Rohan Yashraj Gupta.",
+  description:
+    "The premier actuarial blog exploring the intersection of actuarial science, artificial intelligence, and modern technology. Expert insights on insurance, pension, and data-driven actuarial practices by Rohan Yashraj Gupta.",
   keywords: [
     "actuarial blog",
     "actuarial science",
@@ -62,7 +63,8 @@ export const metadata: Metadata = {
     url: "https://sutra.rohanyashraj.com",
     siteName: "Sutra - Actuarial Blog",
     title: "Sutra - Actuarial Blog | AI, Risk & Technology Insights",
-    description: "A leading actuarial blog exploring actuarial science, AI, risk modeling, and technology insights.",
+    description:
+      "A leading actuarial blog exploring actuarial science, AI, risk modeling, and technology insights.",
     images: [
       {
         url: "/logo.png",
@@ -75,7 +77,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Sutra - Actuarial Blog | AI, Risk & Technology Insights",
-    description: "The premier actuarial blog exploring the intersection of actuarial science, artificial intelligence, and modern technology. Expert insights by Rohan Yashraj Gupta.",
+    description:
+      "The premier actuarial blog exploring the intersection of actuarial science, artificial intelligence, and modern technology. Expert insights by Rohan Yashraj Gupta.",
     images: ["/logo.png"],
     creator: "@rohanyashraj",
   },
@@ -92,13 +95,14 @@ export const metadata: Metadata = {
   },
   alternates: {
     types: {
-      'application/rss+xml': '/feed.xml',
+      "application/rss+xml": "/feed.xml",
     },
   },
   other: {
-    "blogarama-site-verification": "blogarama-0debb237-3b55-439c-926d-654a95b25b1e",
+    "blogarama-site-verification":
+      "blogarama-0debb237-3b55-439c-926d-654a95b25b1e",
   },
-}
+};
 
 // JSON-LD WebSite Schema for rich snippets
 // JSON-LD Graph Schema for AISEO (Organization, Person, WebSite)
@@ -108,42 +112,41 @@ const jsonLd = {
     {
       "@type": "WebSite",
       "@id": "https://sutra.rohanyashraj.com/#website",
-      "url": "https://sutra.rohanyashraj.com",
-      "name": "Sutra - Actuarial Blog",
-      "description": "The premier actuarial blog exploring the intersection of actuarial science, artificial intelligence, and modern technology.",
-      "publisher": { "@id": "https://sutra.rohanyashraj.com/#organization" },
-      "inLanguage": "en-US"
+      url: "https://sutra.rohanyashraj.com",
+      name: "Sutra - Actuarial Blog",
+      description:
+        "The premier actuarial blog exploring the intersection of actuarial science, artificial intelligence, and modern technology.",
+      publisher: { "@id": "https://sutra.rohanyashraj.com/#organization" },
+      inLanguage: "en-US",
     },
     {
       "@type": "Organization",
       "@id": "https://sutra.rohanyashraj.com/#organization",
-      "name": "Sutra",
-      "url": "https://sutra.rohanyashraj.com",
-      "logo": {
+      name: "Sutra",
+      url: "https://sutra.rohanyashraj.com",
+      logo: {
         "@type": "ImageObject",
-        "url": "https://sutra.rohanyashraj.com/logo.png"
+        url: "https://sutra.rohanyashraj.com/logo.png",
       },
-      "founder": { "@id": "https://rohanyashraj.com/#person" }
+      founder: { "@id": "https://rohanyashraj.com/#person" },
     },
     {
       "@type": "Person",
       "@id": "https://rohanyashraj.com/#person",
-      "name": "Rohan Yashraj Gupta",
-      "url": "https://rohanyashraj.com",
-      "sameAs": [
-        "https://rohanyashraj.com",
-        "https://github.com/RohanYashraj"
-      ],
-      "jobTitle": "Actuary & AI Enthusiast",
-      "description": "Rohan Yashraj Gupta is an actuary and technologist specializing in the application of AI and machine learning in actuarial science."
-    }
-  ]
-}
+      name: "Rohan Yashraj Gupta",
+      url: "https://rohanyashraj.com",
+      sameAs: ["https://rohanyashraj.com", "https://github.com/RohanYashraj"],
+      jobTitle: "Actuary & AI Enthusiast",
+      description:
+        "Rohan Yashraj Gupta is an actuary and technologist specializing in the application of AI and machine learning in actuarial science.",
+    },
+  ],
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -170,9 +173,7 @@ export default function RootLayout({
             <PostHogPageView />
           </Suspense>
           <Suspense fallback={null}>
-            <div className="flex-grow">
-              {children}
-            </div>
+            <div className="flex-grow">{children}</div>
           </Suspense>
         </PHProvider>
         <Suspense fallback={null}>
@@ -185,6 +186,5 @@ export default function RootLayout({
         <SpeedInsights />
       </body>
     </html>
-  )
+  );
 }
-

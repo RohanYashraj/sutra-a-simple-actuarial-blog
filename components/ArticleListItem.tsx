@@ -1,37 +1,37 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { ArrowLongRightIcon } from "@heroicons/react/24/outline"
-import { sanitizeSlug } from "@/lib/slug"
-import { useEffect, useRef } from "react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import Link from "next/link";
+import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
+import { sanitizeSlug } from "@/lib/slug";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import type { ArticleItem } from "@/types"
+import type { ArticleItem } from "@/types";
 
 // Register ScrollTrigger
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
 interface Props {
-  category: string
-  articles: ArticleItem[]
-  hideViewAllLink?: boolean
+  category: string;
+  articles: ArticleItem[];
+  hideViewAllLink?: boolean;
 }
 
 // Helper to convert category to URL-friendly slug
-const categoryToSlug = (category: string) => sanitizeSlug(category)
+const categoryToSlug = (category: string) => sanitizeSlug(category);
 
 const ArticleItemList = ({ category, articles, hideViewAllLink }: Props) => {
-  const containerRef = useRef<HTMLDivElement>(null)
-  
+  const containerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Stagger animation for articles
       gsap.fromTo(
         ".article-item",
-        { 
-          y: 20, 
-          opacity: 0 
+        {
+          y: 20,
+          opacity: 0,
         },
         {
           y: 0,
@@ -42,17 +42,17 @@ const ArticleItemList = ({ category, articles, hideViewAllLink }: Props) => {
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top 80%", // Start animation when top of container hits 80% of viewport
-            toggleActions: "play none none reverse"
-          }
-        }
-      )
-    }, containerRef)
-    
-    return () => ctx.revert()
-  }, [])
+            toggleActions: "play none none reverse",
+          },
+        },
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className="flex flex-col md:flex-row gap-8 md:gap-16 border-t border-zinc-100 pt-10 first:border-t-0 first:pt-0"
     >
@@ -70,11 +70,14 @@ const ArticleItemList = ({ category, articles, hideViewAllLink }: Props) => {
               </h2>
             </Link>
           )}
-          
+
           {category !== "Recent" && !hideViewAllLink && (
             <div className="flex items-center gap-2">
               <div className="h-px w-8 bg-zinc-200"></div>
-              <Link href={`/${categoryToSlug(category)}`} className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-zinc-950 transition-colors">
+              <Link
+                href={`/${categoryToSlug(category)}`}
+                className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-zinc-950 transition-colors"
+              >
                 View All Posts
               </Link>
             </div>
@@ -100,12 +103,16 @@ const ArticleItemList = ({ category, articles, hideViewAllLink }: Props) => {
                 </p>
               )}
             </div>
-            
+
             <div className="flex items-center gap-3">
               <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-zinc-400">
                 {(() => {
-                  const [day, month, year] = article.date.split('-')
-                  return new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(new Date(`${year}-${month}-${day}`))
+                  const [day, month, year] = article.date.split("-");
+                  return new Intl.DateTimeFormat("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  }).format(new Date(`${year}-${month}-${day}`));
                 })()}
               </span>
               <span className="w-1 h-1 rounded-full bg-zinc-200"></span>
@@ -118,7 +125,7 @@ const ArticleItemList = ({ category, articles, hideViewAllLink }: Props) => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ArticleItemList
+export default ArticleItemList;

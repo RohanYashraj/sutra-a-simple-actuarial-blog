@@ -1,27 +1,27 @@
-'use client';
+"use client";
 
-import { useSearchParams, useRouter } from 'next/navigation';
-import { useState, Suspense } from 'react';
-import Link from 'next/link';
+import { useSearchParams, useRouter } from "next/navigation";
+import { useState, Suspense } from "react";
+import Link from "next/link";
 
 function UnsubscribeContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const email = searchParams.get('email');
-  
+  const email = searchParams.get("email");
+
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleUnsubscribe = async () => {
     if (!email) return;
 
     setLoading(true);
     try {
-      const response = await fetch('/api/unsubscribe', {
-        method: 'POST',
+      const response = await fetch("/api/unsubscribe", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email }),
       });
@@ -29,13 +29,13 @@ function UnsubscribeContent() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to unsubscribe');
+        throw new Error(data.error || "Failed to unsubscribe");
       }
 
-      router.push('/unsubscribe/success');
+      router.push("/unsubscribe/success");
     } catch (error: any) {
-      console.error('Unsubscribe error:', error);
-      setStatus('error');
+      console.error("Unsubscribe error:", error);
+      setStatus("error");
       setErrorMessage(error.message);
     } finally {
       setLoading(false);
@@ -49,7 +49,7 @@ function UnsubscribeContent() {
         <p className="font-sans text-zinc-600 mb-8">
           No email address provided. Please use the link from your email.
         </p>
-        <Link 
+        <Link
           href="/"
           className="inline-block bg-zinc-900 text-white font-sans font-medium px-6 py-3 rounded hover:bg-zinc-800 transition-colors"
         >
@@ -60,17 +60,19 @@ function UnsubscribeContent() {
   }
 
   return (
-
     <div className="max-w-xl mx-auto px-4 py-32 flex flex-col items-center text-center">
-      <h1 className="font-serif text-3xl mb-4 text-zinc-900 tracking-tight">Sever the Thread?</h1>
-      
+      <h1 className="font-serif text-3xl mb-4 text-zinc-900 tracking-tight">
+        Sever the Thread?
+      </h1>
+
       <p className="font-sans text-zinc-500 mb-12 text-base leading-relaxed max-w-md">
-        Unsubscribing means missing out on weekly Actuarial Intelligence insights, Market Pulse, and Code Sutra snippets.
+        Unsubscribing means missing out on weekly Actuarial Intelligence
+        insights, Market Pulse, and Code Sutra snippets.
       </p>
 
-      {status === 'error' && (
+      {status === "error" && (
         <div className="mb-8 text-red-600 text-sm">
-          {errorMessage || 'Something went wrong. Please try again.'}
+          {errorMessage || "Something went wrong. Please try again."}
         </div>
       )}
 
@@ -81,7 +83,7 @@ function UnsubscribeContent() {
         >
           Keep the Connection
         </Link>
-        
+
         <div className="w-full h-px bg-zinc-200 sm:hidden"></div>
         <div className="hidden sm:block w-px h-4 bg-zinc-200"></div>
 
@@ -90,7 +92,7 @@ function UnsubscribeContent() {
           disabled={loading}
           className="text-zinc-400 font-sans text-sm hover:text-red-600 transition-colors disabled:opacity-50"
         >
-          {loading ? 'Processing...' : 'Unsubscribe'}
+          {loading ? "Processing..." : "Unsubscribe"}
         </button>
       </div>
     </div>
@@ -99,7 +101,9 @@ function UnsubscribeContent() {
 
 export default function UnsubscribePage() {
   return (
-    <Suspense fallback={<div className="min-h-screen animate-pulse bg-white" />}>
+    <Suspense
+      fallback={<div className="min-h-screen animate-pulse bg-white" />}
+    >
       <UnsubscribeContent />
     </Suspense>
   );

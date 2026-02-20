@@ -67,10 +67,10 @@ The reason GenAI feels intelligent is that language itself carries compressed kn
 
 When actuaries write, they encode:
 
-* Technical concepts
-* Domain logic
-* Professional judgment
-* Causal relationships
+- Technical concepts
+- Domain logic
+- Professional judgment
+- Causal relationships
 
 GenAI absorbs all of that through text.
 
@@ -112,15 +112,15 @@ Understanding GenAI as pattern completion changes how you use it.
 
 You stop expecting it to:
 
-* Perform calculations
-* Check its own logic
-* Know when it's wrong
+- Perform calculations
+- Check its own logic
+- Know when it's wrong
 
 You start using it for what it actually does well:
 
-* Drafting text that follows professional patterns
-* Suggesting structure for common document types
-* Translating technical ideas into plain language
+- Drafting text that follows professional patterns
+- Suggesting structure for common document types
+- Translating technical ideas into plain language
 
 The tool hasn't changed.
 

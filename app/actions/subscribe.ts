@@ -18,13 +18,16 @@ export async function subscribeAction(prevState: any, formData: FormData) {
     if (!audienceId) {
       // Manual fallback or developer notification
       await resend.emails.send({
-        from: 'Sutra Blog <newsletter@sutra.rohanyashraj.com>',
-        to: 'rohanyashraj@gmail.com',
+        from: "Sutra Blog <newsletter@sutra.rohanyashraj.com>",
+        to: "rohanyashraj@gmail.com",
         bcc: "sutrarohanyashraj@gmail.com",
-        subject: 'New Subscriber (No Audience ID)!',
-        html: `<p>New subscriber: <strong>${email}</strong>. Please check your RESEND_AUDIENCE_ID.</p>`
+        subject: "New Subscriber (No Audience ID)!",
+        html: `<p>New subscriber: <strong>${email}</strong>. Please check your RESEND_AUDIENCE_ID.</p>`,
       });
-      return { success: true, message: "Subscribed (with fallback notifications)" };
+      return {
+        success: true,
+        message: "Subscribed (with fallback notifications)",
+      };
     }
 
     // 1. Add to audience
@@ -80,7 +83,7 @@ export async function subscribeAction(prevState: any, formData: FormData) {
       </div>
 
     `,
-      email
+      email,
     );
 
     await resend.emails.send({

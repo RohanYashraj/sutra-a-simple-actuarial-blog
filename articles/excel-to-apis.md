@@ -35,10 +35,10 @@ Excel let you think step by step, in rows and columns.
 
 But it came with costs:
 
-* **Version hell** – Emailing workbooks around creates forks. Which file has the latest assumptions?
-* **Audit nightmares** – Try tracing a formula through 15 linked tabs with hidden sheets.
-* **Scale problems** – Run a Monte Carlo simulation on a million policies and watch Excel freeze.
-* **Collaboration limits** – Only one person can edit at a time. Merging changes is manual.
+- **Version hell** – Emailing workbooks around creates forks. Which file has the latest assumptions?
+- **Audit nightmares** – Try tracing a formula through 15 linked tabs with hidden sheets.
+- **Scale problems** – Run a Monte Carlo simulation on a million policies and watch Excel freeze.
+- **Collaboration limits** – Only one person can edit at a time. Merging changes is manual.
 
 These weren't dealbreakers when models were small and teams were local.
 
@@ -58,10 +58,10 @@ The actuary's role changed.
 
 You're no longer running the calculation every time. You're:
 
-* Defining the logic that the platform executes
-* Monitoring outputs for reasonableness
-* Updating assumptions when experience changes
-* Ensuring the platform reflects regulatory requirements
+- Defining the logic that the platform executes
+- Monitoring outputs for reasonableness
+- Updating assumptions when experience changes
+- Ensuring the platform reflects regulatory requirements
 
 The shift is subtle but real.
 
@@ -137,9 +137,9 @@ No Excel file. No manual calculation. Just inputs and outputs.
 
 This changes how actuaries work:
 
-* You need to understand what the API expects (data formats, required fields)
-* You need to know how to send requests (often using Python, R, or another language)
-* You need to validate outputs, because you're not seeing the intermediate steps
+- You need to understand what the API expects (data formats, required fields)
+- You need to know how to send requests (often using Python, R, or another language)
+- You need to validate outputs, because you're not seeing the intermediate steps
 
 You're trusting the platform more. Inspecting it less.
 
@@ -147,9 +147,9 @@ You're trusting the platform more. Inspecting it less.
 
 Excel skills aren't obsolete. You still need to:
 
-* Validate results
-* Build quick models for exploration
-* Summarize experience studies
+- Validate results
+- Build quick models for exploration
+- Summarize experience studies
 
 But they're no longer sufficient.
 
@@ -163,10 +163,10 @@ Platform documentation explains endpoints, parameters, and response structures. 
 
 Not necessarily full software development. But enough to:
 
-* Call an API using Python or R
-* Parse JSON responses
-* Automate repetitive tasks
-* Validate outputs programmatically
+- Call an API using Python or R
+- Parse JSON responses
+- Automate repetitive tasks
+- Validate outputs programmatically
 
 ### Understand Data Pipelines
 
@@ -200,9 +200,9 @@ But it requires trust.
 
 And trust requires validation. You need to:
 
-* Run parallel calculations in Excel for spot checks
-* Compare platform outputs to expected results
-* Understand edge cases where the platform might behave unexpectedly
+- Run parallel calculations in Excel for spot checks
+- Compare platform outputs to expected results
+- Understand edge cases where the platform might behave unexpectedly
 
 ## Practical Example: Building a Pricing Rater
 
@@ -244,10 +244,10 @@ Understanding one platform makes learning others easier.
 
 When IT says they're building an API, ask:
 
-* What data does it need?
-* What does it return?
-* How do we validate outputs?
-* What happens if inputs are missing or malformed?
+- What data does it need?
+- What does it return?
+- How do we validate outputs?
+- What happens if inputs are missing or malformed?
 
 These questions help you understand how the platform will behave in production.
 

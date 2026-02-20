@@ -7,11 +7,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const compat = new FlatCompat({
-    baseDirectory: __dirname,
+  baseDirectory: __dirname,
 });
 
 const eslintConfig = [
-    ...fixupConfigRules(compat.extends("next/core-web-vitals")),
+  ...fixupConfigRules(compat.extends("next/core-web-vitals", "prettier")),
 ];
 
 export default eslintConfig;

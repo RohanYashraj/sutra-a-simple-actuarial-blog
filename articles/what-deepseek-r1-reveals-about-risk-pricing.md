@@ -175,4 +175,4 @@ That changes everything.
 
 ---
 
-*Efficiency wasn't supposed to be the path to frontier capabilities. But here we are.*
+_Efficiency wasn't supposed to be the path to frontier capabilities. But here we are._

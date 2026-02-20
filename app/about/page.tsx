@@ -1,19 +1,21 @@
-import Link from "next/link"
-import { ArrowLeftIcon } from "@heroicons/react/24/solid"
-import type { Metadata } from "next"
+import Link from "next/link";
+import { ArrowLeftIcon } from "@heroicons/react/24/solid";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "About Sutra - An actuarial blog by Rohan Yashraj Gupta. Exploring the intersection of actuarial science, artificial intelligence, and modern technology.",
+  description:
+    "About Sutra - An actuarial blog by Rohan Yashraj Gupta. Exploring the intersection of actuarial science, artificial intelligence, and modern technology.",
   openGraph: {
     title: "About Sutra - Actuarial Blog",
-    description: "About Sutra - An actuarial blog by Rohan Yashraj Gupta exploring actuarial science, AI, and technology.",
+    description:
+      "About Sutra - An actuarial blog by Rohan Yashraj Gupta exploring actuarial science, AI, and technology.",
     url: "https://sutra.rohanyashraj.com/about",
   },
   alternates: {
     canonical: "https://sutra.rohanyashraj.com/about",
   },
-}
+};
 
 export default function AboutPage() {
   return (
@@ -24,44 +26,53 @@ export default function AboutPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ProfilePage",
-            "dateCreated": "2024-01-01T00:00:00-05:00",
-            "dateModified": "2024-01-01T00:00:00-05:00",
-            "mainEntity": {
+            dateCreated: "2024-01-01T00:00:00-05:00",
+            dateModified: "2024-01-01T00:00:00-05:00",
+            mainEntity: {
               "@type": "Person",
-              "name": "Rohan Yashraj Gupta",
-              "alternateName": "RohanYashraj",
-              "description": "Actuary and Technologist exploring the future of insurance and AI.",
-              "image": "https://sutra.rohanyashraj.com/authors/profile-placeholder.svg",
-              "sameAs": [
+              name: "Rohan Yashraj Gupta",
+              alternateName: "RohanYashraj",
+              description:
+                "Actuary and Technologist exploring the future of insurance and AI.",
+              image:
+                "https://sutra.rohanyashraj.com/authors/profile-placeholder.svg",
+              sameAs: [
                 "https://rohanyashraj.com",
-                "https://github.com/RohanYashraj"
-              ]
-            }
-          })
+                "https://github.com/RohanYashraj",
+              ],
+            },
+          }),
         }}
       />
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-zinc-100">
         <div className="mx-auto w-11/12 lg:w-3/4 h-16 flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold tracking-tighter text-zinc-950">
+          <Link
+            href="/"
+            className="text-2xl font-bold tracking-tighter text-zinc-950"
+          >
             sutra<span className="text-zinc-400">.</span>
           </Link>
           <div className="flex gap-8 text-sm font-medium">
-            <Link href="/about" className="text-zinc-950">About</Link>
+            <Link href="/about" className="text-zinc-950">
+              About
+            </Link>
           </div>
         </div>
       </nav>
 
       <section className="mx-auto w-11/12 md:w-3/4 lg:w-2/5 py-24 flex flex-col gap-16">
         <div className="flex flex-col gap-4">
-          <Link 
-            href={"/"} 
+          <Link
+            href={"/"}
             className="flex items-center gap-1.5 text-zinc-400 hover:text-zinc-950 transition-colors group w-fit"
           >
             <ArrowLeftIcon width={12} />
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em]">Back to Homepage</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em]">
+              Back to Homepage
+            </p>
           </Link>
-          
+
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-zinc-950 leading-none">
             About Sutra<span className="text-zinc-200">.</span>
           </h1>
@@ -69,21 +80,33 @@ export default function AboutPage() {
 
         <div className="flex flex-col gap-12 text-zinc-800 text-lg leading-relaxed">
           <div className="flex flex-col gap-4">
-            <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400">The Purpose</h2>
+            <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400">
+              The Purpose
+            </h2>
             <p>
-              Sutra was created as a minimalist digital space to explore the intersection of 
-              <strong> Actuarial Science</strong>, <strong>Artificial Intelligence</strong>, and <strong>Modern Technology</strong>. 
-              The goal is to distill complex topics into clear, concise "sutras" or threads of thought that provoke curiosity and meaningful discussion.
+              Sutra was created as a minimalist digital space to explore the
+              intersection of
+              <strong> Actuarial Science</strong>,{" "}
+              <strong>Artificial Intelligence</strong>, and{" "}
+              <strong>Modern Technology</strong>. The goal is to distill complex
+              topics into clear, concise "sutras" or threads of thought that
+              provoke curiosity and meaningful discussion.
             </p>
           </div>
 
           <div className="flex flex-col gap-4">
-            <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400">About Me</h2>
+            <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400">
+              About Me
+            </h2>
             <p className="text-2xl font-medium text-zinc-950 tracking-tight">
               I'm Rohan Yashraj Gupta.
             </p>
             <p>
-              I am an enthusiast who is always looking to find something exciting at the edge of what's possible. Whether it's dissecting risk models or experimenting with the latest generative AI, my journey is driven by a constant search for innovation and a desire to understand how technology reshapes our world.
+              I am an enthusiast who is always looking to find something
+              exciting at the edge of what's possible. Whether it's dissecting
+              risk models or experimenting with the latest generative AI, my
+              journey is driven by a constant search for innovation and a desire
+              to understand how technology reshapes our world.
             </p>
           </div>
 
@@ -95,5 +118,5 @@ export default function AboutPage() {
         </div>
       </section>
     </main>
-  )
+  );
 }

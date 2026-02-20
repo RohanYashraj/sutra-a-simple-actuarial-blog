@@ -59,17 +59,17 @@ GenAI drafts it.
 
 You feed it:
 
-* Current rate level
-* Proposed changes
-* Key assumptions
-* Loss ratio impacts
+- Current rate level
+- Proposed changes
+- Key assumptions
+- Loss ratio impacts
 
 It produces a structured summary with:
 
-* Executive overview
-* Rate change breakdown by coverage
-* Expected impact on retention
-* Implementation timeline
+- Executive overview
+- Rate change breakdown by coverage
+- Expected impact on retention
+- Implementation timeline
 
 You edit for accuracy and tone.
 
@@ -125,9 +125,9 @@ Send it over.
 
 GenAI fits where the work is:
 
-* Language-heavy, not calculation-heavy
-* Repetitive, not novel
-* Drafting, not deciding
+- Language-heavy, not calculation-heavy
+- Repetitive, not novel
+- Drafting, not deciding
 
 It handles the first 80% of routine communication tasks.
 

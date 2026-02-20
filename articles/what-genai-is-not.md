@@ -125,9 +125,9 @@ GenAI can assist models without being one.
 
 It can:
 
-* Generate SQL queries that feed into your pricing model
-* Summarize model output for non-technical stakeholders  
-* Suggest features to test in your next GLM iteration
+- Generate SQL queries that feed into your pricing model
+- Summarize model output for non-technical stakeholders
+- Suggest features to test in your next GLM iteration
 
 These are language tasks wrapped around real models.
 

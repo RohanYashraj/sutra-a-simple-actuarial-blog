@@ -85,9 +85,9 @@ Recommend action.
 
 Judgment requires:
 
-* Understanding context
-* Weighing tradeoffs
-* Accepting accountability
+- Understanding context
+- Weighing tradeoffs
+- Accepting accountability
 
 GenAI has none of these.
 
@@ -107,7 +107,7 @@ It cannot make the decision.
 **Workflow with GenAI:**
 
 1. (Judgment) Decide what analysis to run
-2. (Model) Execute the analysis  
+2. (Model) Execute the analysis
 3. **(Language + GenAI)** Draft the communication
 4. **(Language)** Verify and refine the draft
 5. (Judgment) Decide what action to take
@@ -120,15 +120,15 @@ Everything else remained the same.
 
 When you understand GenAI as purely a language layer tool, you stop:
 
-* Asking it to do calculations
-* Expecting it to make recommendations
-* Treating its output as analysis
+- Asking it to do calculations
+- Expecting it to make recommendations
+- Treating its output as analysis
 
 You start:
 
-* Using it to draft routine communication
-* Leveraging it to explain technical work
-* Treating it as a writing assistant, not a colleague
+- Using it to draft routine communication
+- Leveraging it to explain technical work
+- Treating it as a writing assistant, not a colleague
 
 ## Common Mistakes, Explained
 
@@ -164,18 +164,18 @@ That's where GenAI creates value.
 
 **You still need to:**
 
-* Understand actuarial methods
-* Know how to build models
-* Apply professional judgment
-* Verify all technical work
-* Accept accountability for recommendations
+- Understand actuarial methods
+- Know how to build models
+- Apply professional judgment
+- Verify all technical work
+- Accept accountability for recommendations
 
 **You no longer need to:**
 
-* Spend 30 minutes drafting routine emails
-* Manually format executive summaries
-* Rewrite the same explanation for different audiences
-* Struggle with phrasing for sensitive communications
+- Spend 30 minutes drafting routine emails
+- Manually format executive summaries
+- Rewrite the same explanation for different audiences
+- Struggle with phrasing for sensitive communications
 
 The intellectual work remained.
 
@@ -201,9 +201,9 @@ And you'll capture the value without the risk.
 
 **The three layers:**
 
-* Language (where GenAI helps)
-* Models (where your technical skills matter)
-* Judgment (where your experience decides)
+- Language (where GenAI helps)
+- Models (where your technical skills matter)
+- Judgment (where your experience decides)
 
 Keep them separate in your mind.
 

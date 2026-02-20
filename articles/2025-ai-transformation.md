@@ -23,7 +23,7 @@ Sarah starts her Monday with a loss reserve analysis. She uploads her loss trian
 
 What used to take Sarah half a day now takes 20 minutes. But here's the important part—she still reviews everything carefully. The AI is great at drafting and spotting patterns, but it doesn't replace her judgment about why those patterns matter.
 
-*The key development*: AI systems can now process thousands of pages at once (they call it "10 million token context windows"). This means Sarah can feed in years of reports and the AI can find connections she'd never have time to spot manually.
+_The key development_: AI systems can now process thousands of pages at once (they call it "10 million token context windows"). This means Sarah can feed in years of reports and the AI can find connections she'd never have time to spot manually.
 
 **Traditional AI Got Really Good**
 
@@ -37,10 +37,10 @@ The models find patterns like "drivers with this specific driving schedule have 
 
 Here's what happened across the industry in 2025:
 
--   **AI adoption jumped from 8% to 34%** of insurance companies. What was experimental became operational.
--   The Casualty Actuarial Society launched an **AI Fast Track program** because AI literacy became a core skill, not a nice-to-have.
--   Companies using AI in underwriting reported **15-20% reductions in expense ratios**.
--   AI moved from back-office tasks to **core actuarial work**—pricing, reserving, and risk selection.
+- **AI adoption jumped from 8% to 34%** of insurance companies. What was experimental became operational.
+- The Casualty Actuarial Society launched an **AI Fast Track program** because AI literacy became a core skill, not a nice-to-have.
+- Companies using AI in underwriting reported **15-20% reductions in expense ratios**.
+- AI moved from back-office tasks to **core actuarial work**—pricing, reserving, and risk selection.
 
 ## A Day in Sarah's Life (2025 Edition)
 
@@ -70,10 +70,10 @@ Two years ago, this kind of analysis would have required days of manual review. 
 
 Sarah's role hasn't disappeared—it's evolved. She's less of a number cruncher and more of a strategic advisor. AI handles the routine calculations, freeing her to focus on:
 
--   Interpreting what the patterns mean for business strategy
--   Validating that AI outputs make actuarial sense
--   Handling complex cases that need human judgment
--   Ensuring AI systems are fair and compliant
+- Interpreting what the patterns mean for business strategy
+- Validating that AI outputs make actuarial sense
+- Handling complex cases that need human judgment
+- Ensuring AI systems are fair and compliant
 
 The boring parts of actuarial work? AI handles those now. The interesting parts—understanding risk, making strategic recommendations, dealing with genuine uncertainty—those are more important than ever.
 
@@ -93,7 +93,7 @@ As the year wraps up, here's what stands out:
 
 ## The Bottom Line
 
-2025 wasn't the year AI replaced actuaries. It was the year actuaries started working *with* AI in meaningful ways. The profession isn't shrinking—it's transforming into something more strategic, more impactful, and frankly, more interesting.
+2025 wasn't the year AI replaced actuaries. It was the year actuaries started working _with_ AI in meaningful ways. The profession isn't shrinking—it's transforming into something more strategic, more impactful, and frankly, more interesting.
 
 If you're an actuary reading this, the message is simple: embrace the learning curve. The AI tools that seemed intimidating at the start of 2025 are now essential to staying competitive. And the actuaries who figured that out early? They're the ones doing the most interesting work.
 

@@ -2,7 +2,7 @@ import { GoogleGenAI } from "@google/genai";
 
 // Initialize the client with the API key from environment variables
 const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY
+  apiKey: process.env.GEMINI_API_KEY,
 });
 
 const DEFAULT_MODEL = "gemini-3-flash-preview";
@@ -68,13 +68,19 @@ export async function generateSutraTrivia(retries = 3) {
       const isRetryable = error?.status === 503 || error?.status === 429;
 
       if (isRetryable && i < retries - 1) {
-        console.warn(`Gemini API overloaded (attempt ${i + 1}/${retries}). Retrying in ${Math.pow(2, i)}s...`);
-        await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
+        console.warn(
+          `Gemini API overloaded (attempt ${i + 1}/${retries}). Retrying in ${Math.pow(2, i)}s...`,
+        );
+        await new Promise((resolve) =>
+          setTimeout(resolve, Math.pow(2, i) * 1000),
+        );
         continue;
       }
 
       console.error("Gemini Generation Error:", error);
-      throw new Error(`Failed to generate daily trivia content after ${i + 1} attempts`);
+      throw new Error(
+        `Failed to generate daily trivia content after ${i + 1} attempts`,
+      );
     }
   }
 }
@@ -133,7 +139,9 @@ export async function generateMarketPulse(retries = 3) {
       return JSON.parse(cleanedText);
     } catch (error: any) {
       if ((error?.status === 503 || error?.status === 429) && i < retries - 1) {
-        await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
+        await new Promise((resolve) =>
+          setTimeout(resolve, Math.pow(2, i) * 1000),
+        );
         continue;
       }
       throw error;
@@ -196,7 +204,9 @@ export async function generateCodeSutra(retries = 3) {
       return JSON.parse(cleanedText);
     } catch (error: any) {
       if ((error?.status === 503 || error?.status === 429) && i < retries - 1) {
-        await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
+        await new Promise((resolve) =>
+          setTimeout(resolve, Math.pow(2, i) * 1000),
+        );
         continue;
       }
       throw error;
@@ -261,7 +271,9 @@ export async function generateGenAIFrontiers(retries = 3) {
       return JSON.parse(cleanedText);
     } catch (error: any) {
       if ((error?.status === 503 || error?.status === 429) && i < retries - 1) {
-        await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
+        await new Promise((resolve) =>
+          setTimeout(resolve, Math.pow(2, i) * 1000),
+        );
         continue;
       }
       throw error;
@@ -322,7 +334,9 @@ export async function generateActuarialSimplified(retries = 3) {
       return JSON.parse(cleanedText);
     } catch (error: any) {
       if ((error?.status === 503 || error?.status === 429) && i < retries - 1) {
-        await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
+        await new Promise((resolve) =>
+          setTimeout(resolve, Math.pow(2, i) * 1000),
+        );
         continue;
       }
       throw error;

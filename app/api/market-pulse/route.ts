@@ -10,7 +10,6 @@ import { submitUrlsToIndexNow } from "@/lib/indexnow";
 const resend = new Resend(process.env.RESEND_API_KEY);
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
-
 export async function triggerMarketPulseBroadcast() {
   try {
     const audienceId = process.env.RESEND_AUDIENCE_ID;
@@ -27,7 +26,7 @@ export async function triggerMarketPulseBroadcast() {
       pulse.title,
       `
       <h1>${pulse.title}</h1>
-      <p style="font-size: 14px; color: #71717a; margin-bottom: 32px;">Sutra Market Pulse • ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+      <p style="font-size: 14px; color: #71717a; margin-bottom: 32px;">Sutra Market Pulse • ${new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
 
       <div style="margin-bottom: 32px; padding: 24px; background-color: #fafafa; border-radius: 8px; border: 1px solid #f4f4f5;">
         <h2 style="margin-top: 0; font-size: 18px; color: #000000;">${pulse.macroView.heading}</h2>
@@ -47,7 +46,7 @@ export async function triggerMarketPulseBroadcast() {
       <div style="text-align: center; margin-top: 40px;">
         <a href="https://sutra.rohanyashraj.com" class="btn">Analyze More on Sutra</a>
       </div>
-      `
+      `,
     );
 
     // 3. Create Resend Broadcast
@@ -61,7 +60,9 @@ export async function triggerMarketPulseBroadcast() {
     });
 
     if (error || !data) {
-      throw new Error(`Resend Broadcast Error: ${error?.message || 'Unknown error'}`);
+      throw new Error(
+        `Resend Broadcast Error: ${error?.message || "Unknown error"}`,
+      );
     }
 
     // 4. Send immediately
@@ -74,18 +75,20 @@ export async function triggerMarketPulseBroadcast() {
     // 5. Archive to Convex
     const slug = `${sanitizeSlug(pulse.title)}-${new Date().getTime()}`;
     await convex.mutation(api.broadcasts.saveBroadcast, {
-      type: 'market-pulse',
+      type: "market-pulse",
       title: pulse.title,
       slug,
       data: pulse,
     });
 
     // 6. Submit to IndexNow
-    await submitUrlsToIndexNow([`https://sutra.rohanyashraj.com/archive/market-pulse/${slug}`]);
+    await submitUrlsToIndexNow([
+      `https://sutra.rohanyashraj.com/archive/market-pulse/${slug}`,
+    ]);
 
     return {
       broadcastId: data.id,
-      title: pulse.title
+      title: pulse.title,
     };
   } catch (error: any) {
     console.error("Market Pulse API Error:", error);
@@ -100,9 +103,12 @@ export async function GET() {
     return NextResponse.json({
       success: true,
       message: "Market Pulse broadcast sent successfully",
-      ...result
+      ...result,
     });
   } catch (error: any) {
-    return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
+    return NextResponse.json(
+      { error: error.message || "Internal Server Error" },
+      { status: 500 },
+    );
   }
 }

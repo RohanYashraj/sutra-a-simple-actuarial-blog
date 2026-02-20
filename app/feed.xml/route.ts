@@ -1,7 +1,7 @@
-import { getSortedArticles } from '@/lib/articles'
+import { getSortedArticles } from "@/lib/articles";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "@/convex/_generated/api";
-import { sanitizeSlug } from '@/lib/slug';
+import { sanitizeSlug } from "@/lib/slug";
 
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
@@ -13,11 +13,11 @@ const TYPE_LABELS: Record<string, string> = {
   "actuarial-simplified": "Actuarial Simplified",
 };
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const articles = getSortedArticles()
-  const siteUrl = 'https://sutra.rohanyashraj.com'
+  const articles = getSortedArticles();
+  const siteUrl = "https://sutra.rohanyashraj.com";
 
   // Fetch broadcasts from Convex
   let broadcasts: any[] = [];
@@ -29,24 +29,26 @@ export async function GET() {
 
   // Combine and sort
   const combinedItems = [
-    ...articles.map(a => ({
+    ...articles.map((a) => ({
       title: a.title,
       link: `${siteUrl}/${sanitizeSlug(a.category)}/${a.id}`,
       pubDate: (() => {
-        const [day, month, year] = a.date.split('-');
+        const [day, month, year] = a.date.split("-");
         return new Date(`${year}-${month}-${day}`).toUTCString();
       })(),
       description: a.description,
-      category: a.category
+      category: a.category,
     })),
-    ...broadcasts.map(b => ({
+    ...broadcasts.map((b) => ({
       title: b.title,
       link: `${siteUrl}/archive/${b.type}/${b.slug}`,
       pubDate: new Date(b.publishedAt).toUTCString(),
       description: `${TYPE_LABELS[b.type] || b.type} - Archived Insight`,
-      category: TYPE_LABELS[b.type] || b.type
-    }))
-  ].sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+      category: TYPE_LABELS[b.type] || b.type,
+    })),
+  ].sort(
+    (a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime(),
+  );
 
   const xml = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
@@ -58,23 +60,25 @@ export async function GET() {
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <atom:link href="${siteUrl}/feed.xml" rel="self" type="application/rss+xml" />
     ${combinedItems
-      .map((item) => `
+      .map(
+        (item) => `
     <item>
       <title><![CDATA[${item.title}]]></title>
       <link>${item.link}</link>
       <guid isPermaLink="true">${item.link}</guid>
       <pubDate>${item.pubDate}</pubDate>
       <description><![CDATA[${item.description}]]></description>
-      <category>${item.category.replace(/&/g, '&amp;')}</category>
-    </item>`)
-      .join('')}
+      <category>${item.category.replace(/&/g, "&amp;")}</category>
+    </item>`,
+      )
+      .join("")}
   </channel>
-</rss>`
+</rss>`;
 
   return new Response(xml, {
     headers: {
-      'Content-Type': 'application/xml',
-      'Cache-Control': 's-maxage=3600, stale-while-revalidate',
+      "Content-Type": "application/xml",
+      "Cache-Control": "s-maxage=3600, stale-while-revalidate",
     },
-  })
+  });
 }

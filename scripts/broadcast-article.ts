@@ -1,35 +1,35 @@
-import { config } from 'dotenv';
-config({ path: '.env.local' });
-import { getEmailTemplate } from '../lib/email';
-import { getArticleData } from '../lib/articles';
-import { Resend } from 'resend';
-import { sanitizeSlug } from '../lib/slug';
+import { config } from "dotenv";
+config({ path: ".env.local" });
+import { getEmailTemplate } from "../lib/email";
+import { getArticleData } from "../lib/articles";
+import { Resend } from "resend";
+import { sanitizeSlug } from "../lib/slug";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 async function broadcastArticle() {
-    const slug = process.argv[2];
+  const slug = process.argv[2];
 
-    if (!slug) {
-        console.error("Usage: npx tsx scripts/broadcast-article.ts <article-slug>");
-        process.exit(1);
+  if (!slug) {
+    console.error("Usage: npx tsx scripts/broadcast-article.ts <article-slug>");
+    process.exit(1);
+  }
+
+  try {
+    const audienceId = process.env.RESEND_AUDIENCE_ID;
+    if (!audienceId) {
+      throw new Error("RESEND_AUDIENCE_ID is not set in .env.local");
     }
 
-    try {
-        const audienceId = process.env.RESEND_AUDIENCE_ID;
-        if (!audienceId) {
-            throw new Error("RESEND_AUDIENCE_ID is not set in .env.local");
-        }
+    console.log(`Fetching article data for: ${slug}...`);
+    const article = await getArticleData(slug);
 
-        console.log(`Fetching article data for: ${slug}...`);
-        const article = await getArticleData(slug);
+    const siteUrl = "https://sutra.rohanyashraj.com";
+    const articleUrl = `${siteUrl}/${sanitizeSlug(article.category)}/${article.id}`;
 
-        const siteUrl = 'https://sutra.rohanyashraj.com';
-        const articleUrl = `${siteUrl}/${sanitizeSlug(article.category)}/${article.id}`;
+    const subject = `New Blog: ${article.title}`;
 
-        const subject = `New Blog: ${article.title}`;
-
-        const contentHtml = `
+    const contentHtml = `
             <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?w=1200&h=400&fit=crop" alt="${article.title}" style="width: 100%; max-width: 600px; height: auto; border-radius: 8px; margin-bottom: 24px;" />
             <div style="text-transform: uppercase; font-size: 12px; letter-spacing: 0.1em; color: #a1a1aa; margin-bottom: 8px; font-weight: 600;">
                 New Blog
@@ -60,42 +60,44 @@ async function broadcastArticle() {
             </div>
         `;
 
-        const fullHtml = getEmailTemplate(subject, contentHtml);
+    const fullHtml = getEmailTemplate(subject, contentHtml);
 
-        console.log(`Preparing to broadcast: "${subject}"`);
+    console.log(`Preparing to broadcast: "${subject}"`);
 
-        // 1. Create Broadcast
-        const { data: broadcast, error: createError } = await resend.broadcasts.create({
-            audienceId,
-            from: "Sutra Updates <newsletter@sutra.rohanyashraj.com>",
-            subject: subject,
-            replyTo: "rohanyashraj@gmail.com",
-            html: fullHtml,
-            name: `Article Broadcast - ${article.title} - ${new Date().toLocaleDateString()}`,
-        });
+    // 1. Create Broadcast
+    const { data: broadcast, error: createError } =
+      await resend.broadcasts.create({
+        audienceId,
+        from: "Sutra Updates <newsletter@sutra.rohanyashraj.com>",
+        subject: subject,
+        replyTo: "rohanyashraj@gmail.com",
+        html: fullHtml,
+        name: `Article Broadcast - ${article.title} - ${new Date().toLocaleDateString()}`,
+      });
 
-        if (createError) {
-            console.error("Error creating broadcast:", createError);
-            process.exit(1);
-        }
-
-        console.log("Broadcast created successfully with ID:", broadcast.id);
-
-        // 2. Send Broadcast
-        console.log("Sending broadcast...");
-        const { data: sendData, error: sendError } = await resend.broadcasts.send(broadcast.id);
-
-        if (sendError) {
-            console.error("Error sending broadcast:", sendError);
-            process.exit(1);
-        }
-
-        console.log("Broadcast sent successfully!", sendData);
-
-    } catch (error) {
-        console.error("Script error:", error);
-        process.exit(1);
+    if (createError) {
+      console.error("Error creating broadcast:", createError);
+      process.exit(1);
     }
+
+    console.log("Broadcast created successfully with ID:", broadcast.id);
+
+    // 2. Send Broadcast
+    console.log("Sending broadcast...");
+    const { data: sendData, error: sendError } = await resend.broadcasts.send(
+      broadcast.id,
+    );
+
+    if (sendError) {
+      console.error("Error sending broadcast:", sendError);
+      process.exit(1);
+    }
+
+    console.log("Broadcast sent successfully!", sendData);
+  } catch (error) {
+    console.error("Script error:", error);
+    process.exit(1);
+  }
 }
 
 broadcastArticle();

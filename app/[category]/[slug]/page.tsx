@@ -1,37 +1,36 @@
-import Link from "next/link"
-import { notFound } from "next/navigation"
-import { ArrowLeftIcon } from "@heroicons/react/24/solid"
-import { getArticleData, getSortedArticles } from "@/lib/articles"
-import { sanitizeSlug } from "@/lib/slug"
-import type { Metadata } from "next"
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { ArrowLeftIcon } from "@heroicons/react/24/solid";
+import { getArticleData, getSortedArticles } from "@/lib/articles";
+import { sanitizeSlug } from "@/lib/slug";
+import type { Metadata } from "next";
 
 type Props = {
-  params: Promise<{ category: string; slug: string }>
-}
-
-
+  params: Promise<{ category: string; slug: string }>;
+};
 
 // Generate static paths for all articles with category
 export async function generateStaticParams() {
-  const articles = getSortedArticles()
+  const articles = getSortedArticles();
   return articles.map((article) => ({
     category: sanitizeSlug(article.category),
     slug: article.id,
-  }))
+  }));
 }
 
 // Generate dynamic metadata for each article
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const resolvedParams = await params
-  
+  const resolvedParams = await params;
+
   try {
-    const articleData = await getArticleData(resolvedParams.slug)
-    const [day, month, year] = articleData.date.split('-')
-    const publishDate = new Date(`${year}-${month}-${day}`).toISOString()
-    const categorySlug = sanitizeSlug(articleData.category)
-    const description = articleData.description || 
-      `Read "${articleData.title}" - an actuarial blog post on Sutra exploring insights about ${articleData.category.toLowerCase()}.`
-    
+    const articleData = await getArticleData(resolvedParams.slug);
+    const [day, month, year] = articleData.date.split("-");
+    const publishDate = new Date(`${year}-${month}-${day}`).toISOString();
+    const categorySlug = sanitizeSlug(articleData.category);
+    const description =
+      articleData.description ||
+      `Read "${articleData.title}" - an actuarial blog post on Sutra exploring insights about ${articleData.category.toLowerCase()}.`;
+
     return {
       title: articleData.title,
       description,
@@ -62,34 +61,35 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       alternates: {
         canonical: `/${categorySlug}/${resolvedParams.slug}`,
       },
-    }
+    };
   } catch {
     return {
       title: "Article Not Found",
-    }
+    };
   }
 }
 
 const Article = async (props: Props) => {
   const params = await props.params;
-  
+
   let articleData;
   try {
-    articleData = await getArticleData(params.slug)
+    articleData = await getArticleData(params.slug);
     // Verify category matches
-    const expectedCategorySlug = sanitizeSlug(articleData.category)
+    const expectedCategorySlug = sanitizeSlug(articleData.category);
     if (params.category !== expectedCategorySlug) {
-      notFound()
+      notFound();
     }
   } catch {
-    notFound()
+    notFound();
   }
 
-  const [day, month, year] = articleData.date.split('-')
-  const publishDate = new Date(`${year}-${month}-${day}`).toISOString()
-  const categorySlug = sanitizeSlug(articleData.category)
-  const description = articleData.description || 
-    `Read "${articleData.title}" - an actuarial blog post on Sutra exploring insights about ${articleData.category.toLowerCase()}.`
+  const [day, month, year] = articleData.date.split("-");
+  const publishDate = new Date(`${year}-${month}-${day}`).toISOString();
+  const categorySlug = sanitizeSlug(articleData.category);
+  const description =
+    articleData.description ||
+    `Read "${articleData.title}" - an actuarial blog post on Sutra exploring insights about ${articleData.category.toLowerCase()}.`;
 
   // JSON-LD BlogPosting Schema for rich snippets
   const blogPostingSchema = {
@@ -113,35 +113,43 @@ const Article = async (props: Props) => {
       "@type": "WebPage",
       "@id": `https://sutra.rohanyashraj.com/${categorySlug}/${params.slug}`,
     },
-    image: articleData.image ? `https://sutra.rohanyashraj.com${articleData.image}` : `https://sutra.rohanyashraj.com${articleData.authorImage || "/logo.png"}`,
-    keywords: ["actuarial", "actuarial blog", "agenticai", "agentic AI", articleData.category.toLowerCase()],
-  }
+    image: articleData.image
+      ? `https://sutra.rohanyashraj.com${articleData.image}`
+      : `https://sutra.rohanyashraj.com${articleData.authorImage || "/logo.png"}`,
+    keywords: [
+      "actuarial",
+      "actuarial blog",
+      "agenticai",
+      "agentic AI",
+      articleData.category.toLowerCase(),
+    ],
+  };
 
   // JSON-LD BreadcrumbList Schema
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
+    itemListElement: [
       {
         "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://sutra.rohanyashraj.com"
+        position: 1,
+        name: "Home",
+        item: "https://sutra.rohanyashraj.com",
       },
       {
         "@type": "ListItem",
-        "position": 2,
-        "name": articleData.category,
-        "item": `https://sutra.rohanyashraj.com/${categorySlug}` /* Note: Category pages need to exist or redirect */
+        position: 2,
+        name: articleData.category,
+        item: `https://sutra.rohanyashraj.com/${categorySlug}` /* Note: Category pages need to exist or redirect */,
       },
       {
         "@type": "ListItem",
-        "position": 3,
-        "name": articleData.title,
-        "item": `https://sutra.rohanyashraj.com/${categorySlug}/${params.slug}`
-      }
-    ]
-  }
+        position: 3,
+        name: articleData.title,
+        item: `https://sutra.rohanyashraj.com/${categorySlug}/${params.slug}`,
+      },
+    ],
+  };
 
   return (
     <>
@@ -157,49 +165,73 @@ const Article = async (props: Props) => {
         {/* Navigation */}
         <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-zinc-100">
           <div className="mx-auto w-11/12 lg:w-3/4 h-16 flex items-center justify-between">
-            <Link href="/" className="text-2xl font-bold tracking-tighter text-zinc-950">
+            <Link
+              href="/"
+              className="text-2xl font-bold tracking-tighter text-zinc-950"
+            >
               sutra<span className="text-zinc-400">.</span>
             </Link>
             <div className="flex gap-8 text-sm font-medium">
-              <Link href="/about" className="nav-link text-zinc-500 hover:text-zinc-950 transition-colors">About</Link>
-              <Link href="https://www.rohanyashraj.com/contact" className="nav-link text-zinc-500 hover:text-zinc-950 transition-colors">Contact</Link>
+              <Link
+                href="/about"
+                className="nav-link text-zinc-500 hover:text-zinc-950 transition-colors"
+              >
+                About
+              </Link>
+              <Link
+                href="https://www.rohanyashraj.com/contact"
+                className="nav-link text-zinc-500 hover:text-zinc-950 transition-colors"
+              >
+                Contact
+              </Link>
             </div>
           </div>
         </nav>
 
         <section className="mx-auto w-11/12 md:w-3/4 lg:w-7/12 py-24 flex flex-col gap-12">
           <div className="flex flex-col gap-4">
-            <Link 
-              href={"/"} 
+            <Link
+              href={"/"}
               className="flex items-center gap-1.5 text-zinc-400 hover:text-zinc-950 transition-colors group w-fit"
             >
               <ArrowLeftIcon width={12} />
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em]">Back to Homepage</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em]">
+                Back to Homepage
+              </p>
             </Link>
-            
+
             <div className="flex flex-col gap-8">
               <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-zinc-950 leading-[1.05]">
                 {articleData.title}
               </h1>
-              
+
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded-full bg-zinc-100 border border-zinc-200 overflow-hidden">
-                  <img 
-                    src={articleData.authorImage || "/authors/profile-placeholder.svg"}  
+                  <img
+                    src={
+                      articleData.authorImage ||
+                      "/authors/profile-placeholder.svg"
+                    }
                     alt={articleData.author || "Author"}
                     className="object-cover w-full h-full transition-all duration-300"
                   />
                 </div>
                 <div className="flex flex-col">
-                  <p className="font-bold text-sm text-zinc-950 tracking-tight">{articleData.author || "Sutra Contributor"}</p>
+                  <p className="font-bold text-sm text-zinc-950 tracking-tight">
+                    {articleData.author || "Sutra Contributor"}
+                  </p>
                   <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest leading-none mt-1">
-                    {new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(new Date(`${year}-${month}-${day}`))}
+                    {new Intl.DateTimeFormat("en-US", {
+                      month: "long",
+                      day: "numeric",
+                      year: "numeric",
+                    }).format(new Date(`${year}-${month}-${day}`))}
                   </p>
                 </div>
               </div>
             </div>
           </div>
-          
+
           <article
             className="article border-t border-zinc-100 pt-16"
             dangerouslySetInnerHTML={{ __html: articleData.contentHtml }}
@@ -207,7 +239,7 @@ const Article = async (props: Props) => {
         </section>
       </main>
     </>
-  )
-}
+  );
+};
 
-export default Article
+export default Article;

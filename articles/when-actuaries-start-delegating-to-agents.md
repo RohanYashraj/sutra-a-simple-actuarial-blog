@@ -72,7 +72,7 @@ The agent:
 
 Total active actuary time: 20 minutes reviewing flagged items and approving outputs.
 
-The agent didn't make fewer mistakes. It made *faster* mistakes that got caught earlier.
+The agent didn't make fewer mistakes. It made _faster_ mistakes that got caught earlier.
 
 ## Case Study: Pricing Iteration Loops
 
@@ -103,8 +103,9 @@ The thinking work stays with you. The execution work moves to the agent.
 This is not about agents replacing actuarial judgment.
 
 You still decide:
+
 - Which assumptions are reasonable
-- What risks are acceptable  
+- What risks are acceptable
 - How to communicate uncertainty
 - When results don't make sense
 
@@ -117,6 +118,7 @@ But they compress the mechanical distance between "I want to test this" and "Her
 Most actuarial departments aren't set up for this yet.
 
 Agents need:
+
 - API access to data systems (not CSV exports)
 - Programmatic model execution (not Excel macros)
 - Structured output formats (not Word documents)
@@ -131,6 +133,7 @@ If your team still emails spreadsheets and copy-pastes into reports, agents won'
 An annuity actuary needs to run annual mortality experience studies.
 
 This used to mean:
+
 - Extract five years of policy data
 - Calculate exposure
 - Count deaths
@@ -142,6 +145,7 @@ This used to mean:
 Total time: 2-3 days spread over a week.
 
 An agent can now:
+
 - Pull data from the warehouse
 - Apply exposure calculations using documented methods
 - Generate segmented A/E analysis
@@ -153,7 +157,7 @@ The actuary reviews the output. Adds context about a specific underwriting chang
 
 Time: half a day.
 
-The experience study quality improves because the actuary spends more time thinking about *what the numbers mean* and less time wrangling them into existence.
+The experience study quality improves because the actuary spends more time thinking about _what the numbers mean_ and less time wrangling them into existence.
 
 ## The Shift in Daily Work
 
@@ -205,4 +209,4 @@ It's what you'll do with the time they give back.
 
 ---
 
-*The best automation doesn't replace thinking. It clears space for it.*
+_The best automation doesn't replace thinking. It clears space for it._

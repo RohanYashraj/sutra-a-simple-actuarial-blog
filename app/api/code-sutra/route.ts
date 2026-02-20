@@ -10,7 +10,6 @@ import { submitUrlsToIndexNow } from "@/lib/indexnow";
 const resend = new Resend(process.env.RESEND_API_KEY);
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
-
 export async function triggerCodeSutraBroadcast() {
   try {
     const audienceId = process.env.RESEND_AUDIENCE_ID;
@@ -27,7 +26,7 @@ export async function triggerCodeSutraBroadcast() {
       codeSutra.title,
       `
       <h1>${codeSutra.title}</h1>
-      <p style="font-size: 14px; color: #71717a; margin-bottom: 32px;">Code Sutra • ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+      <p style="font-size: 14px; color: #71717a; margin-bottom: 32px;">Code Sutra • ${new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
 
       <div style="margin-bottom: 32px;">
         <h2 style="font-size: 18px; color: #000000;">${codeSutra.theChallenge.heading}</h2>
@@ -36,7 +35,7 @@ export async function triggerCodeSutraBroadcast() {
 
       <div style="margin-bottom: 32px; padding: 24px; background-color: #000000; border-radius: 8px; font-family: 'Courier New', Courier, monospace; overflow-x: auto;">
         <h2 style="margin-top: 0; font-size: 16px; color: #a1a1aa; border-bottom: 1px solid #333; padding-bottom: 8px;">${codeSutra.sutraSnippet.heading} (${codeSutra.sutraSnippet.language})</h2>
-        <pre style="margin-top: 16px; color: #ffffff; font-size: 13px; line-height: 1.5; white-space: pre-wrap; word-break: break-all;">${codeSutra.sutraSnippet.content.replace(/```[a-z]*\n|```/g, '')}</pre>
+        <pre style="margin-top: 16px; color: #ffffff; font-size: 13px; line-height: 1.5; white-space: pre-wrap; word-break: break-all;">${codeSutra.sutraSnippet.content.replace(/```[a-z]*\n|```/g, "")}</pre>
       </div>
 
       <div style="margin-bottom: 32px; padding: 16px; border: 1px dashed #a1a1aa; border-radius: 8px;">
@@ -47,7 +46,7 @@ export async function triggerCodeSutraBroadcast() {
       <div style="text-align: center; margin-top: 40px;">
         <a href="https://sutra.rohanyashraj.com" class="btn">View More Snippets</a>
       </div>
-      `
+      `,
     );
 
     // 3. Create Resend Broadcast
@@ -61,7 +60,9 @@ export async function triggerCodeSutraBroadcast() {
     });
 
     if (error || !data) {
-      throw new Error(`Resend Broadcast Error: ${error?.message || 'Unknown error'}`);
+      throw new Error(
+        `Resend Broadcast Error: ${error?.message || "Unknown error"}`,
+      );
     }
 
     // 4. Send immediately
@@ -74,18 +75,20 @@ export async function triggerCodeSutraBroadcast() {
     // 5. Archive to Convex
     const slug = `${sanitizeSlug(codeSutra.title)}-${new Date().getTime()}`;
     await convex.mutation(api.broadcasts.saveBroadcast, {
-      type: 'code-sutra',
+      type: "code-sutra",
       title: codeSutra.title,
       slug,
       data: codeSutra,
     });
 
     // 6. Submit to IndexNow
-    await submitUrlsToIndexNow([`https://sutra.rohanyashraj.com/archive/code-sutra/${slug}`]);
+    await submitUrlsToIndexNow([
+      `https://sutra.rohanyashraj.com/archive/code-sutra/${slug}`,
+    ]);
 
     return {
       broadcastId: data.id,
-      title: codeSutra.title
+      title: codeSutra.title,
     };
   } catch (error: any) {
     console.error("Code Sutra API Error:", error);
@@ -100,9 +103,12 @@ export async function GET() {
     return NextResponse.json({
       success: true,
       message: "Code Sutra broadcast sent successfully",
-      ...result
+      ...result,
     });
   } catch (error: any) {
-    return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
+    return NextResponse.json(
+      { error: error.message || "Internal Server Error" },
+      { status: 500 },
+    );
   }
 }

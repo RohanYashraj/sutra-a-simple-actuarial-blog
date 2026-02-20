@@ -67,7 +67,7 @@ html {
   /* my-4 */
 }
 
-.article>pre {
+.article > pre {
   background-color: #0f172a;
   /* bg-slate-900 */
   border: 1px solid #1e293b;
@@ -87,7 +87,7 @@ html {
   /* shadow-2xl */
 }
 
-.article>blockquote {
+.article > blockquote {
   padding-left: 1.5rem;
   /* pl-6 */
   padding-top: 0.5rem;
@@ -111,7 +111,7 @@ html {
   /* text-slate-200 */
 }
 
-.article>p>img {
+.article > p > img {
   width: 100%;
   /* w-full */
   margin-left: auto;
@@ -134,7 +134,7 @@ html {
   /* duration-500 */
 }
 
-.article>p>img:hover {
+.article > p > img:hover {
   transform: scale(1.01);
   /* hover:scale-[1.01] */
 }

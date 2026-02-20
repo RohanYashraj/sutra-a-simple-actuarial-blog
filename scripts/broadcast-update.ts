@@ -1,7 +1,7 @@
-import { config } from 'dotenv';
-config({ path: '.env.local' });
-import { getEmailTemplate } from '../lib/email';
-import { Resend } from 'resend';
+import { config } from "dotenv";
+config({ path: ".env.local" });
+import { getEmailTemplate } from "../lib/email";
+import { Resend } from "resend";
 
 // --- EDIT THESE VALUES ---
 const SUBJECT = "Update from Sutra";
@@ -38,50 +38,52 @@ const CONTENT_HTML = `
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 async function broadcastUpdate() {
-    try {
-        const audienceId = process.env.RESEND_AUDIENCE_ID;
+  try {
+    const audienceId = process.env.RESEND_AUDIENCE_ID;
 
-        if (!audienceId) {
-            throw new Error("RESEND_AUDIENCE_ID is not set in .env.local");
-        }
-
-        console.log(`Preparing to broadcast: "${SUBJECT}"`);
-
-        // Use the shared template
-        const fullHtml = getEmailTemplate(SUBJECT, CONTENT_HTML);
-
-        // 1. Create Broadcast
-        const { data: broadcast, error: createError } = await resend.broadcasts.create({
-            audienceId,
-            from: "Sutra Updates <newsletter@sutra.rohanyashraj.com>",
-            subject: SUBJECT,
-            replyTo: "rohanyashraj@gmail.com",
-            html: fullHtml,
-            name: `Manual Update - ${new Date().toLocaleDateString()}`,
-        });
-
-        if (createError) {
-            console.error("Error creating broadcast:", createError);
-            process.exit(1);
-        }
-
-        console.log("Broadcast created successfully with ID:", broadcast.id);
-
-        // 2. Send Broadcast
-        console.log("Sending broadcast...");
-        const { data: sendData, error: sendError } = await resend.broadcasts.send(broadcast.id);
-
-        if (sendError) {
-            console.error("Error sending broadcast:", sendError);
-            process.exit(1);
-        }
-
-        console.log("Broadcast sent successfully!", sendData);
-
-    } catch (error) {
-        console.error("Script error:", error);
-        process.exit(1);
+    if (!audienceId) {
+      throw new Error("RESEND_AUDIENCE_ID is not set in .env.local");
     }
+
+    console.log(`Preparing to broadcast: "${SUBJECT}"`);
+
+    // Use the shared template
+    const fullHtml = getEmailTemplate(SUBJECT, CONTENT_HTML);
+
+    // 1. Create Broadcast
+    const { data: broadcast, error: createError } =
+      await resend.broadcasts.create({
+        audienceId,
+        from: "Sutra Updates <newsletter@sutra.rohanyashraj.com>",
+        subject: SUBJECT,
+        replyTo: "rohanyashraj@gmail.com",
+        html: fullHtml,
+        name: `Manual Update - ${new Date().toLocaleDateString()}`,
+      });
+
+    if (createError) {
+      console.error("Error creating broadcast:", createError);
+      process.exit(1);
+    }
+
+    console.log("Broadcast created successfully with ID:", broadcast.id);
+
+    // 2. Send Broadcast
+    console.log("Sending broadcast...");
+    const { data: sendData, error: sendError } = await resend.broadcasts.send(
+      broadcast.id,
+    );
+
+    if (sendError) {
+      console.error("Error sending broadcast:", sendError);
+      process.exit(1);
+    }
+
+    console.log("Broadcast sent successfully!", sendData);
+  } catch (error) {
+    console.error("Script error:", error);
+    process.exit(1);
+  }
 }
 
 broadcastUpdate();

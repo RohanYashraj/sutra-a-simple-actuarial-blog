@@ -1,4 +1,8 @@
-export const getEmailTemplate = (title: string, content: string, recipientEmail?: string) => {
+export const getEmailTemplate = (
+  title: string,
+  content: string,
+  recipientEmail?: string,
+) => {
   const unsubscribeUrl = recipientEmail
     ? `https://sutra.rohanyashraj.com/unsubscribe?email=${encodeURIComponent(recipientEmail)}`
     : `https://sutra.rohanyashraj.com/unsubscribe?email={{{EMAIL}}}`;
@@ -137,5 +141,5 @@ export const getEmailTemplate = (title: string, content: string, recipientEmail?
         </div>
       </body>
     </html>
-  `
-}
+  `;
+};

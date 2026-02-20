@@ -21,10 +21,10 @@ This is the only workflow that matters.
 
 **Verify:** Check every factual claim
 
-* Is the rate increase actually 8%?
-* Did you cite the right loss ratio?
-* Are the effective dates correct?
-* Does the tone match your company's communication style?
+- Is the rate increase actually 8%?
+- Did you cite the right loss ratio?
+- Are the effective dates correct?
+- Does the tone match your company's communication style?
 
 **Refine:** Edit the output until it's yours
 
@@ -46,15 +46,15 @@ Sometimes catastrophic.
 
 **Small problems:**
 
-* Generic phrasing that doesn't match your voice
-* Technically correct but contextually wrong
-* Missing caveats specific to your situation
+- Generic phrasing that doesn't match your voice
+- Technically correct but contextually wrong
+- Missing caveats specific to your situation
 
 **Catastrophic problems:**
 
-* Fabricated citations
-* Incorrect calculations presented as fact
-* Logical gaps covered by confident language
+- Fabricated citations
+- Incorrect calculations presented as fact
+- Logical gaps covered by confident language
 
 You won't catch catastrophic problems by skimming.
 
@@ -70,15 +70,15 @@ They haven't worked on your company's data.
 
 You'd assign them to:
 
-* Draft standard documents
-* Summarize routine analyses
-* Format data for presentations
+- Draft standard documents
+- Summarize routine analyses
+- Format data for presentations
 
 You wouldn't ask them to:
 
-* Make final pricing decisions
-* Choose reserve methodologies
-* Explain unique aspects of your portfolio
+- Make final pricing decisions
+- Choose reserve methodologies
+- Explain unique aspects of your portfolio
 
 That's exactly how to use GenAI.
 
@@ -130,17 +130,17 @@ You need to draft a reserve adequacy memo.
 
 Check that:
 
-* Development amounts match your actual results
-* Any mentioned drivers (claim counts, severity) are accurate
-* No fabricated statistics appear
-* Reserve adequacy conclusion aligns with your analysis
+- Development amounts match your actual results
+- Any mentioned drivers (claim counts, severity) are accurate
+- No fabricated statistics appear
+- Reserve adequacy conclusion aligns with your analysis
 
 **Refine:**
 
-* Replace "industry trends suggest" with your actual experience
-* Add specific context about known large claims
-* Adjust tone to match previous memos
-* Include required regulatory language
+- Replace "industry trends suggest" with your actual experience
+- Add specific context about known large claims
+- Adjust tone to match previous memos
+- Include required regulatory language
 
 **Before/After:**
 
@@ -158,11 +158,11 @@ The content came from you.
 
 Some tasks don't benefit from GenAI at all:
 
-* Building experience triangles
-* Selecting development factors
-* Applying credibility weighting
-* Documenting unusual case reserves
-* Explaining one-off exceptions
+- Building experience triangles
+- Selecting development factors
+- Applying credibility weighting
+- Documenting unusual case reserves
+- Explaining one-off exceptions
 
 These require your judgment from the start.
 

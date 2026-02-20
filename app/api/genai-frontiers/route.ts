@@ -10,7 +10,6 @@ import { submitUrlsToIndexNow } from "@/lib/indexnow";
 const resend = new Resend(process.env.RESEND_API_KEY);
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
-
 export async function triggerGenAIFrontiersBroadcast() {
   try {
     const audienceId = process.env.RESEND_AUDIENCE_ID;
@@ -27,7 +26,7 @@ export async function triggerGenAIFrontiersBroadcast() {
       frontiers.title,
       `
       <h1 style="font-size: 36px; line-height: 1.1; margin-bottom: 8px;">${frontiers.title}</h1>
-      <p style="font-size: 14px; color: #71717a; margin-bottom: 32px; letter-spacing: 0.05em; text-transform: uppercase;">Actuarial Intelligence • ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+      <p style="font-size: 14px; color: #71717a; margin-bottom: 32px; letter-spacing: 0.05em; text-transform: uppercase;">Actuarial Intelligence • ${new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
 
       <div style="margin-bottom: 40px; padding: 32px; background-color: #000000; color: #ffffff; border-radius: 4px;">
         <h2 style="margin-top: 0; font-size: 20px; color: #a1a1aa; text-transform: uppercase; letter-spacing: 0.1em;">${frontiers.executiveSummary.heading}</h2>
@@ -52,7 +51,7 @@ export async function triggerGenAIFrontiersBroadcast() {
       <div style="text-align: center; margin-top: 40px;">
         <a href="https://sutra.rohanyashraj.com" class="btn">Explore the Frontier</a>
       </div>
-            `
+            `,
     );
 
     // 3. Create Resend Broadcast
@@ -66,7 +65,9 @@ export async function triggerGenAIFrontiersBroadcast() {
     });
 
     if (error || !data) {
-      throw new Error(`Resend Broadcast Error: ${error?.message || 'Unknown error'}`);
+      throw new Error(
+        `Resend Broadcast Error: ${error?.message || "Unknown error"}`,
+      );
     }
 
     // 4. Send immediately
@@ -79,18 +80,20 @@ export async function triggerGenAIFrontiersBroadcast() {
     // 5. Archive to Convex
     const slug = `${sanitizeSlug(frontiers.title)}-${new Date().getTime()}`;
     await convex.mutation(api.broadcasts.saveBroadcast, {
-      type: 'genai-frontiers',
+      type: "genai-frontiers",
       title: frontiers.title,
       slug,
       data: frontiers,
     });
 
     // 6. Submit to IndexNow
-    await submitUrlsToIndexNow([`https://sutra.rohanyashraj.com/archive/genai-frontiers/${slug}`]);
+    await submitUrlsToIndexNow([
+      `https://sutra.rohanyashraj.com/archive/genai-frontiers/${slug}`,
+    ]);
 
     return {
       broadcastId: data.id,
-      title: frontiers.title
+      title: frontiers.title,
     };
   } catch (error: any) {
     console.error("GenAI Frontiers API Error:", error);
@@ -105,9 +108,12 @@ export async function GET() {
     return NextResponse.json({
       success: true,
       message: "GenAI Frontiers broadcast sent successfully",
-      ...result
+      ...result,
     });
   } catch (error: any) {
-    return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
+    return NextResponse.json(
+      { error: error.message || "Internal Server Error" },
+      { status: 500 },
+    );
   }
 }

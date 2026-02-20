@@ -15,7 +15,7 @@ It's not about learning Python or mastering machine learning. Those shifts alrea
 
 This one is different.
 
-Within the next two years, a significant part of actuarial work will involve writing instructions for AI agents. Not using software. Not running models. *Instructing autonomous systems that do the work for you.*
+Within the next two years, a significant part of actuarial work will involve writing instructions for AI agents. Not using software. Not running models. _Instructing autonomous systems that do the work for you._
 
 If that sounds abstract, it shouldn't. It's already starting.
 
@@ -27,7 +27,7 @@ The pattern was always the same: you learned the tool, then you used it to do th
 
 GenAI broke that pattern.
 
-Now the tool doesn't just execute—it *interprets*. You don't write code that calculates a loss ratio. You write a sentence that describes what you want, and the system figures out how to get it.
+Now the tool doesn't just execute—it _interprets_. You don't write code that calculates a loss ratio. You write a sentence that describes what you want, and the system figures out how to get it.
 
 This is prompt engineering.
 
@@ -39,7 +39,7 @@ Most actuaries assume AI is just another software upgrade. Learn the basics, app
 
 That misses the point entirely.
 
-Agentic AI doesn't replace one tool in your workflow. It replaces *the way you work.*
+Agentic AI doesn't replace one tool in your workflow. It replaces _the way you work._
 
 Here's what's changing:
 
@@ -49,7 +49,7 @@ Here's what's changing:
 
 The work shifts from execution to instruction and oversight.
 
-If you can't write clear, structured instructions—if you can't describe your intent precisely—you'll struggle to get useful results. And the actuary who *can* do this well will be 10x more productive than the one who can't.
+If you can't write clear, structured instructions—if you can't describe your intent precisely—you'll struggle to get useful results. And the actuary who _can_ do this well will be 10x more productive than the one who can't.
 
 ## What Prompt Engineering Actually Means
 
@@ -71,7 +71,7 @@ The second version doesn't just ask for output. It defines scope, specifies logi
 
 That's what actuarial prompt engineering will look like.
 
-You're not coding. You're *designing workflows in natural language.*
+You're not coding. You're _designing workflows in natural language._
 
 ## Why Actuaries Are Well-Positioned (But Also At Risk)
 
@@ -79,15 +79,15 @@ Actuaries have always been instruction-writers.
 
 Think about what you already do:
 
-* Define data transformations
-* Specify model assumptions
-* Document methodologies
-* Write testing procedures
-* Communicate technical requirements to non-technical stakeholders
+- Define data transformations
+- Specify model assumptions
+- Document methodologies
+- Write testing procedures
+- Communicate technical requirements to non-technical stakeholders
 
 Every memo, every model spec, every assumption document—you've been training for this without knowing it.
 
-The problem is most actuaries never had to be *precise* in natural language. Code forced precision. Excel formulas forced precision. But written instructions? Those could be vague, because a human would interpret them.
+The problem is most actuaries never had to be _precise_ in natural language. Code forced precision. Excel formulas forced precision. But written instructions? Those could be vague, because a human would interpret them.
 
 AI agents don't give you that luxury.
 
@@ -109,7 +109,7 @@ This takes hours or days depending on complexity.
 **Agentic way:**  
 You instruct an AI agent:
 
-*"Run a reserve analysis on the latest claims data. Use chain ladder and Bornhuetter-Ferguson methods. Apply development factors from last quarter unless loss patterns have shifted more than 15%. Flag any cells where actual vs expected differs by more than two standard deviations. Generate a summary report with key drivers of reserve change and export detailed triangles to Excel."*
+_"Run a reserve analysis on the latest claims data. Use chain ladder and Bornhuetter-Ferguson methods. Apply development factors from last quarter unless loss patterns have shifted more than 15%. Flag any cells where actual vs expected differs by more than two standard deviations. Generate a summary report with key drivers of reserve change and export detailed triangles to Excel."_
 
 The agent executes the full workflow. It pulls data, applies methods, identifies anomalies, generates outputs.
 
@@ -127,12 +127,12 @@ Here's what the actuarial workflow starts to look like:
 
 You spend time crafting clear, complete prompts that define:
 
-* Objective
-* Data sources
-* Methodologies
-* Edge cases
-* Output format
-* Quality checks
+- Objective
+- Data sources
+- Methodologies
+- Edge cases
+- Output format
+- Quality checks
 
 This replaces much of the manual setup work.
 
@@ -172,7 +172,7 @@ Agents will do what you ask. If you don't think through the logic, the output wi
 
 ### Domain Knowledge
 
-This doesn't go away—it becomes *more* important.
+This doesn't go away—it becomes _more_ important.
 
 The agent doesn't know whether a loss ratio of 150% is reasonable for a specific line of business. You do.
 
@@ -192,7 +192,7 @@ Most actuaries didn't enter the profession to become "prompt engineers."
 
 They became actuaries to work with data, models, risk. To solve problems through technical rigor.
 
-And now they're being told the job is about *instructing machines* to do that work.
+And now they're being told the job is about _instructing machines_ to do that work.
 
 It feels like a demotion. Like the craft is being stripped away.
 
@@ -204,7 +204,7 @@ Instead of executing every calculation, you're designing the system that does it
 
 This is still actuarial work. It's still technical. It still requires judgment.
 
-It just *looks* different than it did five years ago.
+It just _looks_ different than it did five years ago.
 
 ## What Happens If You Ignore This
 
@@ -246,13 +246,13 @@ This is critical. You need to know when to trust the output and when to dig deep
 
 ### 4. Stay Conceptual
 
-Don't abandon your technical foundation. The actuaries who thrive in this new environment will be the ones who understand the *why* behind the methods, not just the *how.*
+Don't abandon your technical foundation. The actuaries who thrive in this new environment will be the ones who understand the _why_ behind the methods, not just the _how._
 
 Agents can execute. You need to know if the execution makes sense.
 
 ## The Bigger Picture
 
-This shift isn't just about efficiency. It's about *what actuaries can become.*
+This shift isn't just about efficiency. It's about _what actuaries can become._
 
 Right now, most actuarial work is constrained by time. You can only analyze so many scenarios, test so many assumptions, explore so many pricing structures.
 
@@ -270,7 +270,7 @@ But it requires letting go of the old workflow. It requires seeing your role not
 
 The title of this post wasn't hyperbole.
 
-Actuaries *will* become prompt engineers. Not because it's a trendy skill. Not because some consultant said so.
+Actuaries _will_ become prompt engineers. Not because it's a trendy skill. Not because some consultant said so.
 
 Because the tools are changing faster than the profession, and the actuaries who adapt will define what the profession becomes.
 
