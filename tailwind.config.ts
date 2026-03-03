@@ -11,6 +11,7 @@ const config: Config = {
       fontFamily: {
         cormorantGaramond: ["var(--font-cormorant-garamond)", "serif"],
         outfit: ["var(--font-outfit)", "sans-serif"],
+        lora: ["var(--font-lora)", "Georgia", "serif"],
         poppins: ["var(--font-poppins)", "sans-serif"],
       },
     },

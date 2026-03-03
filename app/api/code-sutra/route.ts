@@ -1,23 +1,10 @@
 import { generateCodeSutra } from "@/lib/gemini";
-import { Resend } from "resend";
 import { NextResponse, connection } from "next/server";
 import { getEmailTemplate } from "@/lib/email";
-import { ConvexHttpClient } from "convex/browser";
-import { api } from "@/convex/_generated/api";
-import { sanitizeSlug } from "@/lib/slug";
-import { submitUrlsToIndexNow } from "@/lib/indexnow";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
+import { sendStreamBroadcast } from "@/lib/broadcasts";
 
 export async function triggerCodeSutraBroadcast() {
   try {
-    const audienceId = process.env.RESEND_AUDIENCE_ID;
-
-    if (!audienceId) {
-      throw new Error("RESEND_AUDIENCE_ID is not set");
-    }
-
     // 1. Generate content using Gemini
     const codeSutra = await generateCodeSutra();
 
@@ -26,70 +13,41 @@ export async function triggerCodeSutraBroadcast() {
       codeSutra.title,
       `
       <h1>${codeSutra.title}</h1>
-      <p style="font-size: 14px; color: #71717a; margin-bottom: 32px;">Code Sutra • ${new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
+      <p style="font-size: 13px; color: #9ca3af; margin-bottom: 36px; letter-spacing: 0.04em;">Code Sutra &middot; ${new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
 
-      <div style="margin-bottom: 32px;">
-        <h2 style="font-size: 18px; color: #000000;">${codeSutra.theChallenge.heading}</h2>
-        <p style="color: #000000;">${codeSutra.theChallenge.content}</p>
+      <div style="margin-bottom: 28px; padding: 0 4px;">
+        <h2>${codeSutra.theChallenge.heading}</h2>
+        <p style="color: #374151;">${codeSutra.theChallenge.content}</p>
       </div>
 
-      <div style="margin-bottom: 32px; padding: 24px; background-color: #000000; border-radius: 8px; font-family: 'Courier New', Courier, monospace; overflow-x: auto;">
-        <h2 style="margin-top: 0; font-size: 16px; color: #a1a1aa; border-bottom: 1px solid #333; padding-bottom: 8px;">${codeSutra.sutraSnippet.heading} (${codeSutra.sutraSnippet.language})</h2>
-        <pre style="margin-top: 16px; color: #ffffff; font-size: 13px; line-height: 1.5; white-space: pre-wrap; word-break: break-all;">${codeSutra.sutraSnippet.content.replace(/```[a-z]*\n|```/g, "")}</pre>
+      <div style="margin-bottom: 28px; padding: 24px 28px; background-color: #1f2937; border-radius: 12px; font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', Courier, monospace; overflow-x: auto;">
+        <p style="margin-top: 0; margin-bottom: 12px; font-family: 'Outfit', 'Segoe UI', sans-serif; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #9ca3af;">${codeSutra.sutraSnippet.heading} &middot; ${codeSutra.sutraSnippet.language}</p>
+        <pre style="margin: 0; color: #e5e7eb; font-size: 13px; line-height: 1.6; white-space: pre-wrap; word-break: break-all;">${codeSutra.sutraSnippet.content.replace(/```[a-z]*\n|```/g, "")}</pre>
       </div>
 
-      <div style="margin-bottom: 32px; padding: 16px; border: 1px dashed #a1a1aa; border-radius: 8px;">
-        <h2 style="font-size: 18px; color: #000000; margin-top: 0;">${codeSutra.efficiencyGain.heading}</h2>
-        <p style="margin-bottom: 0; color: #3f3f46; font-style: italic;">${codeSutra.efficiencyGain.content}</p>
+      <div style="margin-bottom: 28px; border-left: 3px solid #d1d5db; padding-left: 24px;">
+        <h2>${codeSutra.efficiencyGain.heading}</h2>
+        <p style="margin-bottom: 0; color: #4b5563; font-style: italic;">${codeSutra.efficiencyGain.content}</p>
       </div>
 
-      <div style="text-align: center; margin-top: 40px;">
-        <a href="https://sutra.rohanyashraj.com" class="btn">View More Snippets</a>
+      <div style="text-align: center; margin-top: 44px;">
+        <a href="https://sutra.rohanyashraj.com" class="btn">More on Sutra</a>
       </div>
       `,
     );
 
-    // 3. Create Resend Broadcast
-    const { data, error } = await resend.broadcasts.create({
-      audienceId,
-      from: "Sutra | Code Sutra <newsletter@sutra.rohanyashraj.com>",
-      subject: `${codeSutra.title}`,
-      replyTo: "rohanyashraj@gmail.com",
-      html: emailHtml,
-      name: `Code Sutra - ${new Date().toLocaleDateString()}`,
-    });
-
-    if (error || !data) {
-      throw new Error(
-        `Resend Broadcast Error: ${error?.message || "Unknown error"}`,
-      );
-    }
-
-    // 4. Send immediately
-    const { error: sendError } = await resend.broadcasts.send(data.id);
-
-    if (sendError) {
-      throw new Error(`Resend Send Error: ${sendError.message}`);
-    }
-
-    // 5. Archive to Convex
-    const slug = `${sanitizeSlug(codeSutra.title)}-${new Date().getTime()}`;
-    await convex.mutation(api.broadcasts.saveBroadcast, {
+    // 3. Send broadcast and archive
+    const { broadcastId, title } = await sendStreamBroadcast({
       type: "code-sutra",
       title: codeSutra.title,
-      slug,
+      subject: codeSutra.title,
+      from: "Sutra | Code Sutra <newsletter@sutra.rohanyashraj.com>",
+      replyTo: "rohanyashraj@gmail.com",
+      html: emailHtml,
       data: codeSutra,
     });
 
-    // 6. Submit to IndexNow
-    await submitUrlsToIndexNow([
-      `https://sutra.rohanyashraj.com/archive/code-sutra/${slug}`,
-    ]);
-
-    return {
-      broadcastId: data.id,
-      title: codeSutra.title,
-    };
+    return { broadcastId, title };
   } catch (error: any) {
     console.error("Code Sutra API Error:", error);
     throw error;

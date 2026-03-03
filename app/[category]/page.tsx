@@ -44,10 +44,9 @@ const CategoryPage = async (props: Props) => {
   const categoryArticles = articles[categoryName];
 
   return (
-    <main className="min-h-screen font-outfit bg-white">
-      {/* Navigation */}
+    <main className="min-h-screen font-outfit bg-zinc-50">
       <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-zinc-100">
-        <div className="mx-auto w-11/12 lg:w-3/4 h-16 flex items-center justify-between">
+        <div className="mx-auto max-w-6xl w-11/12 h-16 flex items-center justify-between">
           <Link
             href="/"
             className="text-2xl font-bold tracking-tighter text-zinc-950"
@@ -55,6 +54,12 @@ const CategoryPage = async (props: Props) => {
             sutra<span className="text-zinc-400">.</span>
           </Link>
           <div className="flex gap-8 text-sm font-medium">
+            <Link
+              href="/archive"
+              className="nav-link text-zinc-500 hover:text-zinc-950 transition-colors"
+            >
+              Archive
+            </Link>
             <Link
               href="/about"
               className="nav-link text-zinc-500 hover:text-zinc-950 transition-colors"
@@ -71,17 +76,26 @@ const CategoryPage = async (props: Props) => {
         </div>
       </nav>
 
-      <section className="mx-auto w-11/12 lg:w-3/4 py-12 flex flex-col gap-12">
+      <section className="mx-auto max-w-6xl w-11/12 pt-16 pb-6">
         <Link
-          href={"/"}
-          className="flex items-center gap-2 text-zinc-400 hover:text-zinc-950 transition-colors group w-fit"
+          href="/"
+          className="flex items-center gap-1.5 text-zinc-400 hover:text-zinc-950 transition-colors w-fit mb-8"
         >
-          <ArrowLeftIcon width={16} />
-          <p className="text-xs font-bold uppercase tracking-widest">
+          <ArrowLeftIcon width={12} />
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em]">
             Back to Homepage
-          </p>
+          </span>
         </Link>
 
+        <h1 className="font-cormorantGaramond text-5xl md:text-6xl font-semibold tracking-tight text-zinc-950 leading-[1.1]">
+          {categoryName}
+        </h1>
+        <p className="mt-3 text-zinc-400 text-sm">
+          {categoryArticles.length} {categoryArticles.length === 1 ? "article" : "articles"}
+        </p>
+      </section>
+
+      <section className="mx-auto max-w-6xl w-11/12 py-12">
         <ArticleItemList
           category={categoryName}
           articles={categoryArticles}
