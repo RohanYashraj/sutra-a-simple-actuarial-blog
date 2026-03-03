@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import { getArticleData, getSortedArticles } from "@/lib/articles";
 import { sanitizeSlug } from "@/lib/slug";
 import type { Metadata } from "next";
@@ -161,10 +160,9 @@ const Article = async (props: Props) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <main className="min-h-screen font-outfit bg-white">
-        {/* Navigation */}
+      <main className="min-h-screen font-outfit bg-zinc-50">
         <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-zinc-100">
-          <div className="mx-auto w-11/12 lg:w-3/4 h-16 flex items-center justify-between">
+          <div className="mx-auto max-w-6xl w-11/12 h-16 flex items-center justify-between">
             <Link
               href="/"
               className="text-2xl font-bold tracking-tighter text-zinc-950"
@@ -172,6 +170,12 @@ const Article = async (props: Props) => {
               sutra<span className="text-zinc-400">.</span>
             </Link>
             <div className="flex gap-8 text-sm font-medium">
+              <Link
+                href="/archive"
+                className="nav-link text-zinc-500 hover:text-zinc-950 transition-colors"
+              >
+                Archive
+              </Link>
               <Link
                 href="/about"
                 className="nav-link text-zinc-500 hover:text-zinc-950 transition-colors"
@@ -188,52 +192,54 @@ const Article = async (props: Props) => {
           </div>
         </nav>
 
-        <section className="mx-auto w-11/12 md:w-3/4 lg:w-7/12 py-24 flex flex-col gap-12">
-          <div className="flex flex-col gap-4">
-            <Link
-              href={"/"}
-              className="flex items-center gap-1.5 text-zinc-400 hover:text-zinc-950 transition-colors group w-fit"
-            >
-              <ArrowLeftIcon width={12} />
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em]">
-                Back to Homepage
-              </p>
+        <section className="mx-auto w-11/12 max-w-[700px] pt-8 pb-0">
+          <nav className="flex items-center gap-1.5 text-[13px] text-zinc-400 mb-6">
+            <Link href="/" className="hover:text-zinc-600 transition-colors">
+              Home
             </Link>
+            <span className="text-zinc-300">/</span>
+            <Link
+              href={`/${categorySlug}`}
+              className="hover:text-zinc-600 transition-colors"
+            >
+              {articleData.category}
+            </Link>
+          </nav>
 
-            <div className="flex flex-col gap-8">
-              <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-zinc-950 leading-[1.05]">
-                {articleData.title}
-              </h1>
+          <h1 className="font-cormorantGaramond text-[28px] md:text-[40px] font-semibold text-zinc-950 leading-[1.2] mb-5">
+            {articleData.title}
+          </h1>
 
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-zinc-100 border border-zinc-200 overflow-hidden">
-                  <img
-                    src={
-                      articleData.authorImage ||
-                      "/authors/profile-placeholder.svg"
-                    }
-                    alt={articleData.author || "Author"}
-                    className="object-cover w-full h-full transition-all duration-300"
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <p className="font-bold text-sm text-zinc-950 tracking-tight">
-                    {articleData.author || "Sutra Contributor"}
-                  </p>
-                  <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest leading-none mt-1">
-                    {new Intl.DateTimeFormat("en-US", {
-                      month: "long",
-                      day: "numeric",
-                      year: "numeric",
-                    }).format(new Date(`${year}-${month}-${day}`))}
-                  </p>
-                </div>
-              </div>
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-full bg-zinc-100 border border-zinc-200 overflow-hidden flex-shrink-0">
+              <img
+                src={
+                  articleData.authorImage || "/authors/profile-placeholder.svg"
+                }
+                alt={articleData.author || "Author"}
+                className="object-cover w-full h-full"
+              />
+            </div>
+            <div className="flex items-center gap-1.5 text-[13px] text-zinc-500">
+              <span className="font-medium text-zinc-700">
+                {articleData.author || "Sutra Contributor"}
+              </span>
+              <span className="text-zinc-300">&middot;</span>
+              <time>
+                {new Intl.DateTimeFormat("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                }).format(new Date(`${year}-${month}-${day}`))}
+              </time>
             </div>
           </div>
+        </section>
 
+        <section className="mx-auto w-11/12 max-w-[700px] pt-8 pb-20">
+          <hr className="border-zinc-200 mb-8" />
           <article
-            className="article border-t border-zinc-100 pt-16"
+            className="article"
             dangerouslySetInnerHTML={{ __html: articleData.contentHtml }}
           />
         </section>

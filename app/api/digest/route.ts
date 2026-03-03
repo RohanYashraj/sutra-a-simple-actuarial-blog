@@ -23,39 +23,39 @@ export async function triggerDigestBroadcast() {
     const emailHtml = getEmailTemplate(
       "Sutra Digest",
       `
-              <h1>Sutra Digest</h1>
-              <p>The week's latest actuarial insights and tech deep-dives:</p>
-              
-              ${articles
-                .map(
-                  (article, index) => `
-                <div style="margin-bottom: 32px; ${index < articles.length - 1 ? "border-bottom: 1px solid #f4f4f5; padding-bottom: 32px;" : ""}">
-                  <h3 style="margin-bottom: 12px; font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; line-height: 1.2;">
-                    <a href="https://sutra.rohanyashraj.com/${article.category.toLowerCase().replace(/\s+/g, "-")}/${article.id}" style="color: #000000 !important; text-decoration: none;">
-                      ${article.title}
-                    </a>
-                  </h3>
-                  <p style="font-size: 15px; color: #3f3f46; margin-bottom: 20px; line-height: 1.5;">${article.description}</p>
-                  
-                  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
-                    <tr>
-                      <td>
-                        <a href="https://sutra.rohanyashraj.com/${article.category.toLowerCase().replace(/\s+/g, "-")}/${article.id}" style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; color: #000000 !important; border-bottom: 1px solid #000000;">Read Article</a>
-                      </td>
-                      <td style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #71717a; text-align: right;">
-                        ${article.date} • Rohan Yashraj Gupta
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-              `,
-                )
-                .join("")}
-              
-              <div style="text-align: center; margin-top: 40px;">
-                <a href="https://sutra.rohanyashraj.com" class="btn">Visit Website</a>
-              </div>
-            `,
+      <h1>Sutra Digest</h1>
+      <p style="font-size: 15px; color: #6b7280; margin-bottom: 32px;">The week's latest actuarial insights and tech deep-dives.</p>
+      
+      ${articles
+        .map(
+          (article, index) => `
+        <div style="margin-bottom: 28px; padding: 24px 28px; background-color: #fafaf8; border-radius: 12px; border: 1px solid #f0eeeb;">
+          <h3 style="margin-top: 0; margin-bottom: 10px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 22px; font-weight: 600; line-height: 1.3;">
+            <a href="https://sutra.rohanyashraj.com/${article.category.toLowerCase().replace(/\s+/g, "-")}/${article.id}" style="color: #1f2937 !important; text-decoration: none;">
+              ${article.title}
+            </a>
+          </h3>
+          <p style="font-size: 14px; color: #4b5563; margin-bottom: 16px; line-height: 1.6;">${article.description}</p>
+          
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+              <td>
+                <a href="https://sutra.rohanyashraj.com/${article.category.toLowerCase().replace(/\s+/g, "-")}/${article.id}" style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; color: #1f2937 !important; border-bottom: 1px solid #d1d5db;">Read Article</a>
+              </td>
+              <td style="font-size: 11px; letter-spacing: 0.03em; color: #9ca3af; text-align: right;">
+                ${article.date} &middot; Rohan Yashraj Gupta
+              </td>
+            </tr>
+          </table>
+        </div>
+      `,
+        )
+        .join("")}
+      
+      <div style="text-align: center; margin-top: 44px;">
+        <a href="https://sutra.rohanyashraj.com" class="btn">Visit Sutra</a>
+      </div>
+      `,
     );
 
     // 3. Create Resend Broadcast

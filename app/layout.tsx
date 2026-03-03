@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import Script from "next/script";
 
-import { Cormorant_Garamond, Outfit } from "next/font/google";
+import { Cormorant_Garamond, Lora, Outfit } from "next/font/google";
 import "./globals.css";
 import PHProvider from "./providers/PostHogProvider";
 import PostHogPageView from "./providers/PostHogPageView";
@@ -21,6 +21,12 @@ const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-outfit",
   weight: ["300", "400", "600", "700"],
+});
+
+const lora = Lora({
+  subsets: ["latin"],
+  variable: "--font-lora",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -166,7 +172,7 @@ export default function RootLayout({
         </Script>
       </head>
       <body
-        className={`${cormorantGaramond.variable} ${outfit.variable} bg-white text-zinc-900 antialiased selection:bg-zinc-900 selection:text-white flex flex-col min-h-screen`}
+        className={`${cormorantGaramond.variable} ${outfit.variable} ${lora.variable} bg-white text-zinc-900 antialiased selection:bg-zinc-900 selection:text-white flex flex-col min-h-screen`}
       >
         <PHProvider>
           <Suspense fallback={null}>
