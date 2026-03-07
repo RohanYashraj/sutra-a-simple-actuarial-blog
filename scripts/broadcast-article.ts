@@ -68,7 +68,7 @@ async function broadcastArticle() {
     const { data: broadcast, error: createError } =
       await resend.broadcasts.create({
         audienceId,
-        from: "Sutra Updates <newsletter@sutra.rohanyashraj.org>",
+        from: "New Blog Post <newsletter@sutra.rohanyashraj.com>",
         subject: subject,
         replyTo: "satyasai@sssia.org",
         html: fullHtml,
