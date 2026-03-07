@@ -69,10 +69,10 @@ export default async function TypeArchivePage({ params }: Props) {
               About
             </Link>
             <Link
-              href="https://www.rohanyashraj.com/contact"
+              href="/contribute"
               className="nav-link text-zinc-500 hover:text-zinc-950 transition-colors"
             >
-              Contact
+              Contribute
             </Link>
           </div>
         </div>

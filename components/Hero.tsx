@@ -9,17 +9,20 @@ export default function Hero() {
   const lineRef = useRef<HTMLDivElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const dotRef = useRef<HTMLSpanElement>(null);
+  const poweredByRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
-      // Initial state is set in CSS/Tailwind (opacity-0 etc) to prevent FOUC,
-      // but we iterate here with 'from' or 'fromTo' for control.
+      // Powered-by badge first (top of hero)
+      tl.fromTo(
+        poweredByRef.current,
+        { y: -12, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+      );
 
-      // Animate the letters of SUTRA if we had them split, but for now we'll do a clip-path reveal
-      // or a simple slide up. Let's do a slide up with opacity.
-
+      // Title: slide up with opacity
       tl.fromTo(
         titleRef.current,
         { y: 100, opacity: 0, scale: 0.95 },
@@ -49,6 +52,7 @@ export default function Hero() {
         { y: 0, opacity: 1, duration: 1 },
         "-=0.8",
       );
+
     }, containerRef);
 
     return () => ctx.revert();
@@ -59,6 +63,16 @@ export default function Hero() {
       ref={containerRef}
       className="mx-auto max-w-6xl w-11/12 min-h-[50vh] flex flex-col justify-center py-20 md:py-32 relative overflow-hidden"
     >
+      <a
+        ref={poweredByRef}
+        href="https://aiactuaries.org"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 w-fit mb-10 px-5 py-2.5 rounded-full text-sm font-semibold text-white opacity-0 bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 hover:from-indigo-400 hover:via-violet-400 hover:to-fuchsia-400 shadow-lg shadow-indigo-500/20 hover:shadow-fuchsia-500/30 transition-all duration-300"
+      >
+        Powered by aiactuaries.org
+      </a>
+
       <div className="overflow-hidden">
         <h1
           ref={titleRef}
