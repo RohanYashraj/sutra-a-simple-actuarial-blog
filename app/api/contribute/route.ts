@@ -5,7 +5,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 const FROM_EMAIL =
   process.env.RESEND_CONTACT_FROM ??
-  "Sutra Blog <contact@sutra.rohanyashraj.com>";
+  "Sutra Blog <contact@sutra.aiactuaries.org>";
 const BCC_EMAILS = [
   "support@sssia.org",
   "satyasai@sssia.org",
@@ -121,7 +121,7 @@ function buildContributeEmailHtml(params: {
           <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
             <tr>
               <td style="padding-bottom: 32px; border-bottom: 1px solid #f4f4f5;">
-                <a href="https://sutra.rohanyashraj.com" style="font-size: 28px; font-weight: 700; letter-spacing: -0.025em; color: #09090b; text-decoration: none; font-family: Georgia, 'Times New Roman', serif;">sutra<span style="color: #a1a1aa;">.</span></a>
+                <a href="https://sutra.aiactuaries.org" style="font-size: 28px; font-weight: 700; letter-spacing: -0.025em; color: #09090b; text-decoration: none; font-family: Georgia, 'Times New Roman', serif;">sutra<span style="color: #a1a1aa;">.</span></a>
               </td>
             </tr>
           </table>
@@ -181,7 +181,7 @@ function buildContributeEmailHtml(params: {
             <tr>
               <td style="padding-top: 40px; border-top: 1px solid #f4f4f5; text-align: center;">
                 <p style="margin: 0; font-size: 12px; color: #a1a1aa;">Sutra – Actuarial blog</p>
-                <p style="margin: 4px 0 0 0;"><a href="https://sutra.rohanyashraj.com" style="font-size: 12px; color: #71717a; text-decoration: none;">sutra.rohanyashraj.com</a></p>
+                <p style="margin: 4px 0 0 0;"><a href="https://sutra.aiactuaries.org" style="font-size: 12px; color: #71717a; text-decoration: none;">sutra.aiactuaries.org</a></p>
               </td>
             </tr>
           </table>

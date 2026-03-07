@@ -18,7 +18,7 @@ export async function subscribeAction(prevState: any, formData: FormData) {
     if (!audienceId) {
       // Manual fallback or developer notification
       await resend.emails.send({
-        from: "Sutra Blog <newsletter@sutra.rohanyashraj.com>",
+        from: "Sutra Blog <newsletter@sutra.rohanyashraj.org>",
         to: "rohanyashraj@gmail.com",
         bcc: "sutrarohanyashraj@gmail.com",
         subject: "New Subscriber (No Audience ID)!",
@@ -78,8 +78,8 @@ export async function subscribeAction(prevState: any, formData: FormData) {
       <p>I'm honored to have you part of this journey. The first step is to explore what we've already built.</p>
       
       <div style="margin-top: 32px; text-align: center;">
-        <a href="https://sutra.rohanyashraj.com" class="btn" style="margin-right: 12px; margin-bottom: 12px;">Read the Blog</a>
-        <a href="https://sutra.rohanyashraj.com/archive" class="btn" style="background-color: transparent; border: 1px solid #000000; color: #000000 !important; margin-bottom: 12px;">Explore Archives</a>
+        <a href="https://sutra.aiactuaries.org" class="btn" style="margin-right: 12px; margin-bottom: 12px;">Read the Blog</a>
+        <a href="https://sutra.aiactuaries.org/archive" class="btn" style="background-color: transparent; border: 1px solid #000000; color: #000000 !important; margin-bottom: 12px;">Explore Archives</a>
       </div>
 
     `,
@@ -87,10 +87,10 @@ export async function subscribeAction(prevState: any, formData: FormData) {
     );
 
     await resend.emails.send({
-      from: "Sutra Blog <newsletter@sutra.rohanyashraj.com>",
+      from: "Sutra Blog <newsletter@sutra.rohanyashraj.org>",
       to: email,
       bcc: "sutrarohanyashraj@gmail.com",
-      replyTo: "rohanyashraj@gmail.com",
+      replyTo: "satyasai@sssia.org",
       subject: "Welcome to Sutra - A Simple Actuarial Blog",
       html: welcomeHtml,
     });

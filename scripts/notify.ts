@@ -13,9 +13,9 @@ async function notify() {
     // For now, we'll send a template that the owner can forward.
 
     const { data, error } = await resend.emails.send({
-      from: "Sutra Blog <newsletter@sutra.rohanyashraj.com>",
+      from: "Sutra Blog <newsletter@sutra.rohanyashraj.org>",
       to: ownerEmail,
-      replyTo: "rohanyashraj@gmail.com",
+      replyTo: "satyasai@sssia.org",
       subject: "Action Required: Send New Post Notification",
       html: `
         <h1>New Post Published!</h1>

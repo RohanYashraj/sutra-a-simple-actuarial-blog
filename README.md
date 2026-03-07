@@ -2,7 +2,7 @@
 
 Sutra is an AI-powered blog and newsletter platform that delivers daily insights at the intersection of **insurance, actuarial science, AI, finance, and technology**. Built with Next.js, powered by Google Gemini, and delivered via Resend.
 
-**Live at** [sutra.rohanyashraj.com](https://sutra.rohanyashraj.com)
+**Live at** [sutra.aiactuaries.org](https://sutra.aiactuaries.org)
 
 ---
 
@@ -132,7 +132,7 @@ The endpoint requires either:
 
 1. Generate a secret: `openssl rand -base64 32`. Add it to Vercel as `CRON_SECRET`.
 2. Create a job on cron-job.org:
-   - **URL**: `https://sutra.rohanyashraj.com/api/cron?secret=YOUR_SECRET`
+   - **URL**: `https://sutra.aiactuaries.org/api/cron?secret=YOUR_SECRET`
    - **Schedule**: `0,15,30,45 * * * *` (every 15 minutes)
    - **Method**: GET
 
@@ -157,7 +157,7 @@ Use the `force` query parameter to bypass the schedule and trigger any stream im
 
 ```bash
 # Via curl
-curl "https://sutra.rohanyashraj.com/api/cron?force=trivia&secret=YOUR_SECRET"
+curl "https://sutra.aiactuaries.org/api/cron?force=trivia&secret=YOUR_SECRET"
 
 # Available force values:
 #   trivia, digest, market-pulse, code-sutra, genai-frontiers, actuarial-simplified

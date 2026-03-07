@@ -4,7 +4,7 @@
 
 export async function submitUrlsToIndexNow(urls: string[]) {
   const key = process.env.INDEXNOW_KEY;
-  const host = "sutra.rohanyashraj.com";
+  const host = "sutra.aiactuaries.org";
 
   if (!key) {
     console.warn("INDEXNOW_KEY is not set. Skipping IndexNow submission.");

@@ -31,7 +31,7 @@ export async function triggerCodeSutraBroadcast() {
       </div>
 
       <div style="text-align: center; margin-top: 44px;">
-        <a href="https://sutra.rohanyashraj.com" class="btn">More on Sutra</a>
+        <a href="https://sutra.aiactuaries.org" class="btn">More on Sutra</a>
       </div>
       `,
     );
@@ -41,8 +41,8 @@ export async function triggerCodeSutraBroadcast() {
       type: "code-sutra",
       title: codeSutra.title,
       subject: codeSutra.title,
-      from: "Sutra | Code Sutra <newsletter@sutra.rohanyashraj.com>",
-      replyTo: "rohanyashraj@gmail.com",
+      from: "Sutra | Code Sutra <newsletter@sutra.rohanyashraj.org>",
+      replyTo: "satyasai@sssia.org",
       html: emailHtml,
       data: codeSutra,
     });

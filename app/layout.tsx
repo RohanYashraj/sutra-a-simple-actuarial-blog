@@ -30,7 +30,7 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sutra.rohanyashraj.com"),
+  metadataBase: new URL("https://sutra.aiactuaries.org"),
   title: {
     default: "Sutra - Actuarial Blog | AI, Risk & Technology Insights",
     template: "%s | Sutra - Actuarial Blog",
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://sutra.rohanyashraj.com",
+    url: "https://sutra.aiactuaries.org",
     siteName: "Sutra - Actuarial Blog",
     title: "Sutra - Actuarial Blog | AI, Risk & Technology Insights",
     description:
@@ -117,22 +117,22 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "WebSite",
-      "@id": "https://sutra.rohanyashraj.com/#website",
-      url: "https://sutra.rohanyashraj.com",
+      "@id": "https://sutra.aiactuaries.org/#website",
+      url: "https://sutra.aiactuaries.org",
       name: "Sutra - Actuarial Blog",
       description:
         "The premier actuarial blog exploring the intersection of actuarial science, artificial intelligence, and modern technology.",
-      publisher: { "@id": "https://sutra.rohanyashraj.com/#organization" },
+      publisher: { "@id": "https://sutra.aiactuaries.org/#organization" },
       inLanguage: "en-US",
     },
     {
       "@type": "Organization",
-      "@id": "https://sutra.rohanyashraj.com/#organization",
+      "@id": "https://sutra.aiactuaries.org/#organization",
       name: "Sutra",
-      url: "https://sutra.rohanyashraj.com",
+      url: "https://sutra.aiactuaries.org",
       logo: {
         "@type": "ImageObject",
-        url: "https://sutra.rohanyashraj.com/logo.png",
+        url: "https://sutra.aiactuaries.org/logo.png",
       },
       founder: { "@id": "https://rohanyashraj.com/#person" },
     },

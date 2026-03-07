@@ -24,7 +24,7 @@ async function broadcastArticle() {
     console.log(`Fetching article data for: ${slug}...`);
     const article = await getArticleData(slug);
 
-    const siteUrl = "https://sutra.rohanyashraj.com";
+    const siteUrl = "https://sutra.aiactuaries.org";
     const articleUrl = `${siteUrl}/${sanitizeSlug(article.category)}/${article.id}`;
 
     const subject = `New Blog: ${article.title}`;
@@ -68,9 +68,9 @@ async function broadcastArticle() {
     const { data: broadcast, error: createError } =
       await resend.broadcasts.create({
         audienceId,
-        from: "Sutra Updates <newsletter@sutra.rohanyashraj.com>",
+        from: "Sutra Updates <newsletter@sutra.rohanyashraj.org>",
         subject: subject,
-        replyTo: "rohanyashraj@gmail.com",
+        replyTo: "satyasai@sssia.org",
         html: fullHtml,
         name: `Article Broadcast - ${article.title} - ${new Date().toLocaleDateString()}`,
       });

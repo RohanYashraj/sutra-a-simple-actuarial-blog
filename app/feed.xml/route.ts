@@ -17,7 +17,7 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   const articles = getSortedArticles();
-  const siteUrl = "https://sutra.rohanyashraj.com";
+  const siteUrl = "https://sutra.aiactuaries.org";
 
   // Fetch broadcasts from Convex
   let broadcasts: any[] = [];

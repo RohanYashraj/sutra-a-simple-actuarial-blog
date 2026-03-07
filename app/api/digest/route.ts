@@ -31,7 +31,7 @@ export async function triggerDigestBroadcast() {
           (article, index) => `
         <div style="margin-bottom: 28px; padding: 24px 28px; background-color: #fafaf8; border-radius: 12px; border: 1px solid #f0eeeb;">
           <h3 style="margin-top: 0; margin-bottom: 10px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 22px; font-weight: 600; line-height: 1.3;">
-            <a href="https://sutra.rohanyashraj.com/${article.category.toLowerCase().replace(/\s+/g, "-")}/${article.id}" style="color: #1f2937 !important; text-decoration: none;">
+            <a href="https://sutra.aiactuaries.org/${article.category.toLowerCase().replace(/\s+/g, "-")}/${article.id}" style="color: #1f2937 !important; text-decoration: none;">
               ${article.title}
             </a>
           </h3>
@@ -40,7 +40,7 @@ export async function triggerDigestBroadcast() {
           <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
             <tr>
               <td>
-                <a href="https://sutra.rohanyashraj.com/${article.category.toLowerCase().replace(/\s+/g, "-")}/${article.id}" style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; color: #1f2937 !important; border-bottom: 1px solid #d1d5db;">Read Article</a>
+                <a href="https://sutra.aiactuaries.org/${article.category.toLowerCase().replace(/\s+/g, "-")}/${article.id}" style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; color: #1f2937 !important; border-bottom: 1px solid #d1d5db;">Read Article</a>
               </td>
               <td style="font-size: 11px; letter-spacing: 0.03em; color: #9ca3af; text-align: right;">
                 ${article.date} &middot; Rohan Yashraj Gupta
@@ -53,7 +53,7 @@ export async function triggerDigestBroadcast() {
         .join("")}
       
       <div style="text-align: center; margin-top: 44px;">
-        <a href="https://sutra.rohanyashraj.com" class="btn">Visit Sutra</a>
+        <a href="https://sutra.aiactuaries.org" class="btn">Visit Sutra</a>
       </div>
       `,
     );
@@ -61,9 +61,9 @@ export async function triggerDigestBroadcast() {
     // 3. Create Resend Broadcast
     const { data, error } = await resend.broadcasts.create({
       audienceId: audienceId,
-      from: "Sutra | Digest <newsletter@sutra.rohanyashraj.com>",
+      from: "Sutra | Digest <newsletter@sutra.rohanyashraj.org>",
       subject: "Weekly Digest - Sutra Blog",
-      replyTo: "rohanyashraj@gmail.com",
+      replyTo: "satyasai@sssia.org",
       html: emailHtml,
       name: `Sutra Digest - ${new Date().toLocaleDateString()}`,
     });

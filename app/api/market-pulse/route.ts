@@ -31,7 +31,7 @@ export async function triggerMarketPulseBroadcast() {
       </div>
 
       <div style="text-align: center; margin-top: 44px;">
-        <a href="https://sutra.rohanyashraj.com" class="btn">Explore More on Sutra</a>
+        <a href="https://sutra.aiactuaries.org" class="btn">Explore More on Sutra</a>
       </div>
       `,
     );
@@ -41,8 +41,8 @@ export async function triggerMarketPulseBroadcast() {
       type: "market-pulse",
       title: pulse.title,
       subject: pulse.title,
-      from: "Sutra | Market Pulse <newsletter@sutra.rohanyashraj.com>",
-      replyTo: "rohanyashraj@gmail.com",
+      from: "Sutra | Market Pulse <newsletter@sutra.rohanyashraj.org>",
+      replyTo: "satyasai@sssia.org",
       html: emailHtml,
       data: pulse,
     });

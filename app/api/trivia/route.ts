@@ -31,7 +31,7 @@ export async function triggerTriviaBroadcast() {
       </div>
 
       <div style="text-align: center; margin-top: 44px;">
-        <a href="https://sutra.rohanyashraj.com" class="btn">Read More on Sutra</a>
+        <a href="https://sutra.aiactuaries.org" class="btn">Read More on Sutra</a>
       </div>
       `,
     );
@@ -41,8 +41,8 @@ export async function triggerTriviaBroadcast() {
       type: "trivia",
       title: trivia.title,
       subject: trivia.title,
-      from: "Sutra | Trivia <newsletter@sutra.rohanyashraj.com>",
-      replyTo: "rohanyashraj@gmail.com",
+      from: "Sutra | Trivia <newsletter@sutra.rohanyashraj.org>",
+      replyTo: "satyasai@sssia.org",
       html: emailHtml,
       data: trivia,
     });

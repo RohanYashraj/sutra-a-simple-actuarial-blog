@@ -31,7 +31,7 @@ export async function triggerActuarialSimplifiedBroadcast() {
       </div>
 
       <div style="text-align: center; margin-top: 44px;">
-        <a href="https://sutra.rohanyashraj.com" class="btn">Learn More on Sutra</a>
+        <a href="https://sutra.aiactuaries.org" class="btn">Learn More on Sutra</a>
       </div>
       `,
     );
@@ -41,8 +41,8 @@ export async function triggerActuarialSimplifiedBroadcast() {
       type: "actuarial-simplified",
       title: simplified.title,
       subject: simplified.title,
-      from: "Sutra | Actuarial Simplified <newsletter@sutra.rohanyashraj.com>",
-      replyTo: "rohanyashraj@gmail.com",
+      from: "Sutra | Actuarial Simplified <newsletter@sutra.rohanyashraj.org>",
+      replyTo: "satyasai@sssia.org",
       html: emailHtml,
       data: simplified,
     });

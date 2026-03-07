@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         type: "article",
         title: articleData.title,
         description,
-        url: `https://sutra.rohanyashraj.com/${categorySlug}/${resolvedParams.slug}`,
+        url: `https://sutra.aiactuaries.org/${categorySlug}/${resolvedParams.slug}`,
         siteName: "Sutra - Actuarial Blog",
         publishedTime: publishDate,
         authors: articleData.author ? [articleData.author] : undefined,
@@ -96,7 +96,7 @@ const Article = async (props: Props) => {
     "@type": "BlogPosting",
     headline: articleData.title,
     description,
-    url: `https://sutra.rohanyashraj.com/${categorySlug}/${params.slug}`,
+    url: `https://sutra.aiactuaries.org/${categorySlug}/${params.slug}`,
     datePublished: publishDate,
     dateModified: publishDate,
     author: {
@@ -110,11 +110,11 @@ const Article = async (props: Props) => {
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://sutra.rohanyashraj.com/${categorySlug}/${params.slug}`,
+      "@id": `https://sutra.aiactuaries.org/${categorySlug}/${params.slug}`,
     },
     image: articleData.image
-      ? `https://sutra.rohanyashraj.com${articleData.image}`
-      : `https://sutra.rohanyashraj.com${articleData.authorImage || "/logo.png"}`,
+      ? `https://sutra.aiactuaries.org${articleData.image}`
+      : `https://sutra.aiactuaries.org${articleData.authorImage || "/logo.png"}`,
     keywords: [
       "actuarial",
       "actuarial blog",
@@ -133,19 +133,19 @@ const Article = async (props: Props) => {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://sutra.rohanyashraj.com",
+        item: "https://sutra.aiactuaries.org",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: articleData.category,
-        item: `https://sutra.rohanyashraj.com/${categorySlug}` /* Note: Category pages need to exist or redirect */,
+        item: `https://sutra.aiactuaries.org/${categorySlug}` /* Note: Category pages need to exist or redirect */,
       },
       {
         "@type": "ListItem",
         position: 3,
         name: articleData.title,
-        item: `https://sutra.rohanyashraj.com/${categorySlug}/${params.slug}`,
+        item: `https://sutra.aiactuaries.org/${categorySlug}/${params.slug}`,
       },
     ],
   };

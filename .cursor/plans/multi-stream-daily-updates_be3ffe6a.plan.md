@@ -75,7 +75,7 @@ isProject: false
     - Generate a slug via `sanitizeSlug(title)` + timestamp.
     - Call Resend `broadcasts.create` + `broadcasts.send`.
     - Save the edition via `convex.mutation(api.broadcasts.saveBroadcast, { type, title, slug, data })`.
-    - Optionally call `submitUrlsToIndexNow(["https://sutra.rohanyashraj.com/archive/${type}/${slug}"])`.
+    - Optionally call `submitUrlsToIndexNow(["https://sutra.aiactuaries.org/archive/${type}/${slug}"])`.
     - Return `{ broadcastId, slug, title }` to the route.
 - **Thin per‑stream API routes** (under `app/api/[stream]/route.ts`):
   - For each stream, the `trigger...Broadcast` function becomes:

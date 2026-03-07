@@ -4,8 +4,8 @@ export const getEmailTemplate = (
   recipientEmail?: string,
 ) => {
   const unsubscribeUrl = recipientEmail
-    ? `https://sutra.rohanyashraj.com/unsubscribe?email=${encodeURIComponent(recipientEmail)}`
-    : `https://sutra.rohanyashraj.com/unsubscribe?email={{{EMAIL}}}`;
+    ? `https://sutra.aiactuaries.org/unsubscribe?email=${encodeURIComponent(recipientEmail)}`
+    : `https://sutra.aiactuaries.org/unsubscribe?email={{{EMAIL}}}`;
 
   return `
     <!DOCTYPE html>
@@ -141,7 +141,7 @@ export const getEmailTemplate = (
         <div class="page">
           <div class="container">
             <div class="header">
-              <a href="https://sutra.rohanyashraj.com" class="logo" style="color: #1f2937; text-decoration: none;">sutra<span class="logo-dot" style="color: #9ca3af;">.</span></a>
+              <a href="https://sutra.aiactuaries.org" class="logo" style="color: #1f2937; text-decoration: none;">sutra<span class="logo-dot" style="color: #9ca3af;">.</span></a>
             </div>
             <div class="content">
               ${content}
@@ -149,7 +149,7 @@ export const getEmailTemplate = (
             </div>
             <div class="footer">
               &copy; ${new Date().getFullYear()} Sutra by Rohan Yashraj Gupta.<br>
-              <a href="https://sutra.rohanyashraj.com" style="color: #9ca3af !important; text-decoration: none;">sutra.rohanyashraj.com</a>
+              <a href="https://sutra.aiactuaries.org" style="color: #9ca3af !important; text-decoration: none;">sutra.aiactuaries.org</a>
               <br/><br/>
               <p style="font-size: 11px; color: #d1d5db;">You are receiving this email because you subscribed to our newsletter.</p>
               <a href="${unsubscribeUrl}" class="unsubscribe">Unsubscribe</a>

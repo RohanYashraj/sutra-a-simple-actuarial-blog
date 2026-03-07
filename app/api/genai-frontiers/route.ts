@@ -36,7 +36,7 @@ export async function triggerGenAIFrontiersBroadcast() {
       </div>
 
       <div style="text-align: center; margin-top: 44px;">
-        <a href="https://sutra.rohanyashraj.com" class="btn">Explore the Frontier</a>
+        <a href="https://sutra.aiactuaries.org" class="btn">Explore the Frontier</a>
       </div>
       `,
     );
@@ -46,8 +46,8 @@ export async function triggerGenAIFrontiersBroadcast() {
       type: "genai-frontiers",
       title: frontiers.title,
       subject: frontiers.title,
-      from: "Sutra | GenAI Frontiers <newsletter@sutra.rohanyashraj.com>",
-      replyTo: "rohanyashraj@gmail.com",
+      from: "Sutra | GenAI Frontiers <newsletter@sutra.rohanyashraj.org>",
+      replyTo: "satyasai@sssia.org",
       html: emailHtml,
       data: frontiers,
     });

@@ -19,7 +19,7 @@ export const dynamic = "force-dynamic";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const articles = getSortedArticles();
   const categories = Object.keys(getCategorisedArticles());
-  const baseUrl = "https://sutra.rohanyashraj.com";
+  const baseUrl = "https://sutra.aiactuaries.org";
 
   // Fetch broadcasts from Convex
   let broadcasts: any[] = [];

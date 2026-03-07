@@ -62,7 +62,7 @@ export async function sendStreamBroadcast<TData>(
   });
 
   await submitUrlsToIndexNow([
-    `https://sutra.rohanyashraj.com/archive/${type}/${slug}`,
+    `https://sutra.aiactuaries.org/archive/${type}/${slug}`,
   ]);
 
   return {

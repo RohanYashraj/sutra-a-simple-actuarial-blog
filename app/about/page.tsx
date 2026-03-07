@@ -10,10 +10,10 @@ export const metadata: Metadata = {
     title: "About Sutra - Actuarial Blog",
     description:
       "About Sutra - An actuarial blog by Rohan Yashraj Gupta exploring actuarial science, AI, and technology.",
-    url: "https://sutra.rohanyashraj.com/about",
+    url: "https://sutra.aiactuaries.org/about",
   },
   alternates: {
-    canonical: "https://sutra.rohanyashraj.com/about",
+    canonical: "https://sutra.aiactuaries.org/about",
   },
 };
 
@@ -35,7 +35,7 @@ export default function AboutPage() {
               description:
                 "Actuary and Technologist exploring the future of insurance and AI.",
               image:
-                "https://sutra.rohanyashraj.com/authors/profile-placeholder.svg",
+                "https://sutra.aiactuaries.org/authors/profile-placeholder.svg",
               sameAs: [
                 "https://rohanyashraj.com",
                 "https://github.com/RohanYashraj",

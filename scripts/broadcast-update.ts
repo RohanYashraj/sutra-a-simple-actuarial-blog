@@ -30,7 +30,7 @@ const CONTENT_HTML = `
   </p>
 
   <div style="text-align: center;">
-    <a href="https://sutra.rohanyashraj.com" class="btn">Visit Sutra</a>
+    <a href="https://sutra.aiactuaries.org" class="btn">Visit Sutra</a>
   </div>
 `;
 // -------------------------
@@ -54,9 +54,9 @@ async function broadcastUpdate() {
     const { data: broadcast, error: createError } =
       await resend.broadcasts.create({
         audienceId,
-        from: "Sutra Updates <newsletter@sutra.rohanyashraj.com>",
+        from: "Sutra Updates <newsletter@sutra.rohanyashraj.org>",
         subject: SUBJECT,
-        replyTo: "rohanyashraj@gmail.com",
+        replyTo: "satyasai@sssia.org",
         html: fullHtml,
         name: `Manual Update - ${new Date().toLocaleDateString()}`,
       });

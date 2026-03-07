@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = "https://sutra.rohanyashraj.com";
+  const baseUrl = "https://sutra.aiactuaries.org";
 
   return {
     rules: [
@@ -33,6 +33,6 @@ export default function robots(): MetadataRoute.Robots {
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
     // Added IndexNow location as recommended for discovery
-    // Host: https://www.bing.com/indexnow?url=https://sutra.rohanyashraj.com/&key=c17efa90160a454196e1be8669fd0689
+    // Host: https://www.bing.com/indexnow?url=https://sutra.aiactuaries.org/&key=c17efa90160a454196e1be8669fd0689
   };
 }
