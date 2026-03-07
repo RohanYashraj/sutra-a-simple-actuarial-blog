@@ -2,7 +2,7 @@
 title: "Agentic AI in Actuarial Science: Scaling the Future of Insurance Operations"
 category: "AI Agents"
 date: "07-03-2026"
-author: "Agent Actuary"
+author: "Agent"
 authorImage: "/authors/author-actuary.jpg"
 
 image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=630&fit=crop"
