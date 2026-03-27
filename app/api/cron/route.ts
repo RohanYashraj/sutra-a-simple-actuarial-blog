@@ -6,6 +6,26 @@ import { triggerCodeSutraBroadcast } from "../code-sutra/route";
 import { triggerGenAIFrontiersBroadcast } from "../genai-frontiers/route";
 import { triggerActuarialSimplifiedBroadcast } from "../actuarial-simplified/route";
 
+/** Matches only :15 so repeated pings in the same hour do not double-send. */
+function isUtcMinuteSlot(
+  hour: number,
+  minute: number,
+  slotHour: number,
+  slotMinute = 15,
+) {
+  return hour === slotHour && minute === slotMinute;
+}
+
+/** 0-based week-of-year for rotating Thursday streams (5-week cycle). */
+function utcWeekIndex(d: Date) {
+  const start = Date.UTC(d.getUTCFullYear(), 0, 1);
+  const day = Math.floor(
+    (Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()) - start) /
+      86400000,
+  );
+  return Math.floor(day / 7);
+}
+
 export async function GET(request: Request) {
   await connection();
   try {
@@ -57,46 +77,35 @@ export async function GET(request: Request) {
       `Cron Orchestrator running at ${hour}:${minute} UTC, Day ${day}`,
     );
 
-    // 1. Sutra Trivia: 08:15 UTC (Wednesday)
-    // Wednesday (Day 3)
-    if (hour === 8 && minute >= 10 && minute < 20 && day === 3) {
-      console.log("Triggering Sutra Trivia...");
-      return NextResponse.json(await triggerTriviaBroadcast());
-    }
+    // At most two automated broadcasts per week:
+    // 1) Weekly digest — Monday 13:15 UTC
+    // 2) One featured stream — Thursday 08:15 UTC, rotates every ~5 weeks
 
-    // 2. Market Pulse: 08:15 UTC (Saturday)
-    // Saturday (Day 6)
-    if (hour === 8 && minute >= 10 && minute < 20 && day === 6) {
-      console.log("Triggering Market Pulse...");
-      return NextResponse.json(await triggerMarketPulseBroadcast());
-    }
-
-    // 3. Code Sutra: 08:15 UTC (Tuesday)
-    // Tuesday (Day 2)
-    if (hour === 8 && minute >= 10 && minute < 20 && day === 2) {
-      console.log("Triggering Code Sutra...");
-      return NextResponse.json(await triggerCodeSutraBroadcast());
-    }
-
-    // 4. GenAI Frontiers: 08:15 UTC (Friday)
-    // Friday (Day 5)
-    if (hour === 8 && minute >= 10 && minute < 20 && day === 5) {
-      console.log("Triggering GenAI Frontiers...");
-      return NextResponse.json(await triggerGenAIFrontiersBroadcast());
-    }
-
-    // 5. Sutra Digest: 13:15 UTC (Monday)
-    // Monday (Day 1)
-    if (hour === 13 && minute >= 10 && minute < 20 && day === 1) {
-      console.log("Triggering Sutra Digest...");
+    if (day === 1 && isUtcMinuteSlot(hour, minute, 13)) {
+      console.log("Triggering Sutra Digest (weekly)...");
       return NextResponse.json(await triggerDigestBroadcast());
     }
 
-    // 6. Actuarial Simplified: 08:15 UTC (Monday & Thursday)
-    // Monday (Day 1) & Thursday (Day 4)
-    if (hour === 8 && minute >= 10 && minute < 20 && (day === 1 || day === 4)) {
-      console.log("Triggering Actuarial Simplified...");
-      return NextResponse.json(await triggerActuarialSimplifiedBroadcast());
+    if (day === 4 && isUtcMinuteSlot(hour, minute, 8)) {
+      const slot = utcWeekIndex(now) % 5;
+      const triggers = [
+        () => triggerActuarialSimplifiedBroadcast(),
+        () => triggerCodeSutraBroadcast(),
+        () => triggerTriviaBroadcast(),
+        () => triggerGenAIFrontiersBroadcast(),
+        () => triggerMarketPulseBroadcast(),
+      ] as const;
+      const labels = [
+        "Actuarial Simplified",
+        "Code Sutra",
+        "Sutra Trivia",
+        "GenAI Frontiers",
+        "Market Pulse",
+      ] as const;
+      console.log(
+        `Triggering weekly featured stream (${labels[slot]}, rotation ${slot}/5)...`,
+      );
+      return NextResponse.json(await triggers[slot]());
     }
 
     return NextResponse.json({

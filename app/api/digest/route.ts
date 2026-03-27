@@ -61,7 +61,7 @@ export async function triggerDigestBroadcast() {
     // 3. Create Resend Broadcast
     const { data, error } = await resend.broadcasts.create({
       audienceId: audienceId,
-      from: "Sutra | Digest <newsletter@sutra.rohanyashraj.org>",
+      from: "Sutra | Digest <newsletter@sutra.rohanyashraj.com>",
       subject: "Weekly Digest - Sutra Blog",
       replyTo: "satyasai@sssia.org",
       html: emailHtml,

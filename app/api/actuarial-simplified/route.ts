@@ -41,7 +41,7 @@ export async function triggerActuarialSimplifiedBroadcast() {
       type: "actuarial-simplified",
       title: simplified.title,
       subject: simplified.title,
-      from: "Sutra | Actuarial Simplified <newsletter@sutra.rohanyashraj.org>",
+      from: "Sutra | Actuarial Simplified <newsletter@sutra.rohanyashraj.com>",
       replyTo: "satyasai@sssia.org",
       html: emailHtml,
       data: simplified,

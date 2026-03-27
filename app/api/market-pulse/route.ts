@@ -41,7 +41,7 @@ export async function triggerMarketPulseBroadcast() {
       type: "market-pulse",
       title: pulse.title,
       subject: pulse.title,
-      from: "Sutra | Market Pulse <newsletter@sutra.rohanyashraj.org>",
+      from: "Sutra | Market Pulse <newsletter@sutra.rohanyashraj.com>",
       replyTo: "satyasai@sssia.org",
       html: emailHtml,
       data: pulse,

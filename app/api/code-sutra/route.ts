@@ -41,7 +41,7 @@ export async function triggerCodeSutraBroadcast() {
       type: "code-sutra",
       title: codeSutra.title,
       subject: codeSutra.title,
-      from: "Sutra | Code Sutra <newsletter@sutra.rohanyashraj.org>",
+      from: "Sutra | Code Sutra <newsletter@sutra.rohanyashraj.com>",
       replyTo: "satyasai@sssia.org",
       html: emailHtml,
       data: codeSutra,

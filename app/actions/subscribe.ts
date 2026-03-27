@@ -18,7 +18,7 @@ export async function subscribeAction(prevState: any, formData: FormData) {
     if (!audienceId) {
       // Manual fallback or developer notification
       await resend.emails.send({
-        from: "Sutra Blog <newsletter@sutra.rohanyashraj.org>",
+        from: "Sutra Blog <newsletter@sutra.rohanyashraj.com>",
         to: "rohanyashraj@gmail.com",
         bcc: "sutrarohanyashraj@gmail.com",
         subject: "New Subscriber (No Audience ID)!",
@@ -87,7 +87,7 @@ export async function subscribeAction(prevState: any, formData: FormData) {
     );
 
     await resend.emails.send({
-      from: "Sutra Blog <newsletter@sutra.rohanyashraj.org>",
+      from: "Sutra Blog <newsletter@sutra.rohanyashraj.com>",
       to: email,
       bcc: "sutrarohanyashraj@gmail.com",
       replyTo: "satyasai@sssia.org",

@@ -4,34 +4,56 @@ import { getEmailTemplate } from "../lib/email";
 import { Resend } from "resend";
 
 // --- EDIT THESE VALUES ---
-const SUBJECT = "Update from Sutra";
+const SUBJECT = "Exclusive for Sutra Subscribers: SSSIA Membership Applications Open";
+const SSSIA_WEBSITE_URL = "https://sssia.org";
+const APPLICATION_FORM_URL = "https://forms.gle/u6sKYR3WVXpgGDGS7";
+const LINKEDIN_POST_URL =
+  "https://www.linkedin.com/posts/sssia_join-the-ai-actuaries-movement-activity-7442083390293708800-5g0M?utm_source=share&utm_medium=member_android&rcm=ACoAAC7XU3YBg2yxW7SqYHQBsWFiUwQRArbv_X8";
 // Clean HTML - Styles are handled by getEmailTemplate
 const CONTENT_HTML = `
-  <h1>Refining the Experience</h1>
+  <h1>Exclusive Opportunity for Sutra Subscribers</h1>
   
   <p>
-    Hello everyone,
+    Dear Sutra Subscribers,
   </p>
   
   <p>
-    We've been hard at work behind the scenes to improve your reading experience. Here is a quick summary of the recent updates we've rolled out to the blog.
+    As a valued member of the Sutra community, you are receiving <strong>early access</strong> to apply for membership at the <strong>Sri Sathya Sai Institute of Actuaries (SSSIA)</strong>, powered by AI Actuaries.
   </p>
 
-  <h2>What's Changed?</h2>
+  <p>
+    This is more than a membership form, it is a chance to be part of a focused actuarial movement shaped around modern practice, AI-first thinking, and continuous learning with a high-intent peer community.
+  </p>
+
+  <h2>Apply Now</h2>
+  <p>
+    Use this application link to submit your membership request:
+  </p>
+  <div style="text-align: center; margin: 24px 0;">
+    <a href="${APPLICATION_FORM_URL}" class="btn">Apply for SSSIA Membership</a>
+  </div>
+
+  <h2>Why This Is Worth It</h2>
   
   <ul>
-    <li><strong>Rebranding to Sutra:</strong> We have officially adopted the name "Sutra" to reflect our focus on concise, high-value insights.</li>
-    <li><strong>New Content Channels:</strong> Look out for our new segments including <em>Daily Trivia</em>, <em>Market Pulse</em>, and technical <em>Code Sutra</em> challenges.</li>
-    <li><strong>Smoother Experience:</strong> We've updated the underlying tech stack for faster load times and a cleaner reading interface.</li>
+    <li><strong>Exclusive access:</strong> You are among a curated group invited from the Sutra subscriber base.</li>
+    <li><strong>Future-ready learning:</strong> Engage with initiatives at the intersection of actuarial science and AI.</li>
+    <li><strong>Serious community:</strong> Join professionals and learners committed to practical growth and impact.</li>
   </ul>
 
   <p>
-    Thank you for being part of our community as we continue to evolve.
+    For additional context, explore the official announcement:
   </p>
-
-  <div style="text-align: center;">
-    <a href="https://sutra.aiactuaries.org" class="btn">Visit Sutra</a>
+  <div style="text-align: center; margin: 18px 0 8px 0;">
+    <a href="${LINKEDIN_POST_URL}" style="color: #2563eb; text-decoration: underline; font-weight: 500;">View LinkedIn Announcement</a>
   </div>
+  <div style="text-align: center; margin: 8px 0 22px 0;">
+    <a href="${SSSIA_WEBSITE_URL}" style="color: #2563eb; text-decoration: underline; font-weight: 500;">Visit SSSIA</a>
+  </div>
+
+  <p>
+    Happy Learning!
+  </p>
 `;
 // -------------------------
 
@@ -54,11 +76,11 @@ async function broadcastUpdate() {
     const { data: broadcast, error: createError } =
       await resend.broadcasts.create({
         audienceId,
-        from: "Sutra Updates <newsletter@sutra.rohanyashraj.org>",
+        from: "Sutra Updates <newsletter@sutra.rohanyashraj.com>",
         subject: SUBJECT,
         replyTo: "satyasai@sssia.org",
         html: fullHtml,
-        name: `Manual Update - ${new Date().toLocaleDateString()}`,
+        name: `SSSIA Membership Invite - ${new Date().toLocaleDateString()}`,
       });
 
     if (createError) {
