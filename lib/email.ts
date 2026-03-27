@@ -12,69 +12,106 @@ export const getEmailTemplate = (
     <html>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="x-apple-disable-message-reformatting">
+        <meta name="color-scheme" content="light only">
+        <meta name="supported-color-schemes" content="light">
         <style>
+          :root {
+            --bg: #eef2f7;
+            --paper: #ffffff;
+            --ink: #111827;
+            --muted: #6b7280;
+            --line: #e5e7eb;
+            --line-soft: #edf1f5;
+            --brand: #0f172a;
+            --brand-soft: #334155;
+            --accent: #1d4ed8;
+          }
           body {
-            font-family: 'Outfit', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f5f5f0;
-            color: #374151;
+            font-family: 'Outfit', 'Avenir Next', 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: radial-gradient(circle at 20% -10%, #dbeafe 0, rgba(219, 234, 254, 0) 40%), radial-gradient(circle at 90% 0%, #ede9fe 0, rgba(237, 233, 254, 0) 35%), var(--bg);
+            color: var(--ink);
             margin: 0;
             padding: 0;
-            line-height: 1.7;
+            line-height: 1.72;
             -webkit-font-smoothing: antialiased;
           }
           .page {
-            padding: 32px 16px;
+            padding: 34px 14px;
           }
           .container {
             max-width: 580px;
             margin: 0 auto;
-            padding: 48px 36px;
-            background-color: #ffffff;
-            border-radius: 16px;
-            border: 1px solid #e8e8e3;
+            padding: 0;
+            background-color: var(--paper);
+            border-radius: 20px;
+            border: 1px solid var(--line);
+            box-shadow: 0 18px 36px rgba(15, 23, 42, 0.08);
+            overflow: hidden;
           }
           .header {
             text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid #f0eeeb;
+            margin: 0;
+            padding: 28px 30px 22px 30px;
+            background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+            border-bottom: 1px solid var(--line-soft);
           }
           .logo {
-            font-family: 'Outfit', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            font-size: 32px;
+            font-family: 'Outfit', 'Avenir Next', 'Segoe UI', Helvetica, Arial, sans-serif;
+            font-size: 34px;
             font-weight: 700;
             letter-spacing: -0.04em;
-            color: #1f2937 !important;
+            color: var(--brand) !important;
             text-decoration: none !important;
             display: inline-block;
+            margin-bottom: 10px;
           }
           .logo-dot {
-            color: #9ca3af !important;
+            color: #64748b !important;
+          }
+          .eyebrow {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: #eff6ff;
+            border: 1px solid #dbeafe;
+            color: #1e3a8a;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+          }
+          .title {
+            margin: 14px 0 0 0;
+            font-size: 14px;
+            color: var(--muted);
+            letter-spacing: 0.02em;
           }
           .content {
-            margin-bottom: 32px;
+            margin: 0;
+            padding: 36px 32px 26px 32px;
           }
           h1 {
             font-family: 'Cormorant Garamond', 'Georgia', 'Times New Roman', serif;
-            font-size: 28px;
+            font-size: 31px;
             font-weight: 600;
-            margin-bottom: 8px;
-            color: #1f2937;
-            line-height: 1.3;
+            margin: 0 0 12px 0;
+            color: var(--brand);
+            line-height: 1.22;
+            letter-spacing: -0.01em;
           }
           h2 {
-            font-family: 'Outfit', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            font-size: 14px;
+            font-family: 'Outfit', 'Avenir Next', 'Segoe UI', Helvetica, Arial, sans-serif;
+            font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: #6b7280;
-            margin-top: 0;
-            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+            color: #64748b;
+            margin: 0 0 12px 0;
           }
           p {
             margin-bottom: 16px;
-            color: #374151;
+            color: #1f2937;
             font-size: 15px;
             line-height: 1.7;
           }
@@ -84,55 +121,66 @@ export const getEmailTemplate = (
           }
           li {
             margin-bottom: 8px;
-            color: #374151;
+            color: #1f2937;
           }
           a {
-            color: #4b5563 !important;
+            color: var(--accent) !important;
             text-decoration: underline;
-            text-decoration-color: #d1d5db;
+            text-decoration-color: #93c5fd;
             text-underline-offset: 3px;
           }
           .footer {
             text-align: center;
             font-size: 12px;
-            color: #9ca3af;
-            margin-top: 48px;
-            padding-top: 24px;
-            border-top: 1px solid #f0eeeb;
+            color: #94a3b8;
+            margin-top: 22px;
+            padding: 24px 30px 30px 30px;
+            border-top: 1px solid var(--line-soft);
+            background: #fcfdff;
           }
           .unsubscribe {
-            color: #9ca3af !important;
+            color: #94a3b8 !important;
             text-decoration: underline;
             font-size: 11px;
           }
           .btn {
             display: inline-block;
-            background-color: #1f2937;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
             color: #ffffff !important;
-            padding: 14px 32px;
+            padding: 14px 30px;
             text-decoration: none !important;
-            border-radius: 999px;
+            border-radius: 10px;
+            border: 1px solid #1e40af;
+            box-shadow: 0 8px 18px rgba(30, 58, 138, 0.22);
             font-size: 13px;
             font-weight: 600;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
             margin-top: 16px;
           }
           img {
             max-width: 100%;
             height: auto;
-            border-radius: 8px;
+            border-radius: 12px;
             display: block;
-            margin: 24px auto;
+            margin: 6px auto 24px auto;
           }
           @media only screen and (max-width: 620px) {
             .page {
-              padding: 0 !important;
+              padding: 8px !important;
             }
             .container {
               max-width: 100% !important;
-              border-radius: 0 !important;
-              border: none !important;
-              padding: 32px 20px !important;
+              border-radius: 14px !important;
+            }
+            .header {
+              padding: 22px 18px 18px 18px !important;
+            }
+            .content {
+              padding: 28px 18px 18px 18px !important;
+            }
+            .footer {
+              padding: 20px 18px 24px 18px !important;
             }
           }
         </style>
@@ -145,13 +193,13 @@ export const getEmailTemplate = (
             </div>
             <div class="content">
               ${content}
-              <p style="margin-top: 56px; color: #6b7280; font-size: 14px;">With regards,<br/><strong style="color: #374151;">Rohan Yashraj Gupta</strong></p>
+              <p style="margin-top: 54px; color: #64748b; font-size: 14px;">With regards,<br/><strong style="color: #1f2937;">Rohan Yashraj Gupta</strong></p>
             </div>
             <div class="footer">
               &copy; ${new Date().getFullYear()} Sutra by Rohan Yashraj Gupta.<br>
-              <a href="https://sutra.aiactuaries.org" style="color: #9ca3af !important; text-decoration: none;">sutra.aiactuaries.org</a>
+              <a href="https://sutra.aiactuaries.org" style="color: #94a3b8 !important; text-decoration: none;">sutra.aiactuaries.org</a>
               <br/><br/>
-              <p style="font-size: 11px; color: #d1d5db;">You are receiving this email because you subscribed to our newsletter.</p>
+              <p style="font-size: 11px; color: #cbd5e1;">You are receiving this email because you subscribed to our newsletter.</p>
               <a href="${unsubscribeUrl}" class="unsubscribe">Unsubscribe</a>
             </div>
           </div>

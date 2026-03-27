@@ -46,7 +46,7 @@ export async function triggerGenAIFrontiersBroadcast() {
       type: "genai-frontiers",
       title: frontiers.title,
       subject: frontiers.title,
-      from: "Sutra | GenAI Frontiers <newsletter@sutra.rohanyashraj.org>",
+      from: "Sutra | GenAI Frontiers <newsletter@sutra.rohanyashraj.com>",
       replyTo: "satyasai@sssia.org",
       html: emailHtml,
       data: frontiers,

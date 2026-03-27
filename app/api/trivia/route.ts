@@ -41,7 +41,7 @@ export async function triggerTriviaBroadcast() {
       type: "trivia",
       title: trivia.title,
       subject: trivia.title,
-      from: "Sutra | Trivia <newsletter@sutra.rohanyashraj.org>",
+      from: "Sutra | Trivia <newsletter@sutra.rohanyashraj.com>",
       replyTo: "satyasai@sssia.org",
       html: emailHtml,
       data: trivia,
